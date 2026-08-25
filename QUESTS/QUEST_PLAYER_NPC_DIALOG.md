@@ -82,6 +82,7 @@ return htmltext;
 - [SYSTEMS/PLAYER_SYSTEM.md](../SYSTEMS/PLAYER_SYSTEM.md) — mapa de dependencias del jugador
 - [SYSTEMS/NPC_SYSTEM.md](../SYSTEMS/NPC_SYSTEM.md) — NPCs, templates e interacción
 - [AI/TARGET_SYSTEM.md](../AI/TARGET_SYSTEM.md) — cómo se resuelve el target semilla
+- [CLIENT_RESEARCH/QUEST_PILOT_Q00001.md](../CLIENT_RESEARCH/QUEST_PILOT_Q00001.md) — diálogos/NPC de quest vistos del lado CLIENT↔SERVER
 
 ---
 **Status**: VERIFIED (conexión completa hasta NpcHtmlMessage) · interior de packets → PACKETS PHASE  

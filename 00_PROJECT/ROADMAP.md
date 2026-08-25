@@ -9,6 +9,8 @@ Hoja de ruta del proyecto/KB. Cronológico orientativo. Los ítems marcados con 
 ## Actual (2026-08)
 
 - [x] **KB v2.0** — contexto de proyecto, separación SOURCE/RUNTIME/CLIENT/KB, taxonomía de estados, master index actualizado.
+- [x] **Fase 3 (inicio)** — investigación CLIENT H5: creado `CLIENT_RESEARCH/` (estructura, cifrado, caso piloto Q00001, mapeo autoridad). Detectado cifrado de texto del cliente y diferencia NEWBIEGUIDE SOURCE↔RUNTIME (CONFLICT).
+- [ ] **Descifrado de texto del cliente** (bloqueo de Fase 3): determinar una vía segura para leer `questname-e.dat`, `NpcName-e.dat`, `itemname-e.dat`, etc.
 - [ ] Verificación puntual de documentos técnicos pendientes (PARTIAL/UNKNOWN/RCV) contra el source.
 - [ ] Reconciliación visible de contradicciones de conteos (managers, packets, configs) marcándolas CONFLICT/DEPRECATED.
 

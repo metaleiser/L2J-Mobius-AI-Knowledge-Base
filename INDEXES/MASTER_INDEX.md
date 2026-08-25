@@ -48,11 +48,20 @@
 | KNOWLEDGE_BASE (esta KB) | [README.md](../README.md) |
 | Build (Apache Ant) y deployment | [BUILD_AND_DEPLOYMENT.md](../BUILD_AND_DEPLOYMENT.md) ✅ |
 
+### Investigación del cliente (CLIENT_RESEARCH)
+
+| Tema | Documento |
+|------|-----------|
+| Estructura del cliente H5 (carpetas/formatos) | [CLIENT_RESEARCH/CLIENT_STRUCTURE.md](../CLIENT_RESEARCH/CLIENT_STRUCTURE.md) ✅ |
+| Cifrado de archivos de texto del cliente | [CLIENT_RESEARCH/CLIENT_ENCRYPTION.md](../CLIENT_RESEARCH/CLIENT_ENCRYPTION.md) ✅ |
+| Caso piloto Q00001 Letters of Love | [CLIENT_RESEARCH/QUEST_PILOT_Q00001.md](../CLIENT_RESEARCH/QUEST_PILOT_Q00001.md) ✅ |
+| Mapa autoridad CLIENT ↔ SERVER por entidad | [CLIENT_RESEARCH/CLIENT_SERVER_MAPPING.md](../CLIENT_RESEARCH/CLIENT_SERVER_MAPPING.md) ✅ |
+
 ### Investigación futura / experimentos
 
 | Tema | Documento |
 |------|-----------|
-| Investigación del cliente (QUESTS/LORE/HTML/NPC/ITEMS/...) | [00_PROJECT/ROADMAP.md](../00_PROJECT/ROADMAP.md) ⧗ (futuro) |
+| Investigación del cliente (QUESTS/LORE/HTML/NPC/ITEMS/...) | [00_PROJECT/ROADMAP.md](../00_PROJECT/ROADMAP.md) ⧗ (en curso) |
 | Quest Knowledge multi-perspectiva | [00_PROJECT/ROADMAP.md](../00_PROJECT/ROADMAP.md) ⧗ (futuro) |
 | Experimentos / observaciones del SERVER_RUNTIME | KB: marcar OBSERVED/VERIFIED (ver [AI_INSTRUCTIONS/VERIFICATION_RULES.md](../AI_INSTRUCTIONS/VERIFICATION_RULES.md)) |
 

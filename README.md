@@ -143,6 +143,7 @@ AI_KNOWLEDGE_BASE/
 ├── QUESTS/ (Motor de quests)
 ├── PACKETS/ (Paquetes cliente↔servidor)
 ├── SYSTEMS/ (Main game systems)
+├── CLIENT_RESEARCH/ (Investigación del cliente H5) ← Fase 3
 ├── NETWORK/ (Communication)
 ├── DATABASE/ (Persistence)
 ├── CONFIGURATION/ (Runtime config)
@@ -157,6 +158,7 @@ AI_KNOWLEDGE_BASE/
 
 Estado sincronizado con [INDEXES/MASTER_INDEX.md](INDEXES/MASTER_INDEX.md):
 - **KB v2.0** (2026-08-25): módulo `00_PROJECT/` (contexto, fuentes, decisiones, roadmap, ideas), separación de 4 entidades (SOURCE/RUNTIME/CLIENT/KB), build Ant documentado, taxonomía de estados ampliada. Ver [VERSIONING/CHANGELOG.md](VERSIONING/CHANGELOG.md).
+- **Fase 3** (2026-08-25): investigación del cliente H5 iniciada — creado `CLIENT_RESEARCH/` (estructura del cliente, cifrado de texto, caso piloto Q00001, mapeo autoridad CLIENT↔SERVER). Detectado que el texto del cliente está cifrado (bloqueo) y una diferencia SOURCE↔RUNTIME en Q00001 (CONFLICT).
 - Previamente: Fase 2F (Database) completada + Fases 2A–2E documentadas (SYSTEMS/, AI/, COMBAT/, SKILLS/, QUESTS/, PACKETS/). Correcciones de auditoría FASE 2: 2026-08-24.
 
 Prioridades pendientes (sin iniciar):

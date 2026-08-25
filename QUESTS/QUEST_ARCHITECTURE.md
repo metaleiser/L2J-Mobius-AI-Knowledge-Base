@@ -81,6 +81,10 @@ public Quest(int questId) {
 
 La referencia de quests vive **solo** en `QUESTS/`. El doc planificado `SYSTEMS/QUEST_SYSTEM.md` fue sustituido en `MASTER_INDEX.md`.
 
+## 6. INVESTIGACIÓN CLIENT ↔ SERVER
+
+La dimensión CLIENT↔SERVER de las quests (correlación de IDs de quest/NPC/item, textos del cliente vs servidor, y casos piloto como `Q00001_LettersOfLove`) está documentada en [../CLIENT_RESEARCH/QUEST_PILOT_Q00001.md](../CLIENT_RESEARCH/QUEST_PILOT_Q00001.md) y [../CLIENT_RESEARCH/CLIENT_SERVER_MAPPING.md](../CLIENT_RESEARCH/CLIENT_SERVER_MAPPING.md). No se duplica aquí.
+
 ---
 **Fuente**: `mechanics/script/**`, `managers/ScriptManager.java`, `scripting/ScriptEngine.java`
 **Status**: VERIFIED
