@@ -4,6 +4,33 @@ Registro cronológico de auditorías. Una auditoría NO incrementa KB_VERSION po
 
 ---
 
+## AUDIT-002
+
+- **Date**: 2026-08-25
+- **KB Version**: 1.0 → **2.0** (cambio mayor de organización/metodología → 2.0)
+- **Focus**: Auditoría SOURCE↔SERVER de la estructura real del workspace + actualización KB v2.0.
+- **Result**: SYNCHRONIZED (documental) — aprobada por el usuario.
+
+**Hallazgos de estructura (verificado, no asumido)**:
+- `UPSTREAM/L2J_Mobius` = repo Git real (GitLab oficial `MobiusDevelopment/L2J_Mobius`, rama master, HEAD `e2518ab`, partial clone `blob:none`, sparse-checkout solo H5). Dentro contiene el **source tree completo** `L2J_Mobius_CT_2.6_HighFive/`.
+- `L2J_Mobius_CT_2.6_HighFive/` (raíz) = **SERVER_RUNTIME** desplegado: **sin `.git`**, JARs compilados fechados **26/05/2024**, config/data/geodata/runtime. No contiene `java/org/l2jmobius` (solo scripts de datapack en `game/data/scripts`).
+- `Lineage2-TCT-273-client/` = cliente H5 (v413, `system/l2.exe`), no modificado.
+- `AI_KNOWLEDGE_BASE/` = KB (repo GitHub propio).
+- **SOURCE ≠ RUNTIME**: inventarios difieren (source 27.657 vs runtime 25.075; java 3.194 vs 1.320; xml 2.907 vs 2.390; sql 116 vs 118; ini 73 vs 58). Configs `game/config` 23 vs 18 (runtime añade `Character.ini`, omite Database/Development/IdManager/Threads/UndergroundColiseum). `Server.ini` difiere. El runtime incluye geodata; el source no.
+- Build del source = **Apache Ant** (`build.xml`), flujo `checkRequirements→init→compile→jar→adding-core→adding-datapack→adding-readme→cleanup`; genera LoginServer.jar, GameServer.jar, DatabaseInstaller.jar, libs de terceros y ZIP de distribución. **No Gradle.**
+- Cliente: `system/l2.ini` descifra como "Lineage2 Ver413".
+
+**Cambios aplicados en KB v2.0** (autorización explícita del usuario):
+- Creado `00_PROJECT/` (PROJECT_CONTEXT, REFERENCE_SOURCES, DECISIONS, ROADMAP, IDEAS).
+- Actualizado `VERSIONING/UPSTREAM_BASELINE.md` (SO baseline vs RUNTIME build), `KB_VERSION.md` (2.0), `AUDIT_HISTORY.md` (esta entrada), `CHANGELOG.md`.
+- Actualizado `BUILD_AND_DEPLOYMENT.md` (Ant real + artefactos), `AI_INSTRUCTIONS/AI_README.md` (4 entidades + rutas reales), `AI_INSTRUCTIONS/VERIFICATION_RULES.md` (taxonomía 7 estados), `README.md` (estado v2.0), `INDEXES/MASTER_INDEX.md` (módulo 00_PROJECT y entidades).
+
+**Areas partial / UNKNOWN conservadas**: estados PARTIAL/UNKNOWN/RCV de v1.0 se mantienen donde corresponda; ninguna investigación previa se eliminó.
+
+**Integridad post-cambio**: conocimiento previo preservado · documentos técnicos 67 · sistema (AI_INSTRUCTIONS=5, VERSIONING=4) + 00_PROJECT=5 · enlaces revisados · sin huérfanos injustificados.
+
+---
+
 ## AUDIT-001
 
 - **Date**: 2026-08-24

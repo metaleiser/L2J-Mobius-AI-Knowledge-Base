@@ -8,10 +8,13 @@
 
 ## BUILD SYSTEM
 
-**Build Tool**: Apache Ant  
-**Build File**: `build.xml` (root directory)  
-**Required Ant Version**: 1.8.2 or higher  
-**Required Java**: Java 25  
+**Build Tool**: Apache Ant  (`build.xml` en la raíz del SERVER_SOURCE `UPSTREAM/L2J_Mobius/L2J_Mobius_CT_2.6_HighFive`)
+**Build File**: `build.xml` (root directory)
+**Required Ant Version**: 1.8.2 or higher
+**Required Java**: Java 25
+
+> **Nota (KB v2.0)**: el sistema de build de H5 es **Apache Ant, NO Gradle**. No existen `build.gradle`/`gradlew` en el source. El build debe ejecutarse sobre el **SERVER_SOURCE** (UPSTREAM), no sobre el runtime desplegado.
+
 
 ---
 
@@ -63,30 +66,49 @@ Removes: build/bin/*, build/dist/
 
 ## BUILD PROCESS FLOW
 
+Flujo real de `build.xml` (`default="cleanup"`, cadena de dependencias):
+
 ```
-1. checkRequirements
-   ├─ Verify Ant ≥ 1.8.2
-   └─ Verify Java 25 installed
-
-2. init
-   ├─ Delete old build/bin/
-   └─ Create fresh directories
-
-3. compile
-   ├─ Compile all java/ source to build/bin/
-   ├─ Classpath: dist/libs/*.jar
-   └─ Output: .class files
-
-4. jar
-   ├─ Create build/dist/libs/LoginServer.jar
-   │  └─ Exclude gameserver, DatabaseInstaller, Search
-   ├─ Create build/dist/libs/GameServer.jar
-   │  └─ Exclude loginserver, AccountManager, GameServerRegister
-   └─ Set Main-Class manifest attributes
-
-5. (Optional cleanup)
-   └─ Remove build artifacts if needed
+checkRequirements
+   ↓
+init
+   ↓
+compile
+   ↓
+jar                      → genera LoginServer.jar, GameServer.jar, DatabaseInstaller.jar
+   ↓
+adding-core              → añade ${build.dist} al ZIP de distribución
+   ↓
+adding-datapack          → añade el datapack (data/scripts/config) al mismo ZIP
+   ↓
+adding-readme            → añade readme.txt al ZIP
+   ↓
+cleanup
 ```
+
+### Artefactos que genera el build
+
+| Artefacto | Detalle |
+|---|---|
+| `LoginServer.jar` | `build/dist/libs/` — Main-Class `org.l2jmobius.loginserver.LoginServer` |
+| `GameServer.jar` | `build/dist/libs/` — Main-Class `org.l2jmobius.gameserver.GameServer` |
+| `DatabaseInstaller.jar` | `build/dist/databaseinstaller/` — instalador de BD |
+| Líbrerías de terceros | copiadas a `dist/libs/*.jar` (p. ej. `mariadb-java-client`) |
+| ZIP de distribución | `L2J_Mobius_CT_2.6_HighFive.zip` (core + datapack + readme) |
+
+### Detalle por target
+
+1. **checkRequirements** — verifica Ant ≥1.8.2 y Java requerido.
+2. **init** — crea directorios de salida (`build/bin`, `build/dist`).
+3. **compile** — compila `java/org/l2jmobius/**/*.java` a `build/bin/`.
+4. **jar** — empaqueta los JARs (ver artefactos) con manifiesto (Main-Class, Build-Date, Class-Path).
+5. **adding-core** — `zip` de `${build.dist}` → `L2J_Mobius_CT_2.6_HighFive.zip`.
+6. **adding-datapack** — `zip update` del datapack (data/scripts/config) al mismo ZIP.
+7. **adding-readme** — añade `readme.txt` al ZIP.
+8. **cleanup** — limpia la carpeta `build/`.
+
+> **El datapack/data se distribuye aparte del core compilado**: el código Java compilado va en los JARs; los datos (XML, scripts, configs de datos) se empaquetan por separado al ZIP, no dentro de los JARs.
+
 
 ---
 
@@ -136,6 +158,17 @@ dist/
 └── db_installer/
     └─ Database setup tool
 ```
+
+### SERVER_RUNTIME (desplegado) vs SERVER_SOURCE (build) — KB v2.0
+
+El `SERVER_RUNTIME` del workspace (`L2J_Mobius_CT_2.6_HighFive/`) es el **contenido de `dist/` + JARs compilados + datapack + geodata**, es decir, el **resultado descomprimido de un build/distribución**:
+
+- Es el servidor que **realmente se ejecuta y se usa para jugar/probar** (build **26/05/2024**).
+- **Sin `.git`**, sin `java/org/l2jmobius` (no es source).
+- Contiene `game/`, `login/`, `db_installer/`, `libs/`, `backup/`, `images/`, `MultisellCreator*`.
+- El source (`UPSTREAM/...`) es donde **se compila**; el runtime es donde **se ejecuta**.
+
+> Relación correcta: **SOURCE (build Ant) → ZIP de distribución → runtime desplegado**. Ver `00_PROJECT/PROJECT_CONTEXT.md` y `VERSIONING/UPSTREAM_BASELINE.md`.
 
 ---
 

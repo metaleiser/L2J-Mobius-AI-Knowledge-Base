@@ -4,9 +4,42 @@ Formato: entradas concisas y cronológicas (descendentes). El detalle completo v
 
 ---
 
+## KB 2.0 — 2026-08-25
+
+**Base**: actualización de KB v1.0 (preservando todo el conocimiento previo). Auditoría SOURCE↔SERVER (AUDIT-002) aprobada.
+
+### Arquitectura del workspace (nueva realidad documentada)
+- Separación formal en **4 entidades**: `SERVER_SOURCE` (UPSTREAM, Git GitLab, baseline `e2518ab`), `SERVER_RUNTIME` (`L2J_Mobius_CT_2.6_HighFive`, build 26/05/2024, sin Git), `CLIENT` (`Lineage2-TCT-273-client`), `KNOWLEDGE_BASE` (`AI_KNOWLEDGE_BASE`).
+- Documentado **SOURCE baseline ≠ RUNTIME build** (source `e2518ab` 2026 vs runtime 26/05/2024; inventarios y configs difieren).
+- Build del source = **Apache Ant** (checkRequirements→init→compile→jar→adding-core→adding-datapack→adding-readme→cleanup); genera LoginServer.jar, GameServer.jar, DatabaseInstaller.jar, libs de terceros y ZIP de distribución. **No Gradle.**
+
+### Nuevos documentos (00_PROJECT/)
+- `PROJECT_CONTEXT.md` — contexto y mapa de las 4 entidades + reglas de autoridad.
+- `REFERENCE_SOURCES.md` — registro de fuentes (repo KB, GitLab Mobius, runtime, cliente, wiki) con propósito/autoridad/uso.
+- `DECISIONS.md` — registro de decisiones (D-001…D-003).
+- `ROADMAP.md` — hoja de ruta (pendientes + investigaciones futuras).
+- `IDEAS.md` — Quest Assistant, AI features/Bots, crónicas superiores (solo ideas).
+
+### Modificados
+- `VERSIONING/UPSTREAM_BASELINE.md` — separado SOURCE baseline vs RUNTIME build; registrado el runtime (26/05/2024, sin Git).
+- `VERSIONING/KB_VERSION.md` — KB_VERSION 1.0 → 2.0.
+- `VERSIONING/AUDIT_HISTORY.md` — entrada AUDIT-002.
+- `BUILD_AND_DEPLOYMENT.md` — flujo Ant real + artefactos (sin Gradle).
+- `AI_INSTRUCTIONS/AI_README.md` — distinción SOURCE/RUNTIME/CLIENT/KB y rutas reales del workspace.
+- `AI_INSTRUCTIONS/VERIFICATION_RULES.md` — taxonomía de 7 estados y compatibilidad histórica.
+- `README.md` — estado KB 2.0 y separación de entidades.
+- `INDEXES/MASTER_INDEX.md` — secciones 00_PROJECT, entidades, client research, experiments, decisiones, roadmap, ideas.
+
+### Validación (resumen)
+- Enlaces y huérfanos revisados (ver AUDIT_HISTORY AUDIT-002).
+- Conocimiento previo preservado; no se eliminó ninguna investigación.
+
+---
+
 ## KB 1.0 — 2026-08-24
 
 **Baseline**: `e2518ab10872b28cd4c6860e102b493656ba8728` (master, 2026-08-22 03:06:03 +0300)
+
 
 ### Consolidación inicial
 - KB consolidada sobre snapshot local verificado estructuralmente contra el commit baseline (inventarios exactos: java 3194 · xml 2907 · sql 116 · ini 73 · properties 0 · total 27657).

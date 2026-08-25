@@ -28,6 +28,36 @@
 
 ---
 
+## PROJECT & WORKSPACE (KB v2.0)
+
+| Pregunta / tema | Documento |
+|-----------------|-----------|
+| ¿Qué es el proyecto y sus 4 entidades? | [00_PROJECT/PROJECT_CONTEXT.md](../00_PROJECT/PROJECT_CONTEXT.md) ✅ |
+| Fuentes de referencia (repos, wiki, cliente) | [00_PROJECT/REFERENCE_SOURCES.md](../00_PROJECT/REFERENCE_SOURCES.md) ✅ |
+| Decisiones de proyecto | [00_PROJECT/DECISIONS.md](../00_PROJECT/DECISIONS.md) ✅ |
+| Hoja de ruta | [00_PROJECT/ROADMAP.md](../00_PROJECT/ROADMAP.md) ✅ |
+| Ideas futuras (Quest Assistant, bots, crónicas) | [00_PROJECT/IDEAS.md](../00_PROJECT/IDEAS.md) ✅ |
+
+### Entidades del workspace
+
+| Tema | Documento |
+|------|-----------|
+| SERVER_SOURCE (UPSTREAM, code Git) | [00_PROJECT/PROJECT_CONTEXT.md](../00_PROJECT/PROJECT_CONTEXT.md) + [VERSIONING/UPSTREAM_BASELINE.md](../VERSIONING/UPSTREAM_BASELINE.md) |
+| SERVER_RUNTIME (desplegado/ejecutable) | [00_PROJECT/PROJECT_CONTEXT.md](../00_PROJECT/PROJECT_CONTEXT.md) + [VERSIONING/UPSTREAM_BASELINE.md](../VERSIONING/UPSTREAM_BASELINE.md) |
+| CLIENT (cliente H5) | [00_PROJECT/PROJECT_CONTEXT.md](../00_PROJECT/PROJECT_CONTEXT.md) (investigación futura) |
+| KNOWLEDGE_BASE (esta KB) | [README.md](../README.md) |
+| Build (Apache Ant) y deployment | [BUILD_AND_DEPLOYMENT.md](../BUILD_AND_DEPLOYMENT.md) ✅ |
+
+### Investigación futura / experimentos
+
+| Tema | Documento |
+|------|-----------|
+| Investigación del cliente (QUESTS/LORE/HTML/NPC/ITEMS/...) | [00_PROJECT/ROADMAP.md](../00_PROJECT/ROADMAP.md) ⧗ (futuro) |
+| Quest Knowledge multi-perspectiva | [00_PROJECT/ROADMAP.md](../00_PROJECT/ROADMAP.md) ⧗ (futuro) |
+| Experimentos / observaciones del SERVER_RUNTIME | KB: marcar OBSERVED/VERIFIED (ver [AI_INSTRUCTIONS/VERIFICATION_RULES.md](../AI_INSTRUCTIONS/VERIFICATION_RULES.md)) |
+
+---
+
 ## CORE PROJECT DOCUMENTATION
 
 | Question | Document |
@@ -295,9 +325,11 @@ Los siguientes documentos NO existen todavía; toda consulta sobre ellos debe re
 
 ## KNOWLEDGE BASE STATUS
 
-**Knowledge Base Version**: PHASE 2F (Database)  
-**Markdown Documents**: 67 (verified)  
-**Last Updated**: 2026-08-23 (auditoría y correcciones FASE 2: 2026-08-24)  
-**Status**: PARTIAL → Fase 2A (SYSTEMS/) + 2B (AI/, COMBAT/) + 2C (SKILLS/) + 2D (QUESTS/) + 2E (PACKETS/) documentados  
-**Current Phase**: 2F Database completed; no subsequent phase started  
-**Audit Note 2026-08-24**: correcciones aplicadas — PACKETS/* (conteos 280/389 unificados; `WritablePacket` en vez de `SendablePacket`; `FloodProtectors` → `gameserver/util`; eliminada referencia inexistente `NetworkThread`), CONFIGURATION_SYSTEM (mecanismo `.ini` real con `ConfigReader`+`load()`; retirados ejemplos `.properties`), MANAGERS_INDEX (inventario regenerado 58/52/6), README (estado de fase, estructura y rutas), rutas obsoletas `c:\L2J KNOLEDGE` eliminadas en 5 documentos.
+**Knowledge Base Version**: **2.0** (2026-08-25)  \
+**Markdown Documents**: 67 técnicos + 5 (`00_PROJECT/`) + sistema (AI_INSTRUCTIONS=5, VERSIONING=4)  \
+**Last Updated**: 2026-08-25 (KB v2.0)  \
+**Status**: Proyecto documentado — 4 entidades (SERVER_SOURCE / SERVER_RUNTIME / CLIENT / KNOWLEDGE_BASE)  \
+**Current phase**: KB v2.0 (contexto + separación de entidades + taxonomía) completada  \
+**Audit Note 2026-08-25 (AUDIT-002)**: SOURCE↔SERVER auditado (source `e2518ab` vs runtime build 26/05/2024); build=Apache Ant; creado `00_PROJECT/`. Histórico 2026-08-24 (AUDIT-001): correcciones FASE 2 — PACKETS/* (280/389), `WritablePacket`, `FloodProtectors` → `gameserver/util`, CONFIGURATION_SYSTEM `.ini`, MANAGERS_INDEX 58/52/6, rutas obsoletas eliminadas.
+
+Ver [VERSIONING/KB_VERSION.md](../VERSIONING/KB_VERSION.md) y [VERSIONING/CHANGELOG.md](../VERSIONING/CHANGELOG.md).

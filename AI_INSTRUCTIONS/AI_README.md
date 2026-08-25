@@ -10,31 +10,44 @@
 
 No sustituye al código. Lo documenta.
 
-## 2. Mapa del workspace
+## 2. Mapa del workspace (KB v2.0)
 
 ```
-C:\AI_KNOWLEDGE_BASE\                                   ← raíz del workspace
-├── AI_KNOWLEDGE_BASE\                                  ← ESTA KB (única zona modificable por defecto)
-│   ├── *.md y carpetas temáticas                        (67 documentos técnicos)
-│   ├── AI_INSTRUCTIONS\                                ← este sistema de instrucciones
-│   └── VERSIONING\                                     ← versión, baseline, changelog, auditorías
-├── L2 H5\                                              ← CLIENTE del juego (solo registro; sin auditoría aún)
-├── L2J_Mobius-master-L2J_Mobius_CT_2.6_HighFive\
-│   └── L2J_Mobius-master-L2J_Mobius_CT_2.6_HighFive\
-│       └── L2J_Mobius_CT_2.6_HighFive\                 ← SERVIDOR: código real (snapshot ZIP)
-│           ├── java\org\l2jmobius\{commons,gameserver,loginserver,...}
-│           └── dist\game\{config,data}, dist\db_installer, launcher, build.xml
-└── UPSTREAM\L2J_Mobius\                                ← clone Git de referencia (rama master,
-    └── L2J_Mobius_CT_2.6_HighFive\                        sparse-checkout de esta carpeta)
+e:\L2J MOBIUS\                                            ← raíz del workspace
+├── AI_KNOWLEDGE_BASE\                                    ← KNOWLEDGE_BASE (ESTA KB; única zona modificable por defecto)
+│   ├── 00_PROJECT\                                       ← contexto, fuentes, decisiones, roadmap, ideas
+│   ├── AI_INSTRUCTIONS\                                  ← sistema de instrucciones para IAs
+│   ├── VERSIONING\                                       ← versión, baselines, changelog, auditorías
+│   └── (67 documentos técnicos temáticos)
+├── L2J_Mobius_CT_2.6_HighFive\                           ← SERVER_RUNTIME (desplegado/ejecutable, sin Git)
+│   └── game\, login\, db_installer\, libs\, backup\, ... (JARs 26/05/2024, config, data, geodata)
+├── UPSTREAM\L2J_Mobius\                                  ← SERVER_SOURCE (repo Git oficial)
+│   └── L2J_Mobius_CT_2.6_HighFive\                       ← source tree completo (java/, dist/, build.xml)
+└── Lineage2-TCT-273-client\                              ← CLIENT H5 (system/l2.exe)
 ```
 
-## 3. Jerarquía de verdad (OBLIGATORIA)
+## 3. Las 4 entidades — distinción OBLIGATORIA
+
+Cada pregunta/afirmación debe indicar de qué entidad proviene. **Nunca mezclar SOURCE, RUNTIME y CLIENT sin señalar la procedencia.**
+
+| Entidad | Ruta | Autoridad para… |
+|---|---|---|
+| **SERVER_SOURCE** | `UPSTREAM/L2J_Mobius/L2J_Mobius_CT_2.6_HighFive` | implementación y arquitectura de código |
+| **SERVER_RUNTIME** | `L2J_Mobius_CT_2.6_HighFive` | estado actualmente desplegado/observable que usamos |
+| **CLIENT** | `Lineage2-TCT-273-client` | información que existe solo en el cliente |
+| **KNOWLEDGE_BASE** | `AI_KNOWLEDGE_BASE` | conocimiento previamente investigado (nunca sustituye la evidencia) |
+
+**Cómo elegir la fuente de una pregunta:**
 
 ```
-CÓDIGO > CONFIGURACIÓN REAL > ESTRUCTURA REAL (SQL/XML/filesystem) > KB > INFERENCIA
+implementación                          → SOURCE
+estado/configuración actualmente ejecut.→ RUNTIME
+texto/recurso/comportamiento de cliente → CLIENT
+conocimiento previamente investigado    → KB
+documentación general                   → REFERENCE SOURCES (00_PROJECT/REFERENCE_SOURCES.md)
 ```
 
-Si la KB contradice al código: **gana el código**. Una inferencia **nunca** se convierte en hecho VERIFIED.
+Si SOURCE y RUNTIME difieren → **registrar la discrepancia**, no corregir automáticamente ninguno. Ver [../00_PROJECT/PROJECT_CONTEXT.md](../00_PROJECT/PROJECT_CONTEXT.md).
 
 ## 4. Baseline vigente
 
@@ -44,29 +57,31 @@ Si la KB contradice al código: **gana el código**. Una inferencia **nunca** se
 
 Antes de modificar cualquier documento: determina **qué versión del código estás observando** y **contra qué commit fue validada la KB**.
 
-## 5. Diferencia servidor / cliente / upstream
+## 5. Baseline vigente (SOURCE)
 
-| Fuente | Qué es | Uso permitido |
+- **SOURCE_BASELINE_COMMIT**: `e2518ab10872b28cd4c6860e102b493656ba8728`
+- **Fecha del commit**: 2026-08-22 03:06:03 +0300 · rama `master` · repo `MobiusDevelopment/L2J_Mobius` (GitLab oficial)
+- El `SERVER_SOURCE` local (`UPSTREAM/...`) corresponde a este commit.
+- El `SERVER_RUNTIME` es un **build distinto (26/05/2024)** y NO coincide con este baseline (SOURCE baseline ≠ RUNTIME build). Detalles: [../VERSIONING/UPSTREAM_BASELINE.md](../VERSIONING/UPSTREAM_BASELINE.md)
+
+Antes de modificar cualquier documento: determina **qué entidad estás observando** (SOURCE/RUNTIME/CLIENT), **qué versión del código** y **contra qué baseline fue validada la KB**.
+
+## 6. Taxonomía de estados (KB v2.0)
+
+| Estado | Significado | Compatibilidad |
 |---|---|---|
-| **SERVIDOR** (snapshot local) | Código que realmente ejecuta el servidor | Fuente primaria para comportamiento actual |
-| **UPSTREAM** (clone) | Historial Git oficial de Mobius | Detectar evolución, diffs, commits nuevos |
-| **CLIENTE** (`L2 H5`) | Cliente del juego | Solo registro; auditoría CLIENT↔SERVER es fase futura |
+| **VERIFIED** | Confirmado mediante código, cliente, ejecución reproducible o evidencia suficiente (idealmente `archivo:línea`) | equivale a VERIFIED |
+| **OBSERVED** | Observado durante una prueba/uso del servidor o cliente, aún no completamente explicado | nuevo |
+| **UNVERIFIED** | Afirmación encontrada en una fuente que aún no fue comprobada | releva a REQUIRES CODE VERIFICATION / afines |
+| **ASSUMPTION** | Hipótesis de trabajo | nuevo |
+| **UNKNOWN** | No existe información suficiente | equivale a UNKNOWN |
+| **DEPRECATED** | Información anteriormente válida pero sustituida | releva a OUTDATED |
+| **CONFLICT** | Existen fuentes o evidencias contradictorias | releva a CONTRADICTED |
+| *(PARTIAL)* | Parte demostrada, parte no (histórico, se conserva) | histórico |
+| *(PLANNED ⧗)* | Documentado como planificado; el doc aún no existe | histórico |
 
-Las afirmaciones sobre el cliente deben marcarse como **CLIENT** y nunca mezclarse con las del servidor.
-
-## 6. Estados documentales
-
-| Estado | Significado |
-|---|---|
-| **VERIFIED** | Existe evidencia concreta en código/filesystem (idealmente `archivo:línea`) que lo demuestra |
-| **PARTIAL** | Parte demostrada, parte no; se indica cuál |
-| **UNKNOWN** | No se pudo determinar con la evidencia disponible |
-| **REQUIRES CODE VERIFICATION** | Requiere inspección adicional antes de usarse como cierto |
-| **OUTDATED** | El código avanzó; la afirmación correspondía a un estado anterior |
-| **CONTRADICTED** | El código demuestra explícitamente que la afirmación es incorrecta |
-| **PLANNED (⧗)** | Documentado como planificado; el documento NO existe todavía |
-
-Los conteos que puedan cambiar llevan fecha/commit de referencia.
+- **No renombrar destructivamente** documentos históricos que usen estados antiguos; documentar el mapeo y usarlo a partir de v2.0.
+- Los conteos que puedan cambiar llevan fecha/commit de referencia.
 
 ## 7. Qué puede modificar una IA
 
@@ -75,9 +90,9 @@ Los conteos que puedan cambiar llevan fecha/commit de referencia.
 
 ## 8. Qué NO debe modificar (nunca)
 
-- Servidor local (Java/XML/SQL/INI/config/build/scripts/datapack)
-- Cliente `L2 H5`
-- Clone `UPSTREAM\L2J_Mobius` y sus `.git`
+- **SERVER_SOURCE / SERVER_RUNTIME** (Java/XML/SQL/INI/config/build/scripts/datapack)
+- **CLIENT** (`Lineage2-TCT-273-client`)
+- Clone `UPSTREAM/L2J_Mobius` y su `.git`
 - Cualquier archivo fuera de `AI_KNOWLEDGE_BASE/` sin autorización explícita
 
 ## 9. Antes de corregir documentación

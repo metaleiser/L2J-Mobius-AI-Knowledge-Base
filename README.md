@@ -2,8 +2,22 @@
 
 **Project**: L2J Mobius CT 2.6 HighFive  
 **Created**: 2026-08-23  
-**Status**: PHASE 2F completada (correcciones de auditoría FASE 2 aplicadas 2026-08-24)  
-**Source of Truth**: Código fuente del servidor — carpeta `java/` de la raíz del servidor en este workspace. Salvo indicación contraria, las rutas de esta KB son relativas a esa raíz.
+**Status**: KB **v2.0** (2026-08-25) — SOURCE↔SERVER auditado, 4 entidades documentadas  
+**Source of Truth**: según la entidad — código fuente (`SERVER_SOURCE`/UPSTREAM) para arquitectura; servidor desplegado (`SERVER_RUNTIME`) para estado observable; cliente (`CLIENT`) para lo solo-cliente. Ver [00_PROJECT/PROJECT_CONTEXT.md](00_PROJECT/PROJECT_CONTEXT.md).
+
+---
+
+## LAS 4 ENTIDADES (resumen)
+
+| Entidad | Ruta real | Rol |
+|---|---|---|
+| **SERVER_SOURCE** | `UPSTREAM/L2J_Mobius/L2J_Mobius_CT_2.6_HighFive` | código fuente (Git GitLab, baseline `e2518ab`) |
+| **SERVER_RUNTIME** | `L2J_Mobius_CT_2.6_HighFive` | servidor desplegado/ejecutable (build 26/05/2024, sin Git) |
+| **CLIENT** | `Lineage2-TCT-273-client` | cliente H5 |
+| **KNOWLEDGE_BASE** | `AI_KNOWLEDGE_BASE` | esta documentación |
+
+> **SOURCE baseline ≠ RUNTIME build**: no son idénticos ni representan el mismo commit.
+> Detalles: [00_PROJECT/PROJECT_CONTEXT.md](00_PROJECT/PROJECT_CONTEXT.md) · [VERSIONING/UPSTREAM_BASELINE.md](VERSIONING/UPSTREAM_BASELINE.md)
 
 ---
 
@@ -142,9 +156,8 @@ AI_KNOWLEDGE_BASE/
 ## DOCUMENTATION STATUS
 
 Estado sincronizado con [INDEXES/MASTER_INDEX.md](INDEXES/MASTER_INDEX.md):
-Fase 2F (Database) completada. Documentadas Fase 1 base + Fases 2A (SYSTEMS/), 2B (AI/, COMBAT/), 2C (SKILLS/), 2D (QUESTS/) y 2E (PACKETS/).
-
-Correcciones de auditoría FASE 2 aplicadas: **2026-08-24**.
+- **KB v2.0** (2026-08-25): módulo `00_PROJECT/` (contexto, fuentes, decisiones, roadmap, ideas), separación de 4 entidades (SOURCE/RUNTIME/CLIENT/KB), build Ant documentado, taxonomía de estados ampliada. Ver [VERSIONING/CHANGELOG.md](VERSIONING/CHANGELOG.md).
+- Previamente: Fase 2F (Database) completada + Fases 2A–2E documentadas (SYSTEMS/, AI/, COMBAT/, SKILLS/, QUESTS/, PACKETS/). Correcciones de auditoría FASE 2: 2026-08-24.
 
 Prioridades pendientes (sin iniciar):
 1. ✓ Core architecture
@@ -153,11 +166,14 @@ Prioridades pendientes (sin iniciar):
 4. ✓ Database layer
 5. ✓ Configuration system
 6. ✓ Threading model
-7. ⧗ Sistemas mayores restantes (CLAN, SIEGE, etc.)
+7. ⧗ Sistemas mayores restantes (CLAN, SIEGE, INSTANCE, ZONE, EVENT, SPAWN)
 8. ⧗ Catálogo completo de managers (ver [INDEXES/MANAGERS_INDEX.md](INDEXES/MANAGERS_INDEX.md))
 9. ⧗ PACKET_INDEX.md (referencia de packets)
 10. ⧗ NPC type catalog
 11. ⧗ CONFIG_REFERENCE.md · HANDLER_INDEX.md · FILE_TREE.md
+12. ⧗ Investigación del cliente (QUESTS, LORE, DIALOGUES, HTML, NPC, ITEMS, TEXTURES, ICONS, SOUNDS, MAPS)
+
+Ver hoja de ruta: [00_PROJECT/ROADMAP.md](00_PROJECT/ROADMAP.md).
 
 ---
 

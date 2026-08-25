@@ -5,13 +5,13 @@
 ## FASE A — Identificación
 
 1. Localizar KB: `AI_KNOWLEDGE_BASE/` (raíz del workspace).
-2. Localizar servidor: carpeta anidada `L2J_Mobius_CT_2.6_HighFive` (ver mapa en [AI_README.md](AI_README.md)).
-3. Localizar cliente si existe: `L2 H5/`.
-4. Localizar clone upstream: `UPSTREAM/L2J_Mobius`.
-5. Obtener commit actual del clone:
+2. Localizar **SERVER_SOURCE**: `UPSTREAM/L2J_Mobius/L2J_Mobius_CT_2.6_HighFive` (código, repo Git).
+3. Localizar **SERVER_RUNTIME**: `L2J_Mobius_CT_2.6_HighFive` (servidor desplegado).
+4. Localizar cliente si existe: `Lineage2-TCT-273-client/`.
+5. Obtener commit actual del clone SOURCE:
    - `git -C UPSTREAM/L2J_Mobius rev-parse HEAD`
    - `git -C UPSTREAM/L2J_Mobius status --porcelain` (debe estar limpio)
-6. Comparar con `UPSTREAM_BASELINE_COMMIT` ([../VERSIONING/UPSTREAM_BASELINE.md](../VERSIONING/UPSTREAM_BASELINE.md)). Si difiere → hay cambios upstream; continuar en FASE C.
+6. Comparar con `SOURCE_BASELINE_COMMIT` ([../VERSIONING/UPSTREAM_BASELINE.md](../VERSIONING/UPSTREAM_BASELINE.md)). Si difiere → hay cambios upstream; continuar en FASE C.
 
 ## FASE B — Inventario (filesystem manda)
 
