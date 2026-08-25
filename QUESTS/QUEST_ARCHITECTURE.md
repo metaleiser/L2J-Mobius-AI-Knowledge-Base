@@ -85,6 +85,10 @@ La referencia de quests vive **solo** en `QUESTS/`. El doc planificado `SYSTEMS/
 
 La dimensión CLIENT↔SERVER de las quests (correlación de IDs de quest/NPC/item, textos del cliente vs servidor, y casos piloto como `Q00001_LettersOfLove`) está documentada en [../CLIENT_RESEARCH/QUEST_PILOT_Q00001.md](../CLIENT_RESEARCH/QUEST_PILOT_Q00001.md) y [../CLIENT_RESEARCH/CLIENT_SERVER_MAPPING.md](../CLIENT_RESEARCH/CLIENT_SERVER_MAPPING.md). No se duplica aquí.
 
+### Casos de estudio transversales (SOURCE ↔ RUNTIME ↔ CLIENT ↔ GAMEPLAY)
+- `Q00001_LettersOfLove` — piloto inicial: [../CLIENT_RESEARCH/QUEST_PILOT_Q00001.md](../CLIENT_RESEARCH/QUEST_PILOT_Q00001.md)
+- `Q00039_RedEyedInvaders` — drops en party ponderados, branching de drop, colecciones dobles con trigger por límite: [Q00039_REDEYEDINVADERS_ANALYSIS.md](Q00039_REDEYEDINVADERS_ANALYSIS.md)
+
 ---
 **Fuente**: `mechanics/script/**`, `managers/ScriptManager.java`, `scripting/ScriptEngine.java`
 **Status**: VERIFIED

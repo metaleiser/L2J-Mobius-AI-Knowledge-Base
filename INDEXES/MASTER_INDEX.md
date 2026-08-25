@@ -154,6 +154,7 @@
 | Timers de quest | [QUESTS/QUEST_TIMERS.md](../QUESTS/QUEST_TIMERS.md) ✅ |
 | Recompensas (items/exp/sp/adena/sounds) | [QUESTS/QUEST_REWARDS.md](../QUESTS/QUEST_REWARDS.md) ✅ |
 | Interacción Player↔NPC↔diálogo HTML | [QUESTS/QUEST_PLAYER_NPC_DIALOG.md](../QUESTS/QUEST_PLAYER_NPC_DIALOG.md) ✅ |
+| Análisis transversal Q00039 RedEyedInvaders (SOURCE↔RUNTIME↔CLIENT↔GAMEPLAY) | [QUESTS/Q00039_REDEYEDINVADERS_ANALYSIS.md](../QUESTS/Q00039_REDEYEDINVADERS_ANALYSIS.md) ✅ |
 
 ### Sistemas de juego planificados (fases futuras)
 
