@@ -155,6 +155,7 @@
 | Recompensas (items/exp/sp/adena/sounds) | [QUESTS/QUEST_REWARDS.md](../QUESTS/QUEST_REWARDS.md) ✅ |
 | Interacción Player↔NPC↔diálogo HTML | [QUESTS/QUEST_PLAYER_NPC_DIALOG.md](../QUESTS/QUEST_PLAYER_NPC_DIALOG.md) ✅ |
 | Análisis transversal Q00039 RedEyedInvaders (SOURCE↔RUNTIME↔CLIENT↔GAMEPLAY) | [QUESTS/Q00039_REDEYEDINVADERS_ANALYSIS.md](../QUESTS/Q00039_REDEYEDINVADERS_ANALYSIS.md) ✅ |
+| Metodología de investigación (framework, plantilla A-W, taxon. clues/lore) | [QUESTS/QUEST_RESEARCH_FRAMEWORK.md](../QUESTS/QUEST_RESEARCH_FRAMEWORK.md) ✅ |
 
 ### Sistemas de juego planificados (fases futuras)
 

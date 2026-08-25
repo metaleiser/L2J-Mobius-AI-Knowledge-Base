@@ -89,6 +89,10 @@ La dimensión CLIENT↔SERVER de las quests (correlación de IDs de quest/NPC/it
 - `Q00001_LettersOfLove` — piloto inicial: [../CLIENT_RESEARCH/QUEST_PILOT_Q00001.md](../CLIENT_RESEARCH/QUEST_PILOT_Q00001.md)
 - `Q00039_RedEyedInvaders` — drops en party ponderados, branching de drop, colecciones dobles con trigger por límite: [Q00039_REDEYEDINVADERS_ANALYSIS.md](Q00039_REDEYEDINVADERS_ANALYSIS.md)
 
+## 7. METODOLOGÍA DE INVESTIGACIÓN DE QUESTS
+
+Este documento describe la arquitectura técnica del motor de quests. Para la metodología de investigación paso a paso, patrones reutilizables, reglas SOURCE↔RUNTIME↔CLIENT y la plantilla A-W para futuras investigaciones de quests, ver [QUEST_RESEARCH_FRAMEWORK.md](QUEST_RESEARCH_FRAMEWORK.md).
+
 ---
 **Fuente**: `mechanics/script/**`, `managers/ScriptManager.java`, `scripting/ScriptEngine.java`
 **Status**: VERIFIED
