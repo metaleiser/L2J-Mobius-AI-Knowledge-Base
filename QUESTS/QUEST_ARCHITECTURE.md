@@ -15,7 +15,7 @@
 | Capa | Ubicación | Contenido |
 |------|-----------|-----------|
 | **Core Java** | `java/org/l2jmobius/gameserver/mechanics/script/` (10 archivos) | Motor: `Quest`, `QuestState`, `State`, `QuestTimer`, `Script`, `Event`, `LongTimeEvent`, `InstanceScript`, `QuestType`, `QuestSound` |
-| **Datapack (scripts compilados en runtime)** | `dist/game/data/scripts/quests/` — **543 archivos .java en 511 carpetas** | Una carpeta por quest, p.ej. `Q00001_LettersOfLove/Q00001_LettersOfLove.java` |
+| **Datapack (scripts compilados en runtime)** | `dist/game/data/scripts/quests/` — **532 archivos .java en 510 carpetas** (recuento filesystem 2026-08-26, RUNTIME; incluye 2 `.java` top-level: handlers) | Una carpeta por quest, p.ej. `Q00001_LettersOfLove/Q00001_LettersOfLove.java` |
 
 Las quests NO tienen XML propio: los directorios de quests contienen solo `.java` (verificado). El ScriptEngine compila y ejecuta estos scripts al arranque.
 

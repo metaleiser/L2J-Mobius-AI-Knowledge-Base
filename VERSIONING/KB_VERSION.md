@@ -1,18 +1,32 @@
 # KB_VERSION
 
 ```
-KB_VERSION          = 2.1
+KB_VERSION          = 2.2
 STATUS              = SYNCHRONIZED
 SOURCE_BASELINE     = e2518ab10872b28cd4c6860e102b493656ba8728 (upstream master)
 RUNTIME_BUILD       = 26/05/2024 (SERVER_RUNTIME desplegado, sin Git)
 UPSTREAM_REPOSITORY = MobiusDevelopment/L2J_Mobius
 BASELINE_DATE       = 2026-08-22 03:06:03 +0300
-LAST_AUDIT          = 2026-08-25 (AUDIT-003: KB v2.1 metadata reconciliation + Q00005)
+LAST_AUDIT          = 2026-08-26 (AUDIT-004: KB v2.2 consolidación quest-engine + gaps map + hardening)
+LAST_COMMIT         = 63c9b40 (KB v0.9: PvE vertical slice + party credit + spawn query consolidation)
+PREVIOUS_COMMIT     = d029681 (KB: complete Q00005 PvE vertical slice)
 00_PROJECT_DOCS     = 5
-TECHNICAL_DOCS      = 74
+TECHNICAL_DOCS      = 81
 SYSTEM_DOCS         = 9 (AI_INSTRUCTIONS=5, VERSIONING=4)
-TOTAL_MD            = 88
+TOTAL_MD            = 95
 ```
+
+> **Nota sobre "KB v0.9"**: el commit `63c9b40` utilizó **"KB v0.9" como nomenclatura de trabajo del micro-sprint**. La versión canónica de la Knowledge Base es **v2.2**. No reinterpretar el mensaje de ese commit como versión de la KB.
+
+## Cambios de v2.1 → v2.2
+
+- **QUESTS/QUEST_ENGINE_REFERENCE.md** (nuevo): referencia central de APIs del engine (`Quest#*`, `QuestState#*`), 15 categorías.
+- **GAPS.md** (nuevo): mapa central de cobertura COVERED/PARTIAL/MISSING/SOURCE_REQUIRED.
+- **QUESTS/QUEST_PARTY_CREDIT.md**, **QUESTS/QUEST_VERTICAL_SLICE_TEMPLATE.md**, **WORLD/SPAWN_QUERY_GUIDE.md**, slices **Q00003/Q00005**: incorporados desde micro-sprints 2.2–2.3 (ya existían en disco; ahora contabilizados).
+- **QUEST_REWARDS.md**: sección de consultas de inventario + patrones reutilizables (ENGINE PATTERN vs QUEST-SPECIFIC).
+- **QUEST_ARCHITECTURE.md**: conteo quests corregido 543/511 → **532/510** (filesystem 2026-08-26).
+- **Cross-links** AGGRO_SYSTEM/DEATH_FLOW ↔ QUEST_PARTY_CREDIT (quest credit ≠ drop normal).
+- **VERIFICATION_RULES.md**: taxonomía ampliada (DIRECTLY_SUPPORTED, ORIENTATION_ONLY, SOURCE_REQUIRED, OUTDATED, CONTRADICTED, UNKNOWN_CLIENT) + metadata estándar.
 
 ## Regla canónica de conteo de documentos
 
@@ -23,7 +37,7 @@ SISTEMA    = AI_INSTRUCTIONS + VERSIONING
 TOTAL      = TÉCNICOS + 00_PROJECT + SISTEMA
 ```
 
-Con esta regla: 74 (técnicos) + 5 (00_PROJECT) + 9 (sistema) = **88**. Los documentos `INDEXES/`, `README.md` (root) y `CLIENT_RESEARCH/` se cuentan como **técnicos** (no están excluidos). El número `67` registrado en AUDIT-001/AUDIT-002 era correcto para el **snapshot v2.0** (81 docs) y se conserva como histórico.
+Con esta regla, estado canónico **KB v2.2**: 81 (técnicos) + 5 (00_PROJECT) + 9 (sistema) = **95**. Los documentos `INDEXES/`, `README.md` (root) y `CLIENT_RESEARCH/` se cuentan como **técnicos** (no están excluidos). Conteos históricos conservados: **88** = 74 técnicos + 5 + 9 (KB v2.1, 2026-08-25) y **81** = 67 técnicos + 5 + 9 (KB v2.0; el `67` de AUDIT-001/AUDIT-002 se conserva como histórico).
 
 ## Qué significa KB 2.0
 

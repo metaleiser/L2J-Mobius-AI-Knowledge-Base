@@ -127,6 +127,21 @@ if (getTarget() != mostHate) setTarget(mostHate);
 
 ---
 
+## 6b. ⚠️ QUEST PARTY CREDIT ≠ GENERAL MOB DROP/REWARD DISTRIBUTION
+
+**No confundir dos mecanismos distintos:**
+
+| Mecanismo | Qué decide | Implementación | Documento |
+|---|---|---|---|
+| **NORMAL MOB REWARD/DROP** (EXP/SP/drops del mob) | Quién recibe EXP/SP/drop **normal**: el `mainDamageDealer` (mayor `damageTotal` dentro de `ALT_PARTY_RANGE`) y su party vía `calculateRewards`; drops vía `doItemDrop(mainDamageDealer)`. | `Attackable#getMainDamageDealer()` · `calculateRewards(lastAttacker)` · `doItemDrop(...)` (flujo en `Creature.doDie`) | Este doc §6 + [COMBAT/DEATH_FLOW.md](../COMBAT/DEATH_FLOW.md) |
+| **QUEST PARTY CREDIT** (quest items / progreso de quest) | A qué **miembro de party con la quest elegible** (`cond` match) se le atribuye el ítem/progreso de quest al morir un mob registrado. | `Quest#getRandomPartyMember*(...)` · `getRandomPartyMemberState(...)` — selección aleatoria (uniforme o ponderada por killer). | [QUESTS/QUEST_PARTY_CREDIT.md](../QUESTS/QUEST_PARTY_CREDIT.md) |
+
+- Ambos usan el mismo radio configurado (`ALT_PARTY_RANGE = 1500`) pero **deciden cosas distintas**.
+- Un jugador puede recibir el **drop normal** (por ser main damage dealer) mientras el **quest item** va a otro miembro de party que cumpla la condición de la quest — y viceversa.
+
+---
+
+
 ## 7. Trazabilidad
 
 | Clase/Método | Path |

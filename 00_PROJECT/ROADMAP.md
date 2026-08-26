@@ -1,6 +1,6 @@
 # ROADMAP
 
-**Última actualización**: 2026-08-25 (KB v2.1)
+**Última actualización**: 2026-08-26 (KB v2.2)
 
 Hoja de ruta del proyecto/KB. Cronológico orientativo. Los ítems marcados con fecha futura son **direcciones**, no compromisos.
 
@@ -10,6 +10,8 @@ Hoja de ruta del proyecto/KB. Cronológico orientativo. Los ítems marcados con 
 
 - [x] **KB v2.0** — contexto de proyecto, separación SOURCE/RUNTIME/CLIENT/KB, taxonomía de estados, master index actualizado.
 - [x] **KB v2.1** — reconciliación de metadatos y conteos (74 técnicos / 5 project / 9 sistema = 88 .md); documentación e indexación de Fase 3, Q00039, Fase 3D y Q00005.
+- [x] **Slices Q00005/Q00003 + consolidación quest** — vertical slices verificados (delivery y combate), `QUEST_PARTY_CREDIT.md`, `WORLD/SPAWN_QUERY_GUIDE.md`, `QUEST_VERTICAL_SLICE_TEMPLATE.md`. *(commit `63c9b40` usó "KB v0.9" como etiqueta de trabajo; versión canónica interna v2.2).*
+- [x] **KB v2.2** — consolidación y hardening: `QUEST_ENGINE_REFERENCE.md` (referencia central del motor), [GAPS.md](../GAPS.md) (mapa de cobertura), patrones reutilizables en QUEST_REWARDS, conteo quests corregido (532 .java / 510 carpetas), cross-links quest-party vs drop normal, taxonomía ampliada. 81 técnicos / 5 project / 9 sistema = **95 .md**.
 - [x] **Fase 3 (inicio)** — investigación CLIENT H5: creado `CLIENT_RESEARCH/` (estructura, cifrado, caso piloto Q00001, mapeo autoridad). Detectado cifrado de texto del cliente y diferencia NEWBIEGUIDE SOURCE↔RUNTIME (CONFLICT).
 - [x] **Fase 3D** — creado `QUESTS/QUEST_RESEARCH_FRAMEWORK.md` (marco A-W de análisis transversal de quests).
 - [x] **Q00039 RedEyedInvaders** — análisis transversal SOURCE↔RUNTIME↔CLIENT↔GAMEPLAY.
@@ -18,8 +20,41 @@ Hoja de ruta del proyecto/KB. Cronológico orientativo. Los ítems marcados con 
 - [ ] Verificación puntual de documentos técnicos pendientes (PARTIAL/UNKNOWN/RCV) contra el source.
 - [ ] Reconciliación visible de contradicciones de conteos (managers, packets, configs) marcándolas CONFLICT/DEPRECATED.
 
+## Próximos micro-sprints (tras KB v2.2) — hacia Community Board
+
+> Objetivo final de esta línea: que la KB sirva como **especificación verificable** para construir sistemas de gameplay mediante IA. Nada de esto está implementado todavía; es planificación.
+
+| Micro-sprint | Tema | Contenido previsto |
+|---|---|---|
+| **2.5** | SKILL / BUFF SEMANTIC FOUNDATION | Base semántica de skills/buffs extraída de SOURCE+XML: tipos de efecto, targets, duraciones, stacking, flags beneficial/non-beneficial. |
+| **2.6** | SCHEME ENGINE / VALIDATOR | Motor y validador de schemes sobre la base 2.5. |
+| **2.7** | COMMUNITY BOARD FOUNDATION | Fundamentos del Community Board (bypass, páginas, servicios). |
+| **2.8** | GAMEPLAY / PLAYTEST LOOP | Bucle de pruebas jugables contra la KB (expected vs actual). |
+
+### Requisitos futuros del Scheme Validator (documentar, NO implementar aún)
+
+El validador deberá distinguir, con evidencia de SOURCE/XML, para cada skill/buff:
+
+- party buffs vs self buffs
+- augmentation
+- weapon-related effects
+- summon-only buffs
+- clan-related effects
+- incompatible buffs
+- role/class restrictions
+- beneficial vs non-beneficial
+- target type
+- PvE/PvP applicability
+- duración
+- stacking
+- conflicto entre buffs
+- applicability al jugador y al party
+- orden del scheme
+
+Clasificaciones objetivo del validador: `VALID · INVALID · SELF_ONLY · PARTY_VALID · SUMMON_ONLY · AUGMENTATION · WEAPON_EFFECT · INCOMPATIBLE · CLASS_RESTRICTED · TARGET_RESTRICTED · REQUIRES_REVIEW`.
+
 ### Documentación completada (post-v2.0)
-- `CLIENT_RESEARCH/`, `Q00039_REDEYEDINVADERS_ANALYSIS.md`, `QUEST_RESEARCH_FRAMEWORK.md`, `Q00005_MINERSFAVOR_ANALYSIS.md`.
+- `CLIENT_RESEARCH/`, `Q00039_REDEYEDINVADERS_ANALYSIS.md`, `QUEST_RESEARCH_FRAMEWORK.md`, `Q00005_MINERSFAVOR_ANALYSIS.md`, slices Q00003/Q00005, `QUEST_PARTY_CREDIT.md`, `WORLD/SPAWN_QUERY_GUIDE.md`, `QUEST_VERTICAL_SLICE_TEMPLATE.md`, `QUEST_ENGINE_REFERENCE.md`, `GAPS.md`.
 - **Cliente**: cifrado detectado y registrado; **no descifrado validado**.
 
 ## Corto plazo (siguientes fases)

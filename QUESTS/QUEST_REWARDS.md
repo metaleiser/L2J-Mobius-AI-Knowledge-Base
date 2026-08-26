@@ -85,6 +85,22 @@ Usados como retorno por defecto de `onTalk/onFirstTalk`.
 
 No existe un helper único "giveReward" que englobe todo: cada script compone su recompensa con estos helpers + APIs de Player.
 
+## 5b. PATRONES REUTILIZABLES (generalizables)
+
+> Distinción obligatoria: **ENGINE PATTERN** = capacidad que las APIs del engine soportan de forma general; **QUEST-SPECIFIC IMPLEMENTATION** = cómo una quest concreta decide usarla. Un patrón engine no convierte la implementación de una quest en regla universal.
+
+| Patrón | Tipo | Mecánica (APIs) | Ejemplo verificado |
+|---|---|---|---|
+| Gate de no-reentrega (`!hasQuestItems`) | ENGINE PATTERN | `if (!hasQuestItems(player, ITEM)) { giveItems(ITEM,1); … }` — garantiza entrega única sin duplicados. Posible gracias a `hasQuestItems(int)` + `giveItems`. | Q00003 helper `giveItem` (`!hasQuestItems` antes de dar) |
+| Advance on collection complete | ENGINE PATTERN | `if (hasQuestItems(player, allIds)) setCond(n)` — dispara transición al completar colección. `hasQuestItems(int...)` es AND. | Q00003 (`getRegisteredItemIds()`), Q00039 (`hasItem` sobre ItemHolder completo) |
+| Conteo con límite → transición | ENGINE PATTERN | `getQuestItemsCount(...) >= LIMIT` → `setCond` (colección por cantidad). | Q00042/43/44 (×30), Q00050–53 (×100) |
+| Drop probabilístico con límite | ENGINE PATTERN | `giveItemRandomly(player,npc,item,min,max,limit,chance,true)` retorna true al alcanzar el límite → usar como trigger de `setCond`. | Q00039 §3.3 |
+| Key-item gating (intercambio) | QUEST-SPECIFIC IMPLEMENTATION | `takeItems(KEY,-1)` + `giveItems(REWARD)` tras comprobar posesión. Depende del diseño de la quest. | Q00005 (1552→1549 vía Brunon) |
+| Party credit compartido / ponderado | ENGINE PATTERN | Ver [QUEST_PARTY_CREDIT.md](QUEST_PARTY_CREDIT.md): SHARED_RANDOM (`getRandomPartyMember`) vs KILLER_WEIGHTED (`getRandomPartyMemberState`). | Q00003 / Q00039 |
+
+> Regla: documentar el patrón como capacidad del engine y citar la quest solo como ejemplo de uso; nunca elevar la implementación de una quest a norma general.
+
+
 ## 6. TRAZABILIDAD
 
 | Helper | Path |

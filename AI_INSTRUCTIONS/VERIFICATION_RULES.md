@@ -1,25 +1,42 @@
 # VERIFICATION_RULES — Reglas obligatorias de verificación
 
-Aplican a cualquier afirmación escrita o modificada en esta KB. Última revisión: 2026-08-25 (KB v2.0).
+Aplican a cualquier afirmación escrita o modificada en esta KB. Última revisión: 2026-08-26 (KB v2.2).
 
 ## Taxonomía de estados (obligatoria)
 
 | Estado | Significado |
 |---|---|
 | **VERIFIED** | Confirmado mediante código, cliente, ejecución reproducible o evidencia suficiente (formato preferente `ruta/archivo.java:línea`, o recuento filesystem con fecha). |
+| **DIRECTLY_SUPPORTED** | La afirmación se deriva directamente del código citado sin interpretación adicional (más débil que VERIFIED por línea exacta, más fuerte que orientación). *(añadido KB v2.2)* |
+| **ORIENTATION_ONLY** | El documento orienta hacia dónde investigar, pero el hecho concreto aún requiere SOURCE. *(añadido KB v2.2)* |
+| **SOURCE_REQUIRED** | Toda afirmación concreta de este dominio exige verificación en SOURCE antes de usarse. *(añadido KB v2.2)* |
+| **OUTDATED** / **DEPRECATED** | Información anteriormente válida pero sustituida/desfasada; re-verificar antes de usar. |
+| **CONTRADICTED** / **CONFLICT** | Existen fuentes o evidencias contradictorias; registrar ambas. |
 | **OBSERVED** | Observado durante una prueba/uso del servidor o cliente, pero aún no completamente explicado. No elevar a VERIFIED sin confirmación. |
 | **UNVERIFIED** | Afirmación encontrada en una fuente que aún no fue comprobada. Requiere inspección antes de usarse como cierta. |
 | **ASSUMPTION** | Hipótesis de trabajo; nunca presentarse como hecho. |
 | **UNKNOWN** | No existe información suficiente. |
-| **DEPRECATED** | Información anteriormente válida pero sustituida. |
-| **CONFLICT** | Existen fuentes o evidencias contradictorias; registrar ambas. |
+| **UNKNOWN_CLIENT** | Dato que corresponde al CLIENTE (texto localizado, UI) y no puede verificarse porque los `.dat` están cifrados. Nunca presentar como hecho server-side. *(formalizado KB v2.2)* |
 
 **Mapeo con estados históricos (no renombrar destructivamente):**
 - `REQUIRES CODE VERIFICATION` → **UNVERIFIED**
-- `OUTDATED` → **DEPRECATED**
+- `OUTDATED` → **DEPRECATED** (o OUTDATED cuando solo esté desfasado y pueda revalidarse)
 - `CONTRADICTED` → **CONFLICT**
 - `VERIFIED`, `UNKNOWN` → se conservan
 - `PARTIAL`, `PLANNED` → se conservan como históricos
+
+## Metadata estándar recomendada (KB v2.2)
+
+Para documentos nuevos e investigaciones futuras:
+
+```
+Status:        VERIFIED | DIRECTLY_SUPPORTED | ORIENTATION_ONLY | SOURCE_REQUIRED | PARTIAL | UNKNOWN | UNKNOWN_CLIENT | CONFLICT
+Source:        rutas SOURCE/RUNTIME/XML/CLIENT usadas
+Source commit: <hash> (p.ej. e2518ab…) cuando provenga del clone upstream
+Verified date: AAAA-MM-DD
+Scope:         qué cubre y qué queda fuera
+Authority:     SOURCE > RUNTIME > XML > CLIENT > KB (indicar nivel usado)
+```
 
 ## Entidades y procedencia (KB v2.0)
 

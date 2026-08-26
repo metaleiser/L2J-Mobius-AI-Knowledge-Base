@@ -4,6 +4,32 @@ Formato: entradas concisas y cronológicas (descendentes). El detalle completo v
 
 ---
 
+## KB 2.2 — 2026-08-26
+
+**Base**: KB v2.1 preservada. Objetivo del sprint: consolidar y endurecer la KB antes de usarla como especificación para construir gameplay con IA (Skill/Buff Semantic → Scheme Validator → Community Board).
+
+**Nuevos documentos**:
+- `QUESTS/QUEST_ENGINE_REFERENCE.md` — referencia central de APIs del motor (`Quest#*`, `QuestState#*`, `State`), 15 categorías, identidad por método (líneas = navegación).
+- `GAPS.md` — mapa central de cobertura COVERED/PARTIAL/MISSING/SOURCE_REQUIRED de todos los dominios de gameplay.
+
+**Documentos creados en micro-sprints previos ahora contabilizados**: slices Q00003/Q00005, `QUEST_PARTY_CREDIT.md`, `QUEST_VERTICAL_SLICE_TEMPLATE.md`, `WORLD/SPAWN_QUERY_GUIDE.md`.
+
+**Modificados**:
+- `QUESTS/QUEST_REWARDS.md` — consultas de inventario (`hasQuestItems`/`getQuestItemsCount`/`getRegisteredItemIds`) + patrones reutilizables (ENGINE PATTERN vs QUEST-SPECIFIC IMPLEMENTATION).
+- `QUESTS/QUEST_ARCHITECTURE.md` — conteo quests corregido: 543 .java / 511 carpetas → **532 / 510** (filesystem 2026-08-26).
+- `AI/AGGRO_SYSTEM.md` · `COMBAT/DEATH_FLOW.md` — sección "⚠️ QUEST PARTY CREDIT ≠ GENERAL MOB DROP/REWARD DISTRIBUTION" con cross-links a QUEST_PARTY_CREDIT.
+- `AI_INSTRUCTIONS/VERIFICATION_RULES.md` — taxonomía ampliada (DIRECTLY_SUPPORTED, ORIENTATION_ONLY, SOURCE_REQUIRED, OUTDATED, CONTRADICTED, UNKNOWN_CLIENT) + metadata estándar de documento.
+- `README.md` · `00_PROJECT/ROADMAP.md` · `INDEXES/MASTER_INDEX.md` — sincronizados a v2.2; roadmap de micro-sprints 2.5–2.8 (SKILL SEMANTIC → SCHEME VALIDATOR → COMMUNITY BOARD → PLAYTEST) documentado como planificación.
+
+**Conteos tras consolidación**: 81 técnicos + 5 (`00_PROJECT/`) + sistema 9 = **95 .md**. KB_VERSION 2.1 → **2.2**.
+
+**Notas de límite**:
+- Ningún archivo de SERVER_SOURCE / SERVER_RUNTIME / CLIENT fue modificado.
+- El commit anterior `63c9b40` usó "KB v0.9" como nomenclatura de trabajo; la versión canónica es v2.2 (documentado en KB_VERSION).
+- Community Board / Scheme Buffer NO implementados: solo planificados (ROADMAP).
+
+---
+
 ## KB 2.1 — 2026-08-25
 
 **Base**: KB v2.0 preservada. Esta entrada cierra la **reconciliación de metadatos** (AUDIT-003: el número de documentos y el estado `SYNCHRONIZED` estaban desactualizados respecto al filesystem tras los commits Fase 3/3D).

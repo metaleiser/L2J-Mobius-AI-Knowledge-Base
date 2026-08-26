@@ -167,6 +167,8 @@
 | Metodología de investigación (framework, plantilla A-W, taxon. clues/lore) | [QUESTS/QUEST_RESEARCH_FRAMEWORK.md](../QUESTS/QUEST_RESEARCH_FRAMEWORK.md) ✅ |
 | Crédito de party en quests (getRandomPartyMember* / PARTY_CREDIT_*) | [QUESTS/QUEST_PARTY_CREDIT.md](../QUESTS/QUEST_PARTY_CREDIT.md) ✅ |
 | Plantilla reutilizable de vertical slice (24 secciones + checklist) | [QUESTS/QUEST_VERTICAL_SLICE_TEMPLATE.md](../QUESTS/QUEST_VERTICAL_SLICE_TEMPLATE.md) ✅ |
+| **Referencia central del engine de quests** (Quest#/QuestState# APIs, 15 categorías) | [QUESTS/QUEST_ENGINE_REFERENCE.md](../QUESTS/QUEST_ENGINE_REFERENCE.md) ✅ |
+| **Mapa de cobertura de dominios** (COVERED/PARTIAL/MISSING/SOURCE_REQUIRED) | [GAPS.md](../GAPS.md) ✅ |
 | Vertical slice Q00003 Will the Seal be Broken? (combate, race-lock Dark Elf, PARTY_CREDIT_SHARED) | [QUESTS/Q00003_PVE_VERTICAL_SLICE.md](../QUESTS/Q00003_PVE_VERTICAL_SLICE.md) ✅ |
 | Vertical slice Q00005 Miner's Favor (delivery sin combate) | [QUESTS/Q00005_PVE_VERTICAL_SLICE.md](../QUESTS/Q00005_PVE_VERTICAL_SLICE.md) ✅ |
 
@@ -349,12 +351,23 @@ Los siguientes documentos NO existen todavía; toda consulta sobre ellos debe re
 
 ## KNOWLEDGE BASE STATUS
 
-**Knowledge Base Version**: **2.1** (2026-08-25)  \
-**Markdown Documents**: 74 técnicos + 5 (`00_PROJECT/`) + sistema 9 (AI_INSTRUCTIONS=5, VERSIONING=4) = 88  \
-**Last Updated**: 2026-08-25 (KB v2.1)  \
+**Knowledge Base Version**: **2.2** (2026-08-26)  \
+**Markdown Documents**: 81 técnicos + 5 (`00_PROJECT/`) + sistema 9 (AI_INSTRUCTIONS=5, VERSIONING=4) = 95  \
+**Last Updated**: 2026-08-26 (KB v2.2)  \
 **Status**: Proyecto documentado — 4 entidades (SERVER_SOURCE / SERVER_RUNTIME / CLIENT / KNOWLEDGE_BASE)  \
-**Current phase**: KB v2.1 (contexto v2.0 + separación entidades + taxonomía + reconciliación conteos/fase cliente/quest research + Q00005) completada  \
+**Current phase**: KB v2.2 (consolidación quest-engine + GAPS map + hardening) completada. Próximos micro-sprints planificados: 2.5 SKILL SEMANTIC FOUNDATION → 2.6 SCHEME VALIDATOR → 2.7 COMMUNITY BOARD → 2.8 PLAYTEST LOOP (ver [00_PROJECT/ROADMAP.md](../00_PROJECT/ROADMAP.md)).  \
 **Counting rule**: TÉCNICOS = `.md` excepto `00_PROJECT`, `AI_INSTRUCTIONS`, `VERSIONING`; SISTEMA = AI_INSTRUCTIONS + VERSIONING; 00_PROJECT por separado. Ver [VERSIONING/KB_VERSION.md](../VERSIONING/KB_VERSION.md).  \
-**Audit Note 2026-08-25 (AUDIT-002)**: SOURCE↔SERVER auditado (source `e2518ab` vs runtime build 26/05/2024); build=Apache Ant; creado `00_PROJECT/`. Histórico 2026-08-24 (AUDIT-001): correcciones FASE 2 — PACKETS/* (280/389), `WritablePacket`, `FloodProtectors` → `gameserver/util`, CONFIGURATION_SYSTEM `.ini`, MANAGERS_INDEX 58/52/6, rutas obsoletas eliminadas. Post-v2.0 (AUDIT-003): Fase 3 `CLIENT_RESEARCH/`, análisis Q00039, Fase 3D `QUEST_RESEARCH_FRAMEWORK`, análisis Q00005 + integración de navegación → 74 técnicos / 88 totales.
+**Audit Note 2026-08-26 (AUDIT-004)**: conteo quests corregido (532 .java / 510 carpetas); creado QUEST_ENGINE_REFERENCE + GAPS.md; cross-links quest-party vs drop normal; taxonomía ampliada; versión normalizada v2.1 → v2.2 (el commit `63c9b40` usó "v0.9" como etiqueta de trabajo). Histórico: AUDIT-003 (2026-08-25, Fase 3/Q00039/Q00005 → 88), AUDIT-002 (v2.0, entidades/build Ant), AUDIT-001 (FASE 1-2, H1–H18).
+
+## GETTING STARTED FOR NEW AI TASKS
+
+Ruta recomendada para una tarea nueva:
+
+1. [README.md](../README.md) — reglas de uso de la KB.
+2. Este índice ([INDEXES/MASTER_INDEX.md](MASTER_INDEX.md)) — localizar el dominio.
+3. [GAPS.md](../GAPS.md) — comprobar si el dominio está COVERED/PARTIAL/MISSING antes de afirmar nada.
+4. Documento del dominio correspondiente.
+5. Si la tarea involucra quests → [QUESTS/QUEST_ENGINE_REFERENCE.md](../QUESTS/QUEST_ENGINE_REFERENCE.md) (+ [QUEST_PARTY_CREDIT.md](../QUESTS/QUEST_PARTY_CREDIT.md) si hay party/drops).
+6. Todo lo clasificado SOURCE_REQUIRED / MISSING → verificar directamente en SERVER_SOURCE (`UPSTREAM/L2J_Mobius/L2J_Mobius_CT_2.6_HighFive/`).
 
 Ver [VERSIONING/KB_VERSION.md](../VERSIONING/KB_VERSION.md) y [VERSIONING/CHANGELOG.md](../VERSIONING/CHANGELOG.md).

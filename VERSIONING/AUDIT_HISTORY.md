@@ -4,6 +4,36 @@ Registro cronológico de auditorías. Una auditoría NO incrementa KB_VERSION po
 
 ---
 
+## AUDIT-004
+
+- **Date**: 2026-08-26
+- **KB Version**: 2.1 → **2.2**
+- **Upstream Commit auditado**: `e2518ab10872b28cd4c6860e102b493656ba8728` (sin cambios upstream; baseline preservado)
+- **Result**: SYNCHRONIZED
+
+**Filesystem / Git state at audit start**:
+- HEAD `63c9b40` ("KB v0.9: PvE vertical slice + party credit + spawn query consolidation"); commit anterior `d029681` (Q00005 slice). Internamente la KB estaba en v2.1/88 sin reflejar los micro-sprints 2.2–2.3.
+- Físicos: **93 `.md`** · Tracked+untracked reconciliados en este sprint.
+
+**Verificaciones SOURCE realizadas (todas contra baseline `e2518ab`)**:
+- Quest.java: helpers giveAdena L4634, giveItems L4782/4803/4846, giveItemRandomly L4901/4918/4936, takeItems L5011/5107, playSound L5126/5136, addExpAndSp L5147, getNoQuestMsg/getAlreadyCompletedMsg L1442/1452, getQuestItemsCount L4379, getRegisteredItemIds L2338, hasQuestItems L4483/4494, getRandomPartyMember*/State L1979–2235, addSpawn overloads L4082–4271, openDoor/closeDoor L5334/5352, executeForEachPlayer L5290, addAttackDesire/addMoveToDesire L5422–5450, playMovie L5604–5634, showResult L1190.
+- QuestState.java: API completa (startQuest L615, exitQuest L633–722 con limpieza de quest items + COMPLETED/delete según repeatable), memo/cond/variables.
+- State.java: CREATED=0/STARTED=1/COMPLETED=2 (byte).
+- World.java: utilidad estática (`public class World` + `private World()`), sin getInstance.
+- Monster.java: `extends Attackable`.
+- Attackable.java: `_onKillDelay=2500`, despacho ON_ATTACKABLE_KILL vía EventDispatcher (L328).
+
+**Outdated/Contradicted found & fixed**:
+- QUEST_ARCHITECTURE: conteo quests 543 .java / 511 carpetas → **532 / 510** (recuento filesystem 2026-08-26). Corregido.
+- Version metadata stale (88 .md / v2.1) vs real 93 → normalizado a **v2.2 / 93**. Commit `63c9b40` documentado como etiqueta de trabajo "v0.9", no versión canónica.
+- Sin contradicciones funcionales detectadas en los dominios auditados (quests/world/entities/party).
+
+**Corrections applied**: ver [CHANGELOG](CHANGELOG.md) KB 2.2 (QUEST_ENGINE_REFERENCE + GAPS.md + hardening). Autorización: plan aprobado del MICRO-SPRINT 2.4.
+
+**Post-change validation**: 95 físicos ✓ (= 93 al inicio del sprint + 2 nuevos: QUEST_ENGINE_REFERENCE, GAPS) · links revisados ✓ · solo AI_KNOWLEDGE_BASE modificada ✓ · SERVER_SOURCE/RUNTIME/CLIENT intactos ✓.
+
+---
+
 ## AUDIT-003
 
 - **Date**: 2026-08-25

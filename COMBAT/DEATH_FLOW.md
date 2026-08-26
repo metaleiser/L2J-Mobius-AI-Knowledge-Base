@@ -99,6 +99,17 @@ super.deleteMe()
 
 ---
 
+## 4b. ⚠️ QUEST PARTY CREDIT ≠ GENERAL MOB DROP/REWARD DISTRIBUTION
+
+En `Attackable.doDie` conviven dos mecanismos independientes que NO deben confundirse:
+
+1. **NORMAL MOB REWARD** — `getMainDamageDealer()` (mayor daño dentro de `ALT_PARTY_RANGE`) → `calculateRewards(...)` da EXP/SP → `doItemDrop(mainDamageDealer)` calcula drops base/quest/evento. Es la distribución **normal** de recompensas del mob (ver §2 paso 4 y [../AI/AGGRO_SYSTEM.md](../AI/AGGRO_SYSTEM.md) §6).
+2. **QUEST PARTY CREDIT** — tras el despacho del evento kill (`OnAttackableKill`, retardo `_onKillDelay`), cada quest registrada para ese NPC ejecuta su `onKill`, que puede usar `Quest#getRandomPartyMember*` / `getRandomPartyMemberState` para decidir a qué miembro de party (con `cond` elegible) se le atribuye el **ítem/progreso de quest**.
+
+→ Detalle y taxonomía: [QUESTS/QUEST_PARTY_CREDIT.md](../QUESTS/QUEST_PARTY_CREDIT.md).
+
+---
+
 ## 5. TRAZABILIDAD
 
 | Paso | Path |
