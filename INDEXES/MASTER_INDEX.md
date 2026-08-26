@@ -155,6 +155,7 @@
 | Recompensas (items/exp/sp/adena/sounds) | [QUESTS/QUEST_REWARDS.md](../QUESTS/QUEST_REWARDS.md) ✅ |
 | Interacción Player↔NPC↔diálogo HTML | [QUESTS/QUEST_PLAYER_NPC_DIALOG.md](../QUESTS/QUEST_PLAYER_NPC_DIALOG.md) ✅ |
 | Análisis transversal Q00039 RedEyedInvaders (SOURCE↔RUNTIME↔CLIENT↔GAMEPLAY) | [QUESTS/Q00039_REDEYEDINVADERS_ANALYSIS.md](../QUESTS/Q00039_REDEYEDINVADERS_ANALYSIS.md) ✅ |
+| Análisis transversal Q00005 Miner's Favor (SOURCE↔RUNTIME, Newbie Guide conflict documented) | [QUESTS/Q00005_MINERSFAVOR_ANALYSIS.md](../QUESTS/Q00005_MINERSFAVOR_ANALYSIS.md) ✅ |
 | Metodología de investigación (framework, plantilla A-W, taxon. clues/lore) | [QUESTS/QUEST_RESEARCH_FRAMEWORK.md](../QUESTS/QUEST_RESEARCH_FRAMEWORK.md) ✅ |
 
 ### Sistemas de juego planificados (fases futuras)
@@ -295,7 +296,7 @@ Los siguientes documentos NO existen todavía; toda consulta sobre ellos debe re
 | SYSTEMS/ (8 docs de Fase 2A) | VERIFIED | 2026-08-23 |
 | AI/* y COMBAT/* (12 docs de Fase 2B) | VERIFIED | 2026-08-23 |
 | SKILLS/* (10 docs de Fase 2C) | VERIFIED | 2026-08-23 |
-| QUESTS/* (7 docs de Fase 2D) | VERIFIED | 2026-08-23 |
+| QUESTS/* (10 docs: 7 de Fase 2D + Q00039/Q00005 análisis + QUEST_RESEARCH_FRAMEWORK) | VERIFIED (Q00039/Q00005 server-side; framework metodológico) | 2026-08-25 |
 | PACKETS/* (8 docs de Fase 2E) | VERIFIED | 2026-08-23 |
 | INDEXES/* | VERIFIED (corregido 2A, ampliado 2B/2C/2D/2E) | 2026-08-23 |
 | Systems planificados (CLAN, SIEGE...) | -- | pendiente |
@@ -336,11 +337,12 @@ Los siguientes documentos NO existen todavía; toda consulta sobre ellos debe re
 
 ## KNOWLEDGE BASE STATUS
 
-**Knowledge Base Version**: **2.0** (2026-08-25)  \
-**Markdown Documents**: 67 técnicos + 5 (`00_PROJECT/`) + sistema (AI_INSTRUCTIONS=5, VERSIONING=4)  \
-**Last Updated**: 2026-08-25 (KB v2.0)  \
+**Knowledge Base Version**: **2.1** (2026-08-25)  \
+**Markdown Documents**: 74 técnicos + 5 (`00_PROJECT/`) + sistema 9 (AI_INSTRUCTIONS=5, VERSIONING=4) = 88  \
+**Last Updated**: 2026-08-25 (KB v2.1)  \
 **Status**: Proyecto documentado — 4 entidades (SERVER_SOURCE / SERVER_RUNTIME / CLIENT / KNOWLEDGE_BASE)  \
-**Current phase**: KB v2.0 (contexto + separación de entidades + taxonomía) completada  \
-**Audit Note 2026-08-25 (AUDIT-002)**: SOURCE↔SERVER auditado (source `e2518ab` vs runtime build 26/05/2024); build=Apache Ant; creado `00_PROJECT/`. Histórico 2026-08-24 (AUDIT-001): correcciones FASE 2 — PACKETS/* (280/389), `WritablePacket`, `FloodProtectors` → `gameserver/util`, CONFIGURATION_SYSTEM `.ini`, MANAGERS_INDEX 58/52/6, rutas obsoletas eliminadas.
+**Current phase**: KB v2.1 (contexto v2.0 + separación entidades + taxonomía + reconciliación conteos/fase cliente/quest research + Q00005) completada  \
+**Counting rule**: TÉCNICOS = `.md` excepto `00_PROJECT`, `AI_INSTRUCTIONS`, `VERSIONING`; SISTEMA = AI_INSTRUCTIONS + VERSIONING; 00_PROJECT por separado. Ver [VERSIONING/KB_VERSION.md](../VERSIONING/KB_VERSION.md).  \
+**Audit Note 2026-08-25 (AUDIT-002)**: SOURCE↔SERVER auditado (source `e2518ab` vs runtime build 26/05/2024); build=Apache Ant; creado `00_PROJECT/`. Histórico 2026-08-24 (AUDIT-001): correcciones FASE 2 — PACKETS/* (280/389), `WritablePacket`, `FloodProtectors` → `gameserver/util`, CONFIGURATION_SYSTEM `.ini`, MANAGERS_INDEX 58/52/6, rutas obsoletas eliminadas. Post-v2.0 (AUDIT-003): Fase 3 `CLIENT_RESEARCH/`, análisis Q00039, Fase 3D `QUEST_RESEARCH_FRAMEWORK`, análisis Q00005 + integración de navegación → 74 técnicos / 88 totales.
 
 Ver [VERSIONING/KB_VERSION.md](../VERSIONING/KB_VERSION.md) y [VERSIONING/CHANGELOG.md](../VERSIONING/CHANGELOG.md).

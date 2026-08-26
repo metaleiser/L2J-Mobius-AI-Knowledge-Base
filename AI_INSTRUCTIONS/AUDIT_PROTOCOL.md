@@ -19,7 +19,7 @@ Contar recursivamente en el snapshot del servidor y anotar fecha:
 
 - `*.java`, `*.xml`, `*.sql`, `*.ini`, `*.properties`
 - total de archivos
-- documentos Markdown de la KB (67 técnicos + docs de sistema)
+- documentos Markdown de la KB (contar con la regla canónica de [../VERSIONING/KB_VERSION.md](../VERSIONING/KB_VERSION.md): TÉCNICOS = `.md` excepto `00_PROJECT` + `AI_INSTRUCTIONS` + `VERSIONING`, SISTEMA = AI_INSTRUCTIONS + VERSIONING, 00_PROJECT por separado; TOTAL = TÉCNICOS + 00_PROJECT + SISTEMA)
 
 Cifras de referencia del baseline: java=3194, xml=2907, sql=116, ini=73, properties=0, total=27657. Cualquier desviación = cambio estructural.
 
@@ -53,7 +53,7 @@ Para cada ítem: localizar evidencia en código → determinar estado (VERIFIED/
 
 Checklist obligatorio:
 
-- [ ] Recuento `.md` (técnicos = 67 + sistema)
+- [ ] Recuento `.md` derivado de la regla canónica en [../VERSIONING/KB_VERSION.md](../VERSIONING/KB_VERSION.md) (TÉCNICOS + 00_PROJECT + SISTEMA = TOTAL; NO usar un número hardcodeado como "67" o "74")
 - [ ] Enlaces internos sin rotos
 - [ ] Sin huérfanos no justificados
 - [ ] Conteos citados correctos y fechados

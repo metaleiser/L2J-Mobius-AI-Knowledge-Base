@@ -1,16 +1,29 @@
 # KB_VERSION
 
 ```
-KB_VERSION          = 2.0
-STATUS              = SYNCHRONIZED (documental)
+KB_VERSION          = 2.1
+STATUS              = SYNCHRONIZED
 SOURCE_BASELINE     = e2518ab10872b28cd4c6860e102b493656ba8728 (upstream master)
 RUNTIME_BUILD       = 26/05/2024 (SERVER_RUNTIME desplegado, sin Git)
 UPSTREAM_REPOSITORY = MobiusDevelopment/L2J_Mobius
 BASELINE_DATE       = 2026-08-22 03:06:03 +0300
-LAST_AUDIT          = 2026-08-25 (AUDIT-002: SOURCE↔SERVER + KB v2.0)
-TECHNICAL_DOCS      = 67 (+ 5 en 00_PROJECT + sistema)
+LAST_AUDIT          = 2026-08-25 (AUDIT-003: KB v2.1 metadata reconciliation + Q00005)
+00_PROJECT_DOCS     = 5
+TECHNICAL_DOCS      = 74
 SYSTEM_DOCS         = 9 (AI_INSTRUCTIONS=5, VERSIONING=4)
+TOTAL_MD            = 88
 ```
+
+## Regla canónica de conteo de documentos
+
+```
+TÉCNICOS  = todos los .md EXCEPT: 00_PROJECT, AI_INSTRUCTIONS, VERSIONING
+SISTEMA    = AI_INSTRUCTIONS + VERSIONING
+00_PROJECT = 00_PROJECT (categoría por separado)
+TOTAL      = TÉCNICOS + 00_PROJECT + SISTEMA
+```
+
+Con esta regla: 74 (técnicos) + 5 (00_PROJECT) + 9 (sistema) = **88**. Los documentos `INDEXES/`, `README.md` (root) y `CLIENT_RESEARCH/` se cuentan como **técnicos** (no están excluidos). El número `67` registrado en AUDIT-001/AUDIT-002 era correcto para el **snapshot v2.0** (81 docs) y se conserva como histórico.
 
 ## Qué significa KB 2.0
 

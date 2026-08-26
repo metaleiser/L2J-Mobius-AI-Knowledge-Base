@@ -2,7 +2,7 @@
 
 **Project**: L2J Mobius CT 2.6 HighFive  
 **Created**: 2026-08-23  
-**Status**: KB **v2.0** (2026-08-25) — SOURCE↔SERVER auditado, 4 entidades documentadas  
+**Status**: KB **v2.1** (2026-08-25) — SOURCE↔SERVER auditado, 4 entidades documentadas    
 **Source of Truth**: según la entidad — código fuente (`SERVER_SOURCE`/UPSTREAM) para arquitectura; servidor desplegado (`SERVER_RUNTIME`) para estado observable; cliente (`CLIENT`) para lo solo-cliente. Ver [00_PROJECT/PROJECT_CONTEXT.md](00_PROJECT/PROJECT_CONTEXT.md).
 
 ---
@@ -158,6 +158,7 @@ AI_KNOWLEDGE_BASE/
 
 Estado sincronizado con [INDEXES/MASTER_INDEX.md](INDEXES/MASTER_INDEX.md):
 - **KB v2.0** (2026-08-25): módulo `00_PROJECT/` (contexto, fuentes, decisiones, roadmap, ideas), separación de 4 entidades (SOURCE/RUNTIME/CLIENT/KB), build Ant documentado, taxonomía de estados ampliada. Ver [VERSIONING/CHANGELOG.md](VERSIONING/CHANGELOG.md).
+- **KB v2.1** (2026-08-25): reconciliación de metadatos y conteos (74 técnicos/5 project/9 sistema = 88 .md), Fase 3, Q00039, Fase 3D `QUEST_RESEARCH_FRAMEWORK`, análisis Q00005 + integración de navegación. Conteos y STATUS validados (AUDIT-003).
 - **Fase 3** (2026-08-25): investigación del cliente H5 iniciada — creado `CLIENT_RESEARCH/` (estructura del cliente, cifrado de texto, caso piloto Q00001, mapeo autoridad CLIENT↔SERVER). Detectado que el texto del cliente está cifrado (bloqueo) y una diferencia SOURCE↔RUNTIME en Q00001 (CONFLICT).
 - Previamente: Fase 2F (Database) completada + Fases 2A–2E documentadas (SYSTEMS/, AI/, COMBAT/, SKILLS/, QUESTS/, PACKETS/). Correcciones de auditoría FASE 2: 2026-08-24.
 

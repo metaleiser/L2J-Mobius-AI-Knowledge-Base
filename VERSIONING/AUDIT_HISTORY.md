@@ -4,6 +4,32 @@ Registro cronológico de auditorías. Una auditoría NO incrementa KB_VERSION po
 
 ---
 
+## AUDIT-003
+
+- **Date**: 2026-08-25
+- **KB Version**: 2.0 → **2.1**
+- **Upstream Commit auditado**: `e2518ab10872b28cd4c6860e102b493656ba8728` (sin cambios upstream; baseline preservado)
+- **Result**: SYNCHRONIZED
+
+**Filesystem / Git state at audit start**:
+- **Físicos**: 88 `.md` (incl. Q00005_MINERSFAVOR_ANALYSIS.md, trabajando aún como *untracked*)
+- **Tracked**: 87 · **Untracked**: 1 (Q00005)
+- Ramas/directorios: 16 subdirs + root; rama `master`, HEAD `d77b6fd`, 5 commits.
+
+**Recuentos reconciliados (regla canónica, ver KB_VERSION.md)**:
+- Técnicos (`EXCL. 00_PROJECT` + `AI_INSTRUCTIONS` + `VERSIONING`) = **74** (incluye INDEXES, root/README, CLIENT_RESEARCH, QUESTS 10).
+- `00_PROJECT` = **5**
+- Sistema (`AI_INSTRUCTIONS`=5 + `VERSIONING`=4) = **9**
+- **TOTAL = 88** (74 + 5 + 9)
+
+**Mayor hallazgo**: el número `67` registrado en AUDIT-001/AUDIT-002 era correcto para el **snapshot v2.0 (81 docs)**; quedó **desactualizado** tras Fase 3 (CLIENT_RESEARCH +4), Q00039 (+1), Fase 3D framework (+1) y Q00005 (+1) → +7 = 74/88. KB_VERSION reportaba 2.0/SYNCHRONIZED aunque esas entregas ya estaban persistidas → metadata DESYNCHRONIZED.
+
+**Reconciliación aplicada**: KB_VERSION 2.0→2.1; STATUS↔SYNCHRONIZED revalidado tras integrar Q00005; conteos 74/5/9/88; AUDIT_PROTOCOL apuntado a la regla canónica (no a un número hardcodeado); MASTER_INDEX/ROADMAP/README/CHANGELOG actualizados. AUDIT-001 y AUDIT-002 **preservados sin cambios** (sus valores `67`/`81` siguen siendo históricos-correctos para el snapshot v2.0).
+
+**Post-change validation**: 88 físicos = 88 tracked tras commit ✓ · enlaces revisados (AUDIT-002) ✓ · 0 huérfanos NUEVOS · SERVER_SOURCE/RUNTIME/CLIENT no modificados ✓.
+
+---
+
 ## AUDIT-002
 
 - **Date**: 2026-08-25

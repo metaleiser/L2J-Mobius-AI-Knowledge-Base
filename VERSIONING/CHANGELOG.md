@@ -4,7 +4,25 @@ Formato: entradas concisas y cronológicas (descendentes). El detalle completo v
 
 ---
 
-## KB 2.0 — 2026-08-25
+## KB 2.1 — 2026-08-25
+
+**Base**: KB v2.0 preservada. Esta entrada cierra la **reconciliación de metadatos** (AUDIT-003: el número de documentos y el estado `SYNCHRONIZED` estaban desactualizados respecto al filesystem tras los commits Fase 3/3D).
+
+**Evolución post-v2.0 (ya persistida en disco/git, no documentada antes en CHANGELOG)**:
+- **Fase 3** (`CLIENT_RESEARCH/`): investigación del cliente H5 — estructura del cliente, cifrado de texto, caso piloto Q00001, mapeo autoridad CLIENT↔SERVER. El texto cliente sigue **cifrado** (bloqueo); no se ha validado un método de descifrado (ver `CLIENT_RESEARCH/CLIENT_ENCRYPTION.md`).
+- **Q00039** (`QUESTS/Q00039_REDEYEDINVADERS_ANALYSIS.md`): análisis transversal SOURCE↔RUNTIME↔CLIENT↔GAMEPLAY (drops en party, branching, doble colección).
+- **Fase 3D** (`QUESTS/QUEST_RESEARCH_FRAMEWORK.md`): marco metodológico A–W para análisis transversal de quests.
+- **Q00005 Miner's Favor** (`QUESTS/Q00005_MINERSFAVOR_ANALYSIS.md`): análisis SOURCE↔RUNTIME con documented `SOURCE_RUNTIME_CONFLICT` en la integración Newbie Guide (presente solo en SOURCE; RUNTIME lo reemplaza por `showOnScreenMsg` directo). Incluye baseline SHA-256 de los 17 archivos y verificación server-side (Quest ID 5, NPCs 30517–30554, items 1547–1552 + 906, recompensas 5672 EXP / 446 SP / 2466 adena).
+- **Integración de navegación**: referencias cruzadas añadidas en `INDEXES/MASTER_INDEX.md` y `QUESTS/QUEST_ARCHITECTURE.md`.
+
+**Conteos tras reconciliación**: 74 técnicos + 5 (`00_PROJECT/`) + sistema 9 (AI_INSTRUCTIONS=5, VERSIONING=4) = **88 .md**. KB_VERSION 2.0 → **2.1** (nueva área CLIENT_RESEARCH + metodología Fase 3D superan "corrección puntual"; < 3.0).
+
+**Notas de límite**:
+- Ningún archivo de SERVER_SOURCE / SERVER_RUNTIME / CLIENT fue modificado.
+- Q00005 sigue bajo `UNKNOWN_CLIENT` para textos cliente (no se afirma descifrado validado).
+- No se reivindican nombres/localizaciones cliente como evidencia verificada.
+
+### Arquitectura del workspace (nueva realidad documentada)
 
 **Base**: actualización de KB v1.0 (preservando todo el conocimiento previo). Auditoría SOURCE↔SERVER (AUDIT-002) aprobada.
 

@@ -88,6 +88,7 @@ La dimensión CLIENT↔SERVER de las quests (correlación de IDs de quest/NPC/it
 ### Casos de estudio transversales (SOURCE ↔ RUNTIME ↔ CLIENT ↔ GAMEPLAY)
 - `Q00001_LettersOfLove` — piloto inicial: [../CLIENT_RESEARCH/QUEST_PILOT_Q00001.md](../CLIENT_RESEARCH/QUEST_PILOT_Q00001.md)
 - `Q00039_RedEyedInvaders` — drops en party ponderados, branching de drop, colecciones dobles con trigger por límite: [Q00039_REDEYEDINVADERS_ANALYSIS.md](Q00039_REDEYEDINVADERS_ANALYSIS.md)
+- `Q00005_MinersFavor` — delivery/collection quest behavior, key-item gating, SOURCE↔RUNTIME Newbie Guide conflict: [Q00005_MINERSFAVOR_ANALYSIS.md](Q00005_MINERSFAVOR_ANALYSIS.md)
 
 ## 7. METODOLOGÍA DE INVESTIGACIÓN DE QUESTS
 
