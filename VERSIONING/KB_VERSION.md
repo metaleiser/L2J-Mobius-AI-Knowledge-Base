@@ -1,22 +1,40 @@
 # KB_VERSION
 
 ```
-KB_VERSION          = 2.3
+KB_VERSION          = 2.4.1
 STATUS              = SYNCHRONIZED
 SOURCE_BASELINE     = e2518ab10872b28cd4c6860e102b493656ba8728 (upstream master)
 RUNTIME_BUILD       = 26/05/2024 (SERVER_RUNTIME desplegado, sin Git)
 UPSTREAM_REPOSITORY = MobiusDevelopment/L2J_Mobius
 BASELINE_DATE       = 2026-08-22 03:06:03 +0300
-LAST_AUDIT          = 2026-08-26 (AUDIT-005: KB v2.3 Skill Semantic Foundation + ABNORMAL_TYPE_REFERENCE + GAPS/INDEX updates)
+LAST_AUDIT          = 2026-08-26 (AUDIT-007 / Micro-Sprint 2.7: KB v2.4.1 reconciliation patch — correcciones documentales BUFFS/GAPS/AI_MANIFEST, sin docs nuevos, documentation-only)
 LAST_COMMIT         = 62a47c3 (KB v2.2: consolidate quest engine and coverage foundations)
 PREVIOUS_COMMIT     = 63c9b40 (KB v0.9: PvE vertical slice + party credit + spawn query consolidation)
 00_PROJECT_DOCS     = 5
-TECHNICAL_DOCS      = 83
-SYSTEM_DOCS         = 9 (AI_INSTRUCTIONS=5, VERSIONING=4)
-TOTAL_MD            = 97
+TECHNICAL_DOCS      = 88
+SYSTEM_DOCS         = 11 (AI_INSTRUCTIONS=7, VERSIONING=4)
+TOTAL_MD            = 104
 ```
 
-> **Nota sobre "KB v0.9"**: el commit `63c9b40` utilizó **"KB v0.9" como nomenclatura de trabajo del micro-sprint**. La versión canónica de la Knowledge Base es **v2.3**. No reinterpretar el mensaje de ese commit como versión de la KB.
+> **Nota sobre "KB v0.9"**: el commit `63c9b40` utilizó **"KB v0.9" como nomenclatura de trabajo del micro-sprint**. La versión canónica de la Knowledge Base es **v2.4**. No reinterpretar el mensaje de ese commit como versión de la KB.
+
+## Cambios de v2.4 → v2.4.1 (reconciliación documental — AUDIT-007 / Micro-Sprint 2.7)
+
+- Corrección documental menor **dentro de la línea 2.4** usando la notación parche establecida por la política de versionado (patrón x.y.z, p. ej. 2.0.1). **Ningún documento nuevo**: conteos canónicos intactos (88 técnicos + 5 + 11 sistema = **104**).
+- `BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md`: analizado identificado como **SERVER_RUNTIME**; persistencia `bbs_schemes` → **`buffer_schemes`** (runtime L167-169); grabación de schemes vía **`_bbsbuffsingle`** (L285-330, `addBuffToScheme()` en L319); **`_bbsbuff` sin escritura de esquemas**; entrega HTML `CommunityBoardHandler.separateAndSend` (L633-640); `CommunityMaxSchemes` desde `config/Custom/CommunityBoard.ini` (default 5; carga L1090-1102); nueva §1.1 divergencia SOURCE/RUNTIME (attribution PARTIAL, mismatch `IParseBoardHandler` PARTIAL); nueva tabla de anchors runtime.
+- `BUFFS/SCHEME_SYSTEM_COMPARISON.md`: celda Community Board → `buffer_schemes`; celda NPC confirmada contra `SchemeBufferTable.java` (L64-66, única copia en SOURCE) con **CONFLICT/SOURCE_REQUIRED** frente al registro runtime `custom_buff_schemes` de AUDIT-006; fila Max schemes ampliada con ruta/property/default.
+- `GAPS.md`: dominio COMMUNITY BOARD conserva **PARTIAL**; incorporada arquitectura verificada (MasterHandler registration, routing `RequestBypassToServer`, dispatch `CommunityBoardHandler`, entrega HTML `HtmlUtil.sendCBHtml`, PATH_DIVERGENCE); TELEPORT sigue MISSING como dominio aparte.
+- `AI_INSTRUCTIONS/AI_MANIFEST.md`: clarificación de que las rutas del manifiesto son relativas a `AI_KNOWLEDGE_BASE/`.
+
+## Cambios de v2.3 → v2.4
+
+- **BUFFS/SCHEME_BUFFER_ANALYSIS.md** (nuevo, carpeta nueva): análisis VERIFIED de `SchemeBuffer.java` (RUNTIME): persistencia DB, handlers `createscheme`/`skillselect`/`skillunselect`/`givebuffs`, conteo real de slots, almacenamiento CSV `"id,level"`, limitaciones documentadas.
+- **BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md** (nuevo): esquemas de buffs vía Community Board (`CommunityBoardManager`/HTML bypass), storage string, add/remove/cast flows.
+- **BUFFS/SCHEME_SYSTEM_COMPARISON.md** (nuevo): comparación lado a lado NPC SchemeBuffer vs Community Board (persistencia, coste, validación, UX) con veredictos y gaps compartidos.
+- **SKILLS/SCHEME_VALIDATOR_DESIGN.md** (nuevo): diseño del Scheme Validator (verification-first): clasificaciones objetivo, árbol de decisión sobre semántica 2.5, matriz de evidencia SOURCE/XML, fases de construcción (design-only, sin implementar).
+- **SKILLS/SCHEME_VALIDATION_LIFECYCLE.md** (nuevo): ciclo de vida runtime de una decisión de validación (flujo E→F: DB/bypass → carga → validación → cast/skip/logging).
+- **SKILLS/SKILL_SEMANTIC_REFERENCE.md** (extendido): cross-links al paquete BUFFS y a los dos documentos del validador.
+- **GAPS.md**, **AI_BOOTSTRAP.md**, **AI_MANIFEST.md**, **AI_README.md**, **INDEXES/MASTER_INDEX.md** y **00_PROJECT/ROADMAP.md**: sincronizados a v2.4.
 
 ## Cambios de v2.2 → v2.3
 
@@ -38,7 +56,7 @@ SISTEMA    = AI_INSTRUCTIONS + VERSIONING
 TOTAL      = TÉCNICOS + 00_PROJECT + SISTEMA
 ```
 
-Con esta regla, estado canónico **KB v2.3**: 83 (técnicos) + 5 (00_PROJECT) + 9 (sistema) = **97**. Los documentos `INDEXES/`, `README.md` (root) y `CLIENT_RESEARCH/` se cuentan como **técnicos** (no están excluidos). Conteos históricos conservados: **95** = 81 técnicos + 5 + 9 (KB v2.2, 2026-08-26); **88** = 74 técnicos + 5 + 9 (KB v2.1, 2026-08-25); **81** = 67 técnicos + 5 + 9 (KB v2.0; el `67` de AUDIT-001/AUDIT-002 se conserva como histórico).
+Con esta regla, estado canónico **KB v2.4**: 88 (técnicos) + 5 (00_PROJECT) + 11 (sistema) = **104**. Los documentos `INDEXES/`, `README.md` (root), `BUFFS/`, `CLIENT_RESEARCH/` se cuentan como **técnicos** (no están excluidos). Conteos históricos conservados: **97** = 83 técnicos + 5 + 9 (KB v2.3, 2026-08-26; AI_INSTRUCTIONS con 5 docs); **95** = 81 técnicos + 5 + 9 (KB v2.2, 2026-08-26); **88** = 74 técnicos + 5 + 9 (KB v2.1, 2026-08-25); **81** = 67 técnicos + 5 + 9 (KB v2.0; el `67` de AUDIT-001/AUDIT-002 se conserva como histórico).
 
 ## Qué significa KB 2.0
 

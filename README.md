@@ -60,66 +60,38 @@ If contradiction exists between this KB and the source code → **code wins**.
 
 ## SPECIAL MARKERS
 
-### `UNKNOWN`
-Information that could not be determined from code analysis.
+This Knowledge Base uses the evidence taxonomy defined in `AI_INSTRUCTIONS/VERIFICATION_RULES.md`:
 
-Example:
-```
-Performance Characteristics: UNKNOWN
-(The specific timing requirements are not documented in code comments)
-```
+- `VERIFIED`
+- `SOURCE_REQUIRED`
+- `PARTIAL`
+- `UNKNOWN`
+- `ASSUMPTION`
+- `CONFLICT`
+- `DEPRECATED`
+- `UNKNOWN_CLIENT`
 
-### `REQUIRES CODE VERIFICATION`
-Information needs to be verified in the actual source code before implementation.
-
-Example:
-```
-Exact table schema: REQUIRES CODE VERIFICATION
-(Check actual database schema files)
-```
-
----
+Older markers such as `REQUIRES CODE VERIFICATION` are deprecated. Map them to `UNVERIFIED` or `SOURCE_REQUIRED`.
 
 ## HOW AN AI SHOULD USE THIS KB
 
-### Rule 1: Start with INDEXES
-Always begin at `INDEXES/MASTER_INDEX.md`
+**For AI agents, the mandatory entry point is `AI_INSTRUCTIONS/AI_BOOTSTRAP.md`.**
 
-### Rule 2: Navigate by Theme
-Identify which system your question relates to, then navigate to that document.
+Do not start with this README. Use the routing table in `AI_INSTRUCTIONS/AI_MANIFEST.md` to select task-specific documents.
 
-Example:
-- Question about Player stats? → `SYSTEMS/PLAYER_SYSTEM.md`
-- Question about skill casting? → `SKILLS/CAST_FLOW.md`
-- Question about network packets? → `PACKETS/PACKET_ARCHITECTURE.md`
+General rules:
 
-### Rule 3: Verify Against Code
-Before making ANY change or decision:
-1. Consult relevant KB document
-2. Locate the actual class in source
-3. Read the real source code
-4. Make decision based on source code, not KB
+1. Start at `AI_INSTRUCTIONS/AI_BOOTSTRAP.md`.
+2. Read `GAPS.md` to check coverage.
+3. Read `VERSIONING/KB_VERSION.md` for baseline identity.
+4. Load only the KB documents relevant to the task.
+5. Inspect `SERVER_SOURCE` only when the KB marks information as `SOURCE_REQUIRED`, `PARTIAL`, `UNKNOWN`, or stale.
+6. Verify claims against source code before implementing.
+7. Update the KB when new reusable knowledge is discovered.
+8. The KB is never more current than the source code.
 
-### Rule 4: Update KB When Code Changes
-If you implement changes to the server code, update the relevant KB documents.
+For exact evidence rules and authority hierarchy, see `AI_INSTRUCTIONS/VERIFICATION_RULES.md`.
 
-### Rule 5: KB is Never More Current Than Code
-The Knowledge Base reflects the state of the codebase at creation time.
-
-Future changes to code are the source of truth immediately.
-
-### Rule 6: Use Cross-References
-When a document references another:
-- Follow the link to get full context
-- Do not assume summary is complete
-- Read both documents for understanding
-
-### Rule 7: No Speculation
-If something is not documented:
-- Mark it as `UNKNOWN`
-- Check source code directly
-- Ask for code verification if needed
-- Do not guess behavior
 
 ---
 
@@ -159,6 +131,7 @@ AI_KNOWLEDGE_BASE/
 Estado sincronizado con [INDEXES/MASTER_INDEX.md](INDEXES/MASTER_INDEX.md):
 - **KB v2.0** (2026-08-25): módulo `00_PROJECT/` (contexto, fuentes, decisiones, roadmap, ideas), separación de 4 entidades (SOURCE/RUNTIME/CLIENT/KB), build Ant documentado, taxonomía de estados ampliada. Ver [VERSIONING/CHANGELOG.md](VERSIONING/CHANGELOG.md).
 - **KB v2.1** (2026-08-25): reconciliación de metadatos y conteos (74 técnicos/5 project/9 sistema = 88 .md), Fase 3, Q00039, Fase 3D `QUEST_RESEARCH_FRAMEWORK`, análisis Q00005 + integración de navegación. Conteos y STATUS validados (AUDIT-003).
+- **KB v2.4** (2026-08-26): micro-sprint 2.6 **SCHEME ENGINE / VALIDATOR** (documentation-only). Nuevos: [BUFFS/SCHEME_BUFFER_ANALYSIS](BUFFS/SCHEME_BUFFER_ANALYSIS.md), [BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS](BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md), [BUFFS/SCHEME_SYSTEM_COMPARISON](BUFFS/SCHEME_SYSTEM_COMPARISON.md), [SKILLS/SCHEME_VALIDATOR_DESIGN](SKILLS/SCHEME_VALIDATOR_DESIGN.md), [SKILLS/SCHEME_VALIDATION_LIFECYCLE](SKILLS/SCHEME_VALIDATION_LIFECYCLE.md); cross-links en SKILL_SEMANTIC_REFERENCE. **88 técnicos / 5 project / 11 sistema = 104 .md** (AUDIT-006).
 - **KB v2.3** (2026-08-26): base semántica de skills/buffs/effects para el Scheme Validator (`SKILL_SEMANTIC_REFERENCE.md`, `ABNORMAL_TYPE_REFERENCE.md`); catálogos verificados de `EffectType`/`EffectFlag`/`AffectScope`/`AffectObject`; reglas de stacking/reemplazo/slots en `EFFECT_SYSTEM.md`; categorías y beneficial/harmful 4-capas en `SKILL_DATA_MODEL.md`; `GAPS.md` e índices actualizados. **83 técnicos / 5 project / 9 sistema = 97 .md** (AUDIT-005).
 - **KB v2.2** (2026-08-26): consolidación del engine de quests (`QUEST_ENGINE_REFERENCE`), mapa de cobertura [GAPS.md](GAPS.md), crédito de party ([QUEST_PARTY_CREDIT](QUESTS/QUEST_PARTY_CREDIT.md)), guía de spawns ([WORLD/SPAWN_QUERY_GUIDE](WORLD/SPAWN_QUERY_GUIDE.md)), plantilla de slices, slices Q00003/Q00005, patrones reutilizables en QUEST_REWARDS, conteo quests corregido (532 java / 510 carpetas), cross-links quest-party vs drop normal, taxonomía ampliada. **81 técnicos / 5 project / 9 sistema = 95 .md** (AUDIT-004).
 - **Fase 3** (2026-08-25): investigación del cliente H5 iniciada — creado `CLIENT_RESEARCH/` (estructura del cliente, cifrado de texto, caso piloto Q00001, mapeo autoridad CLIENT↔SERVER). Detectado que el texto del cliente está cifrado (bloqueo) y una diferencia SOURCE↔RUNTIME en Q00001 (CONFLICT).

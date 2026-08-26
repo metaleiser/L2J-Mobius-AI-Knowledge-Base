@@ -150,6 +150,18 @@
 | Sistema de efectos | [SKILLS/EFFECT_SYSTEM.md](../SKILLS/EFFECT_SYSTEM.md) ✅ |
 | Daño mágico / resistencias | [SKILLS/MAGIC_DAMAGE.md](../SKILLS/MAGIC_DAMAGE.md) ✅ |
 | Handlers como scripts | [SKILLS/SKILL_HANDLERS_SCRIPTS.md](../SKILLS/SKILL_HANDLERS_SCRIPTS.md) ✅ |
+| Diseño del Scheme Validator | [SKILLS/SCHEME_VALIDATOR_DESIGN.md](../SKILLS/SCHEME_VALIDATOR_DESIGN.md) ✅ |
+| Ciclo de vida de validación de schemes | [SKILLS/SCHEME_VALIDATION_LIFECYCLE.md](../SKILLS/SCHEME_VALIDATION_LIFECYCLE.md) ✅ |
+
+---
+
+## BUFFS (Micro-Sprint 2.6)
+
+| Tema | Documento |
+|------|-----------|
+| SchemeBuffer NPC: persistencia DB, handlers, storage CSV `"id,level"`, slots reales | [BUFFS/SCHEME_BUFFER_ANALYSIS.md](../BUFFS/SCHEME_BUFFER_ANALYSIS.md) ✅ |
+| Community Board schemes: bypass/HTML, add/remove buff, cast flow | [BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md](../BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md) ✅ |
+| Comparación NPC buffer ↔ Community Board (veredictos y gaps) | [BUFFS/SCHEME_SYSTEM_COMPARISON.md](../BUFFS/SCHEME_SYSTEM_COMPARISON.md) ✅ |
 
 ---
 
@@ -353,13 +365,14 @@ Los siguientes documentos NO existen todavía; toda consulta sobre ellos debe re
 
 ## KNOWLEDGE BASE STATUS
 
-**Knowledge Base Version**: **2.3** (2026-08-26)  \
-**Markdown Documents**: 83 técnicos + 5 (`00_PROJECT/`) + sistema 9 (AI_INSTRUCTIONS=5, VERSIONING=4) = **97**  \
-**Last Updated**: 2026-08-26 (KB v2.3 — SKILL SEMANTIC FOUNDATION)  \
+**Knowledge Base Version**: **2.4** (2026-08-26)  \
+**Markdown Documents**: 88 técnicos + 5 (`00_PROJECT/`) + sistema 11 (AI_INSTRUCTIONS=7, VERSIONING=4) = **104**  \
+**Last Updated**: 2026-08-26 (KB v2.4 — SCHEME ENGINE / VALIDATOR DESIGN)  \
 **Status**: Proyecto documentado — 4 entidades (SERVER_SOURCE / SERVER_RUNTIME / CLIENT / KNOWLEDGE_BASE)  \
-**Current phase**: KB v2.3 (Skill Semantic Foundation + AbnormalType reference) completada. Próximos micro-sprints planificados: 2.6 SCHEME VALIDATOR → 2.7 COMMUNITY BOARD → 2.8 PLAYTEST LOOP (ver [00_PROJECT/ROADMAP.md](../00_PROJECT/ROADMAP.md)).  \
+**Current phase**: KB v2.4 — Micro-Sprint 2.6 (SCHEME ENGINE / VALIDATOR) completado como **diseño documentation-only** (análisis SchemeBuffer/Community Board/comparación + diseño y ciclo de vida del validador). Próximos micro-sprints planificados: 2.7 COMMUNITY BOARD → 2.8 PLAYTEST LOOP (ver [00_PROJECT/ROADMAP.md](../00_PROJECT/ROADMAP.md)).  \
 **Counting rule**: TÉCNICOS = `.md` excepto `00_PROJECT`, `AI_INSTRUCTIONS`, `VERSIONING`; SISTEMA = AI_INSTRUCTIONS + VERSIONING; 00_PROJECT por separado. Ver [VERSIONING/KB_VERSION.md](../VERSIONING/KB_VERSION.md).  \
 **Audit Note 2026-08-26 (AUDIT-005)**: añadida referencia semántica de skills (SKILL_SEMANTIC_REFERENCE) y catálogo AbnormalType (ABNORMAL_TYPE_REFERENCE); extendidos EFFECT_SYSTEM, SKILL_TARGETING y SKILL_DATA_MODEL; GAPS.md actualizado; versión v2.2 → v2.3.
+**Audit Note 2026-08-26 (AUDIT-006)**: creada carpeta `BUFFS/` con SCHEME_BUFFER_ANALYSIS, COMMUNITY_BOARD_SCHEME_ANALYSIS y SCHEME_SYSTEM_COMPARISON; creados SKILLS/SCHEME_VALIDATOR_DESIGN y SKILLS/SCHEME_VALIDATION_LIFECYCLE; añadida sección BUFFS a este índice; sistema ampliado (AI_INSTRUCTIONS=7); versión v2.3 → v2.4.
 
 ## GETTING STARTED FOR NEW AI TASKS
 

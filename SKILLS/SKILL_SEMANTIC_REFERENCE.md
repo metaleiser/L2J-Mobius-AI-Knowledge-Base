@@ -227,6 +227,11 @@ Si se excede el límite, se remueve el buff más antiguo de la cola correspondie
 - Aprendizaje → [`SKILL_LEARNING.md`](SKILL_LEARNING.md)
 - Casteo → [`CAST_FLOW.md`](CAST_FLOW.md)
 - Arquitectura → [`SKILL_ARCHITECTURE.md`](SKILL_ARCHITECTURE.md)
+- Diseño del Scheme Validator → [`SCHEME_VALIDATOR_DESIGN.md`](SCHEME_VALIDATOR_DESIGN.md)
+- Ciclo de vida de validación → [`SCHEME_VALIDATION_LIFECYCLE.md`](SCHEME_VALIDATION_LIFECYCLE.md)
+- Análisis de SchemeBuffer → [`../BUFFS/SCHEME_BUFFER_ANALYSIS.md`](../BUFFS/SCHEME_BUFFER_ANALYSIS.md)
+- Análisis de Community Board schemes → [`../BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md`](../BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md)
+- Comparación de sistemas de scheme → [`../BUFFS/SCHEME_SYSTEM_COMPARISON.md`](../BUFFS/SCHEME_SYSTEM_COMPARISON.md)
 - Requisitos del validador → [`../00_PROJECT/ROADMAP.md`](../00_PROJECT/ROADMAP.md)
 
 ---

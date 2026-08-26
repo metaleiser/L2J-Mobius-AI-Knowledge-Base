@@ -1,0 +1,210 @@
+# AI_MANIFEST — Machine-readable KB routing table
+
+**Project**: L2J Mobius CT 2.6 HighFive  
+**KB Version**: 2.4  
+**Total documents**: 104  
+**Purpose**: Enable an AI to select exactly which KB documents to load for a task without scanning the entire KB.
+
+---
+
+## Legend
+
+| Field | Meaning |
+|---|---|
+| **load_priority** | `ALWAYS` (bootstrap tier), `ON_DEMAND` (domain tier), `RARELY` (historical/protocol) |
+| **domain_tags** | Comma-separated domain identifiers |
+| **evidence** | Highest evidence level in the document: `VERIFIED`, `PARTIAL`, `SOURCE_REQUIRED`, `ORIENTATION_ONLY`, `UNKNOWN` |
+| **lines** | Approximate line count for token budgeting |
+
+> **Layout note (AUDIT-007)**: las rutas de documento de este manifiesto son **relativas a `AI_KNOWLEDGE_BASE/`**, no a la raíz del workspace. Ej.: `AI_INSTRUCTIONS/AI_BOOTSTRAP.md` resuelve a `AI_KNOWLEDGE_BASE/AI_INSTRUCTIONS/AI_BOOTSTRAP.md`; `GAPS.md` a `AI_KNOWLEDGE_BASE/GAPS.md`.
+
+---
+
+## System and routing documents
+
+| Document | Priority | Domain | Evidence | Lines |
+|---|---|---|---|---|
+| `AI_INSTRUCTIONS/AI_BOOTSTRAP.md` | ALWAYS | SYSTEM | VERIFIED | 70 |
+| `AI_INSTRUCTIONS/AI_MANIFEST.md` | ON_DEMAND | SYSTEM | VERIFIED | 200 |
+| `AI_INSTRUCTIONS/AI_README.md` | RARELY | SYSTEM | VERIFIED | 114 |
+| `AI_INSTRUCTIONS/VERIFICATION_RULES.md` | RARELY | SYSTEM | VERIFIED | 72 |
+| `AI_INSTRUCTIONS/AUDIT_PROTOCOL.md` | RARELY | SYSTEM | VERIFIED | - |
+| `AI_INSTRUCTIONS/UPDATE_PROTOCOL.md` | RARELY | SYSTEM | VERIFIED | - |
+| `AI_INSTRUCTIONS/CHANGE_DETECTION.md` | RARELY | SYSTEM | VERIFIED | - |
+| `GAPS.md` | ALWAYS | SYSTEM | VERIFIED | 61 |
+| `VERSIONING/KB_VERSION.md` | ALWAYS | SYSTEM | VERIFIED | 77 |
+| `VERSIONING/AUDIT_HISTORY.md` | RARELY | SYSTEM | VERIFIED | 209 |
+| `VERSIONING/CHANGELOG.md` | RARELY | SYSTEM | VERIFIED | - |
+| `VERSIONING/UPSTREAM_BASELINE.md` | RARELY | SYSTEM | VERIFIED | - |
+| `README.md` | RARELY | SYSTEM | VERIFIED | 181 |
+| `PROJECT_OVERVIEW.md` | RARELY | PROJECT | VERIFIED | 175 |
+| `PROJECT_STRUCTURE.md` | RARELY | PROJECT | VERIFIED | 267 |
+| `ARCHITECTURE_OVERVIEW.md` | RARELY | PROJECT | VERIFIED | 335 |
+| `FASE1_SUMMARY.md` | RARELY | PROJECT | VERIFIED | 277 |
+
+## Project context and planning
+
+| Document | Priority | Domain | Evidence | Lines |
+|---|---|---|---|---|
+| `00_PROJECT/PROJECT_CONTEXT.md` | RARELY | PROJECT | VERIFIED | 80 |
+| `00_PROJECT/REFERENCE_SOURCES.md` | RARELY | PROJECT | VERIFIED | - |
+| `00_PROJECT/DECISIONS.md` | RARELY | PROJECT | VERIFIED | - |
+| `00_PROJECT/ROADMAP.md` | ON_DEMAND | PROJECT | VERIFIED | 86 |
+| `00_PROJECT/IDEAS.md` | RARELY | PROJECT | VERIFIED | - |
+
+## Skills and buffs
+
+| Document | Priority | Domain | Evidence | Lines |
+|---|---|---|---|---|
+| `SKILLS/SKILL_SEMANTIC_REFERENCE.md` | ON_DEMAND | SKILLS,BUFFS | VERIFIED | 240 |
+| `SKILLS/EFFECT_SYSTEM.md` | ON_DEMAND | SKILLS,BUFFS | VERIFIED | 197 |
+| `SKILLS/ABNORMAL_TYPE_REFERENCE.md` | ON_DEMAND | SKILLS,BUFFS | VERIFIED | 178 |
+| `SKILLS/SKILL_DATA_MODEL.md` | ON_DEMAND | SKILLS | VERIFIED | - |
+| `SKILLS/SKILL_TARGETING.md` | ON_DEMAND | SKILLS | VERIFIED | - |
+| `SKILLS/SKILL_CONDITIONS.md` | ON_DEMAND | SKILLS | VERIFIED | - |
+| `SKILLS/SKILL_LOADING.md` | ON_DEMAND | SKILLS | VERIFIED | - |
+| `SKILLS/SKILL_LEARNING.md` | ON_DEMAND | SKILLS | VERIFIED | - |
+| `SKILLS/CAST_FLOW.md` | ON_DEMAND | SKILLS | VERIFIED | 113 |
+| `SKILLS/MAGIC_DAMAGE.md` | ON_DEMAND | SKILLS | VERIFIED | - |
+| `SKILLS/SKILL_HANDLERS_SCRIPTS.md` | ON_DEMAND | SKILLS | VERIFIED | - |
+| `SKILLS/SKILL_ARCHITECTURE.md` | ON_DEMAND | SKILLS | VERIFIED | - |
+| `SKILLS/SCHEME_VALIDATOR_DESIGN.md` | ON_DEMAND | SKILLS,BUFFS | VERIFIED | 174 |
+| `SKILLS/SCHEME_VALIDATION_LIFECYCLE.md` | ON_DEMAND | SKILLS,BUFFS | VERIFIED | 78 |
+| `BUFFS/SCHEME_BUFFER_ANALYSIS.md` | ON_DEMAND | BUFFS | VERIFIED | 128 |
+| `BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md` | ON_DEMAND | BUFFS | VERIFIED | 158 |
+| `BUFFS/SCHEME_SYSTEM_COMPARISON.md` | ON_DEMAND | BUFFS | VERIFIED | 84 |
+
+## Quests
+
+| Document | Priority | Domain | Evidence | Lines |
+|---|---|---|---|---|
+| `QUESTS/QUEST_ENGINE_REFERENCE.md` | ON_DEMAND | QUESTS | VERIFIED | 137 |
+| `QUESTS/QUEST_ARCHITECTURE.md` | ON_DEMAND | QUESTS | VERIFIED | - |
+| `QUESTS/QUEST_LIFECYCLE.md` | ON_DEMAND | QUESTS | VERIFIED | - |
+| `QUESTS/QUEST_EVENTS.md` | ON_DEMAND | QUESTS | VERIFIED | - |
+| `QUESTS/QUEST_STATES_VARIABLES.md` | ON_DEMAND | QUESTS | VERIFIED | - |
+| `QUESTS/QUEST_TIMERS.md` | ON_DEMAND | QUESTS | VERIFIED | - |
+| `QUESTS/QUEST_REWARDS.md` | ON_DEMAND | QUESTS | VERIFIED | - |
+| `QUESTS/QUEST_PLAYER_NPC_DIALOG.md` | ON_DEMAND | QUESTS | VERIFIED | - |
+| `QUESTS/QUEST_PARTY_CREDIT.md` | ON_DEMAND | QUESTS | VERIFIED | - |
+| `QUESTS/QUEST_RESEARCH_FRAMEWORK.md` | ON_DEMAND | QUESTS | VERIFIED | 404 |
+| `QUESTS/QUEST_VERTICAL_SLICE_TEMPLATE.md` | RARELY | QUESTS | VERIFIED | - |
+| `QUESTS/Q00039_REDEYEDINVADERS_ANALYSIS.md` | RARELY | QUESTS | VERIFIED | 137 |
+| `QUESTS/Q00005_MINERSFAVOR_ANALYSIS.md` | RARELY | QUESTS | VERIFIED | 270 |
+| `QUESTS/Q00005_PVE_VERTICAL_SLICE.md` | RARELY | QUESTS | VERIFIED | 262 |
+| `QUESTS/Q00003_PVE_VERTICAL_SLICE.md` | RARELY | QUESTS | VERIFIED | 239 |
+
+## Combat
+
+| Document | Priority | Domain | Evidence | Lines |
+|---|---|---|---|---|
+| `COMBAT/COMBAT_ARCHITECTURE.md` | ON_DEMAND | COMBAT | VERIFIED | 122 |
+| `COMBAT/ATTACK_FLOW.md` | ON_DEMAND | COMBAT | VERIFIED | - |
+| `COMBAT/DAMAGE_CALCULATION.md` | ON_DEMAND | COMBAT | PARTIAL | - |
+| `COMBAT/DEFENSE.md` | ON_DEMAND | COMBAT | VERIFIED | - |
+| `COMBAT/CRITICALS.md` | ON_DEMAND | COMBAT | VERIFIED | - |
+| `COMBAT/DEATH_FLOW.md` | ON_DEMAND | COMBAT | VERIFIED | - |
+| `COMBAT/COMBAT_TASKS.md` | ON_DEMAND | COMBAT | VERIFIED | - |
+
+
+## Infrastructure
+
+| Document | Priority | Domain | Evidence | Lines |
+|---|---|---|---|---|
+| `BUILD_AND_DEPLOYMENT.md` | RARELY | INFRA | VERIFIED | 285 |
+| `COMMONS_ARCHITECTURE.md` | RARELY | INFRA | VERIFIED | 429 |
+| `GAMESERVER_ARCHITECTURE.md` | RARELY | INFRA | VERIFIED | 432 |
+| `LOGINSERVER_ARCHITECTURE.md` | RARELY | INFRA | VERIFIED | 410 |
+| `NETWORK/NETWORK_ARCHITECTURE.md` | ON_DEMAND | INFRA,NETWORK | VERIFIED | 220 |
+| `THREADING/THREADING_ARCHITECTURE.md` | ON_DEMAND | INFRA | VERIFIED | 232 |
+| `SCRIPTING/SCRIPT_ENGINE.md` | ON_DEMAND | INFRA | VERIFIED | 252 |
+| `CONFIGURATION/CONFIGURATION_SYSTEM.md` | ON_DEMAND | INFRA | VERIFIED | 167 |
+
+## Packets and networking
+
+| Document | Priority | Domain | Evidence | Lines |
+|---|---|---|---|---|
+| `PACKETS/PACKET_ARCHITECTURE.md` | ON_DEMAND | PACKETS | VERIFIED | - |
+| `PACKETS/INCOMING_PACKETS.md` | ON_DEMAND | PACKETS | VERIFIED | - |
+| `PACKETS/OUTGOING_PACKETS.md` | ON_DEMAND | PACKETS | VERIFIED | - |
+| `PACKETS/PACKET_DISPATCH.md` | ON_DEMAND | PACKETS | VERIFIED | - |
+| `PACKETS/PACKET_PLAYER_FLOW.md` | ON_DEMAND | PACKETS | VERIFIED | - |
+| `PACKETS/PACKET_SECURITY.md` | ON_DEMAND | PACKETS | VERIFIED | - |
+| `PACKETS/PACKET_THREADING.md` | ON_DEMAND | PACKETS | VERIFIED | - |
+| `PACKETS/PACKET_SYSTEM_INTEGRATION.md` | ON_DEMAND | PACKETS | VERIFIED | - |
+
+## Database
+
+| Document | Priority | Domain | Evidence | Lines |
+|---|---|---|---|---|
+| `DATABASE/DATABASE_ARCHITECTURE.md` | ON_DEMAND | DATABASE | VERIFIED | - |
+| `DATABASE/SQL_SCHEMA.md` | ON_DEMAND | DATABASE | VERIFIED | - |
+| `DATABASE/DATABASE_CONFIGURATION.md` | ON_DEMAND | DATABASE | VERIFIED | - |
+| `DATABASE/DATABASE_TRANSACTIONS.md` | ON_DEMAND | DATABASE | VERIFIED | - |
+| `DATABASE/XML_DATA_LOADING.md` | ON_DEMAND | DATABASE | VERIFIED | - |
+| `DATABASE/ID_MANAGEMENT.md` | ON_DEMAND | DATABASE | VERIFIED | - |
+
+## Indexes
+
+| Document | Priority | Domain | Evidence | Lines |
+|---|---|---|---|---|
+| `INDEXES/MASTER_INDEX.md` | ON_DEMAND | INDEX | VERIFIED | 388 |
+| `INDEXES/MANAGERS_INDEX.md` | RARELY | INDEX | VERIFIED | - |
+| `INDEXES/ENTITY_TYPES_INDEX.md` | RARELY | INDEX | VERIFIED | 197 |
+
+## Client research
+
+| Document | Priority | Domain | Evidence | Lines |
+|---|---|---|---|---|
+| `CLIENT_RESEARCH/CLIENT_STRUCTURE.md` | RARELY | CLIENT | VERIFIED | - |
+| `CLIENT_RESEARCH/CLIENT_ENCRYPTION.md` | RARELY | CLIENT | VERIFIED | - |
+| `CLIENT_RESEARCH/CLIENT_SERVER_MAPPING.md` | RARELY | CLIENT | VERIFIED | - |
+| `CLIENT_RESEARCH/QUEST_PILOT_Q00001.md` | RARELY | CLIENT | VERIFIED | - |
+
+## World
+
+| Document | Priority | Domain | Evidence | Lines |
+|---|---|---|---|---|
+| `WORLD/SPAWN_QUERY_GUIDE.md` | ON_DEMAND | WORLD | VERIFIED | - |
+
+---
+
+## Count verification
+
+```
+System + routing:    17
+Project context:      5
+Skills + buffs:      17
+Quests:              15
+Combat:               7
+AI + systems:        13
+Infrastructure:       8
+Packets:              8
+Database:             6
+Indexes:              3
+Client research:      4
+World:                1
+---
+TOTAL:              104
+```
+
+If the filesystem count differs, update this manifest and `VERSIONING/KB_VERSION.md` before any other task.
+
+## AI and systems
+
+| Document | Priority | Domain | Evidence | Lines |
+|---|---|---|---|---|
+| `AI/AI_ARCHITECTURE.md` | ON_DEMAND | AI | VERIFIED | 117 |
+| `AI/AI_TASKS.md` | ON_DEMAND | AI | VERIFIED | - |
+| `AI/INTENTION_ACTION.md` | ON_DEMAND | AI | VERIFIED | - |
+| `AI/TARGET_SYSTEM.md` | ON_DEMAND | AI | VERIFIED | - |
+| `AI/AGGRO_SYSTEM.md` | ON_DEMAND | AI | VERIFIED | 118 |
+| `SYSTEMS/ENTITY_SYSTEM.md` | ON_DEMAND | SYSTEMS | VERIFIED | 261 |
+| `SYSTEMS/PLAYER_SYSTEM.md` | ON_DEMAND | SYSTEMS | VERIFIED | - |
+| `SYSTEMS/NPC_SYSTEM.md` | ON_DEMAND | SYSTEMS | VERIFIED | - |
+| `SYSTEMS/MONSTER_SYSTEM.md` | ON_DEMAND | SYSTEMS | VERIFIED | - |
+| `SYSTEMS/ITEM_SYSTEM.md` | ON_DEMAND | SYSTEMS | PARTIAL | - |
+| `SYSTEMS/INVENTORY_SYSTEM.md` | ON_DEMAND | SYSTEMS | PARTIAL | - |
+| `SYSTEMS/SUMMON_SYSTEM.md` | ON_DEMAND | SYSTEMS | VERIFIED | - |
+| `SYSTEMS/WORLD_SYSTEM.md` | ON_DEMAND | SYSTEMS | VERIFIED | - |
+

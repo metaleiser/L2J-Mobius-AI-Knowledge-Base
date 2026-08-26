@@ -1,6 +1,6 @@
 # GAPS MAP — Cobertura de la AI_KNOWLEDGE_BASE
 
-**Última actualización**: 2026-08-26 (KB v2.2 / SKILL SEMANTIC FOUNDATION 2.5)
+**Última actualización**: 2026-08-26 (KB v2.4.1 — reconciliación Micro-Sprint 2.7)
 
 > **Nota `*`**: dominio COVERED con base semántica documentada en Micro-Sprint 2.5. Sub-temas cross-AbnormalType y augmentation siguen como SOURCE_REQUIRED.
 **Propósito**: mapa central de cobertura documental. Protege contra alucinaciones: si un dominio figura como MISSING, la KB **no lo documenta** y cualquier afirmación sobre él debe verificarse directamente contra SOURCE.
@@ -22,10 +22,10 @@ Estados permitidos:
 |---|---|---|---|---|---|
 | QUESTING (motor) | **COVERED** | QUESTS/ (14 docs): ARCHITECTURE, LIFECYCLE, EVENTS, STATES_VARIABLES, REWARDS, PARTY_CREDIT, TIMERS, PLAYER_NPC_DIALOG, ENGINE_REFERENCE, RESEARCH_FRAMEWORK, VERTICAL_SLICE_TEMPLATE + slices Q00003/Q00005 + análisis Q00039/Q00005 | Mantener al día; promover patrones nuevos a ENGINE_REFERENCE/REWARDS | `mechanics/script/*`, datapack quests | — |
 | COMBAT | PARTIAL | COMBAT/ (7 docs): architecture, attack flow, damage, defense, criticals, death flow, tasks | Drop/reward normal del mob (cruce con DEATH_FLOW); efectos por elemento | `Attackable`, `Creature`, formulas | MEDIA |
-| SKILLS | COVERED* | SKILLS/ (12 docs): ARCHITECTURE, DATA_MODEL, TARGETING, CONDITIONS, LOADING, LEARNING, CAST_FLOW, EFFECT_SYSTEM, MAGIC_DAMAGE, HANDLERS_SCRIPTS + SKILL_SEMANTIC_REFERENCE + ABNORMAL_TYPE_REFERENCE | Semántica cross-AbnormalType y augmentation → SOURCE_REQUIRED | `skills/**`, XML | ALTA (2.5) |
+| SKILLS | COVERED* | SKILLS/ (14 docs): ARCHITECTURE, DATA_MODEL, TARGETING, CONDITIONS, LOADING, LEARNING, CAST_FLOW, EFFECT_SYSTEM, MAGIC_DAMAGE, HANDLERS_SCRIPTS + SKILL_SEMANTIC_REFERENCE + ABNORMAL_TYPE_REFERENCE + SCHEME_VALIDATOR_DESIGN + SCHEME_VALIDATION_LIFECYCLE | Semántica cross-AbnormalType y augmentation → SOURCE_REQUIRED | `skills/**`, XML | ALTA (2.5) |
 | BUFFS / EFFECTS | COVERED* | SKILL_SEMANTIC_REFERENCE, EFFECT_SYSTEM extendido, ABNORMAL_TYPE_REFERENCE | Comportamiento por skill XML específica → SOURCE_REQUIRED | `EffectList.java`, `AbstractEffect` | ALTA (2.5) |
 | TARGETS | COVERED | SKILL_TARGETING extendido con AffectScope/AffectObject | Semántica específica de cada handler script → SOURCE_REQUIRED | `TargetHandler`, scripts targets | — |
-| SCHEME VALIDATION | PARTIAL | SKILL_SEMANTIC_REFERENCE evidence matrix | Reglas ejecutables del validator; validación por skill XML → SOURCE_REQUIRED | `mechanics/skill/**`, XML | ALTA (2.6) |
+| SCHEME VALIDATION | **COVERED** | `SKILL_SEMANTIC_REFERENCE` evidence matrix, `SKILLS/SCHEME_VALIDATOR_DESIGN.md`, `SKILLS/SCHEME_VALIDATION_LIFECYCLE.md` | Cross-AbnormalType y augmentation siguen como SOURCE_REQUIRED | `mechanics/skill/**`, XML | **2.7 (implementación)** |
 | ITEMS / EQUIPMENT | PARTIAL | SYSTEMS/ITEM_SYSTEM.md (59 líneas), INVENTORY_SYSTEM.md | enchant/attributes/equip/sets/crystalización | `items/**`, Item/Inventory | MEDIA |
 | DROPS / LOOT | PARTIAL | DEATH_FLOW menciona `doItemDrop`; SPAWN_QUERY_GUIDE no cubre tablas | Tablas normales vs quest vs evento; rates | `DropListDAO`/XML drops, Attackable | ALTA |
 | LEVELING | MISSING | — | XP tables, rates, penalty party-level | `PcStat`, config rates | MEDIA |
@@ -34,8 +34,8 @@ Estados permitidos:
 | RAID / BOSS | MISSING | Monster System lista RaidBoss/GrandBoss como clases; sin doc de mecánica | respawn timers, curse, minions, raid parties | `RaidBoss*`, `GrandBoss*`, DB | ALTA |
 | ZONES | MISSING (planificado ⧗) | — | ZoneType, peace/combat/water/etc. | `zones/*.xml`, ZoneManager | MEDIA |
 | TELEPORT | MISSING | — | Teleporters NPC, Community Board teleports, scrolls, locId | `TeleportLocation*`, SQL, CB | **ALTA (CB)** |
-| COMMUNITY BOARD | MISSING | — | Prioridad post-2.4 (ROADMAP 2.7) | `CommunityBoard*`, HTML/bypass | **ALTA (2.7)** |
-| SCHEME BUFFER | MISSING | — | Prioridad post-2.4 (ROADMAP 2.6); requiere Skill Semantic Foundation (2.5) | scripts buffers, skills | **ALTA (2.6)** |
+| COMMUNITY BOARD | PARTIAL | `BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md` (subsistema scheme; análisis **SERVER_RUNTIME**, divergencia SOURCE/RUNTIME PATH_DIVERGENCE documentada), `BUFFS/SCHEME_SYSTEM_COMPARISON.md`. Arquitectura verificada (AUDIT-007): MasterHandler registration · routing `RequestBypassToServer` · dispatch `CommunityBoardHandler` · entrega HTML `HtmlUtil.sendCBHtml` / `CommunityBoardHandler.separateAndSend` (runtime L633-640) | UI general y otros servicios (teleport, multisell) siguen MISSING/planificados; paridad de interfaz con `IParseBoardHandler` del baseline SOURCE: PARTIAL; attribution de la customización runtime: PARTIAL | `CommunityBoard*`, HTML/bypass | **ALTA (2.7)** |
+| SCHEME BUFFER | **COVERED** | `BUFFS/SCHEME_BUFFER_ANALYSIS.md`, `BUFFS/SCHEME_SYSTEM_COMPARISON.md` | Mantener al día si cambia el NPC | `SchemeBuffer.java`, `SchemeBufferTable.java` | — |
 | CLAN | MISSING (planificado ⧗) | — | Clan, skills de clan, reputación, wars | `clan/**` | BAJA (ahora) |
 | SIEGE | MISSING (planificado ⧗) | — | castles, artifacts, mercs | `siege/**` | BAJA (ahora) |
 | CRAFTING | MISSING | — | recipes, dwarven craft, manufacture | `recipe/**`, RequestRecipe | MEDIA |

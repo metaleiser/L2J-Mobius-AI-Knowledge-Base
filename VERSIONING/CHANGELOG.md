@@ -4,6 +4,47 @@ Formato: entradas concisas y cronológicas (descendentes). El detalle completo v
 
 ---
 
+## KB 2.4.1 — 2026-08-26
+
+**Base**: KB v2.4 **preservada sin documentos nuevos**. Objetivo del micro-sprint 2.7: **RECONCILIACIÓN DOCUMENTAL** (knowledge-base-only) — corregir contradicciones detectadas en BUFFS tras la investigación runtime de 2.7. Baseline upstream sin cambios (`e2518ab`). Ver AUDIT-007.
+
+**Correcciones aplicadas**:
+- `BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md` — implementación analizada identificada como **SERVER_RUNTIME**; persistencia `bbs_schemes` → **`buffer_schemes`** (runtime `HomeBoard.java` L167-169); hook de grabación corregido a **`_bbsbuffsingle`** (L285-330, `addBuffToScheme()` en L319) con `_bbsbuff` explícitamente **sin** escritura de esquemas; entrega HTML documentada (`CommunityBoardHandler.separateAndSend`, L633-640); `CommunityMaxSchemes` desde `config/Custom/CommunityBoard.ini` (default 5, carga L1090-1102); nueva §1.1 **SOURCE/RUNTIME PATH_DIVERGENCE** (attribution PARTIAL, mismatch `IParseBoardHandler` PARTIAL); nueva tabla de anchors runtime.
+- `BUFFS/SCHEME_SYSTEM_COMPARISON.md` — celda Community Board corregida a `buffer_schemes`; celda NPC conservada (`buffer_schemes`, confirmada en SOURCE `SchemeBufferTable.java` L64-66, única copia en workspace) con nota **CONFLICT/SOURCE_REQUIRED** frente al registro runtime `custom_buff_schemes` de AUDIT-006; fila Max schemes ampliada (`config/Custom/CommunityBoard.ini`, property `CommunityMaxSchemes`, default 5).
+- `GAPS.md` — dominio COMMUNITY BOARD sigue **PARTIAL**; cobertura arquitectónica verificada añadida (MasterHandler registration, routing `RequestBypassToServer`, dispatch `CommunityBoardHandler`, entrega HTML `HtmlUtil.sendCBHtml`/`separateAndSend`, PATH_DIVERGENCE); TELEPORT continúa MISSING como dominio separado.
+- `AI_INSTRUCTIONS/AI_MANIFEST.md` — nota de layout: rutas relativas a `AI_KNOWLEDGE_BASE/`.
+- `VERSIONING/KB_VERSION.md` — 2.4 → **2.4.1** (notación parche por política; conteos canónicos intactos: 88/5/11/**104**); LAST_AUDIT → AUDIT-007.
+- `VERSIONING/AUDIT_HISTORY.md`, `VERSIONING/CHANGELOG.md` — entradas de esta reconciliación.
+
+**Notas de límite**: documentation-only; nada de SERVER_SOURCE/RUNTIME/CLIENT/SQL tocado; sin commit/push; sin implementación de SchemeValidator ni features de Community Board. Ítem abierto: **CONFLICT/SOURCE_REQUIRED** (tabla NPC runtime `custom_buff_schemes` vs SOURCE `buffer_schemes`), diferido a auditoría futura.
+
+**Conteos tras 2.4.1**: **104 .md** (sin cambios).
+
+---
+
+## KB 2.4 — 2026-08-26
+
+**Base**: KB v2.3 preservada. Objetivo del sprint: **SCHEME ENGINE / VALIDATOR** (micro-sprint 2.6) — análisis del estado actual de los schemes de buffs y diseño documentation-only del validador.
+
+**Nuevos documentos**:
+- `BUFFS/SCHEME_BUFFER_ANALYSIS.md` — análisis VERIFIED del SchemeBuffer NPC (RUNTIME `SchemeBuffer.java`): persistencia DB (`custom_buff_schemes`), handlers `createscheme`/`skillselect`/`skillunselect`/`givebuffs`, storage CSV `"id,level"`, conteo real de slots (dances vs buffs), limitaciones.
+- `BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md` — schemes vía Community Board: bypass/HTML, add/remove buff, cast flow, almacenamiento como string persistido.
+- `BUFFS/SCHEME_SYSTEM_COMPARISON.md` — comparación lado a lado NPC buffer ↔ Community Board con veredicto por dimensión y gaps compartidos.
+- `SKILLS/SCHEME_VALIDATOR_DESIGN.md` — diseño verification-first del validador: clasificaciones objetivo, árbol de decisión sobre la semántica v2.5, matriz de evidencia SOURCE/XML, fases futuras (**sin implementar código**).
+- `SKILLS/SCHEME_VALIDATION_LIFECYCLE.md` — ciclo de vida runtime de una decisión de validación (entrada → carga → reglas → veredicto → cast/skip → logging).
+
+**Documentos extendidos**: `SKILLS/SKILL_SEMANTIC_REFERENCE.md` (cross-links BUFFS + validator).
+
+**Documentos de soporte actualizados**: `GAPS.md`, `AI_INSTRUCTIONS/AI_BOOTSTRAP.md`, `AI_INSTRUCTIONS/AI_MANIFEST.md`, `AI_INSTRUCTIONS/AI_README.md`, `INDEXES/MASTER_INDEX.md`, `00_PROJECT/ROADMAP.md`.
+
+**Conteos tras Micro-Sprint 2.6**: 88 técnicos + 5 (`00_PROJECT/`) + sistema 11 (AI_INSTRUCTIONS=7, VERSIONING=4) = **104 .md**. KB_VERSION 2.3 → **2.4**.
+
+**Notas de límite**:
+- Diseño only: no se implementó ninguna clase nueva ni se modificó SERVER_SOURCE/RUNTIME/CLIENT.
+- Toda regla del futuro validador queda condicionada a evidencia por-skill XML (`data/stats/skills/`) antes de afirmarse (`SOURCE_REQUIRED`).
+
+---
+
 ## KB 2.3 — 2026-08-26
 
 **Base**: KB v2.2 preservada. Objetivo del sprint: **SKILL / BUFF SEMANTIC FOUNDATION** para habilitar el Scheme Validator (2.6).

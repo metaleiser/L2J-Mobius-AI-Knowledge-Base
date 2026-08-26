@@ -1,6 +1,10 @@
+> **MANDATORY FIRST-READ**: `AI_BOOTSTRAP.md` supersedes this document as the AI entry point. This document remains authoritative for detailed workspace and entity rules.
+
+---
+
 # AI_README — Guía de entrada para cualquier IA
 
-**Última revisión**: 2026-08-24 · **Audiencia**: agentes de IA que consulten o modifiquen esta KB
+**Última revisión**: 2026-08-26 · **Audiencia**: agentes de IA que consulten o modifiquen esta KB
 
 ---
 
@@ -47,7 +51,7 @@ conocimiento previamente investigado    → KB
 documentación general                   → REFERENCE SOURCES (00_PROJECT/REFERENCE_SOURCES.md)
 ```
 
-Si SOURCE y RUNTIME difieren → **registrar la discrepancia**, no corregir automáticamente ninguno. Ver [../00_PROJECT/PROJECT_CONTEXT.md](../00_PROJECT/PROJECT_CONTEXT.md).
+Si SOURCE y RUNTIME difieren → **registrar la discrepancia**, no corregir automáticamente ninguno. Ver `00_PROJECT/PROJECT_CONTEXT.md` y `AI_BOOTSTRAP.md` §1.
 
 ## 4. Baseline vigente
 
@@ -66,24 +70,9 @@ Antes de modificar cualquier documento: determina **qué versión del código es
 
 Antes de modificar cualquier documento: determina **qué entidad estás observando** (SOURCE/RUNTIME/CLIENT), **qué versión del código** y **contra qué baseline fue validada la KB**.
 
-## 6. Taxonomía de estados (KB v2.0)
+## 6. Taxonomía de estados
 
-| Estado | Significado | Compatibilidad |
-|---|---|---|
-| **VERIFIED** | Confirmado mediante código, cliente, ejecución reproducible o evidencia suficiente (idealmente `archivo:línea`) | equivale a VERIFIED |
-| **OBSERVED** | Observado durante una prueba/uso del servidor o cliente, aún no completamente explicado | nuevo |
-| **UNVERIFIED** | Afirmación encontrada en una fuente que aún no fue comprobada | releva a REQUIRES CODE VERIFICATION / afines |
-| **ASSUMPTION** | Hipótesis de trabajo | nuevo |
-| **UNKNOWN** | No existe información suficiente | equivale a UNKNOWN |
-| **DEPRECATED** | Información anteriormente válida pero sustituida | releva a OUTDATED |
-| **CONFLICT** | Existen fuentes o evidencias contradictorias | releva a CONTRADICTED |
-| *(PARTIAL)* | Parte demostrada, parte no (histórico, se conserva) | histórico |
-| *(PLANNED ⧗)* | Documentado como planificado; el doc aún no existe | histórico |
-
-- **No renombrar destructivamente** documentos históricos que usen estados antiguos; documentar el mapeo y usarlo a partir de v2.0.
-- Los conteos que puedan cambiar llevan fecha/commit de referencia.
-
-## 7. Qué puede modificar una IA
+Ver `AI_INSTRUCTIONS/VERIFICATION_RULES.md` para la taxonomía canónica completa (VERIFIED, SOURCE_REQUIRED, PARTIAL, UNKNOWN, ASSUMPTION, CONFLICT, DEPRECATED, UNKNOWN_CLIENT). Para reglas de uso rápido, ver `AI_BOOTSTRAP.md` §2.
 
 - Únicamente archivos dentro de `AI_KNOWLEDGE_BASE/`.
 - Solo tras verificar contra código y, para correcciones no triviales, tras presentar propuesta y obtener autorización.
@@ -97,11 +86,12 @@ Antes de modificar cualquier documento: determina **qué entidad estás observan
 
 ## 9. Antes de corregir documentación
 
-1. Leer [../INDEXES/MASTER_INDEX.md](../INDEXES/MASTER_INDEX.md) y [../VERSIONING/KB_VERSION.md](../VERSIONING/KB_VERSION.md).
-2. Comprobar estado Git del clone upstream y si hay commits nuevos ([CHANGE_DETECTION.md](CHANGE_DETECTION.md)).
-3. Verificar cada afirmación contra el código actual.
-4. Clasificar hallazgo (CRITICAL/HIGH/MEDIUM/LOW/INFO) con evidencia.
-5. Presentar propuesta → esperar autorización → aplicar → validar (ver [AUDIT_PROTOCOL.md](AUDIT_PROTOCOL.md)).
+1. Leer `AI_INSTRUCTIONS/AI_BOOTSTRAP.md`, `GAPS.md` y `VERSIONING/KB_VERSION.md`.
+2. Leer `INDEXES/MASTER_INDEX.md` y `AI_INSTRUCTIONS/AI_MANIFEST.md` para localizar el dominio.
+3. Comprobar estado Git del clone upstream y si hay commits nuevos (`AI_INSTRUCTIONS/CHANGE_DETECTION.md`).
+4. Verificar cada afirmación contra el código actual.
+5. Clasificar hallazgo (CRITICAL/HIGH/MEDIUM/LOW/INFO) con evidencia.
+6. Presentar propuesta → esperar autorización → aplicar → validar (`AI_INSTRUCTIONS/AUDIT_PROTOCOL.md`).
 
 ## 10. Preguntas que esta KB debe poder responder en todo momento
 
@@ -111,4 +101,4 @@ Antes de modificar cualquier documento: determina **qué entidad estás observan
 - ¿Qué cambió desde la última auditoría? → [../VERSIONING/CHANGELOG.md](../VERSIONING/CHANGELOG.md)
 - ¿Qué documentos podrían necesitar actualización? → salida de la última auditoría (Impact Analysis)
 
-Regla mnemotécnica: **primero versión del código observado, después documento**.
+Regla mnemotécnica: **primero `AI_BOOTSTRAP.md`, después documento**.

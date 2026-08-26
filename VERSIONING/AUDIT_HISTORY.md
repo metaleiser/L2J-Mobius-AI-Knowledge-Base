@@ -4,6 +4,62 @@ Registro cronológico de auditorías. Una auditoría NO incrementa KB_VERSION po
 
 ---
 
+## AUDIT-007
+
+- **Date**: 2026-08-26
+- **KB Version**: 2.4 → **2.4.1** (corrección documental dentro de la línea 2.4; notación parche según política de [KB_VERSION.md](KB_VERSION.md))
+- **Upstream Commit auditado**: `e2518ab10872b28cd4c6860e102b493656ba8728` (sin cambios upstream; baseline preservado)
+- **Result**: SYNCHRONIZED
+
+**Alcance (Micro-Sprint 2.7 — KB RECONCILIATION PATCH, knowledge-base-only)**: ningún archivo de SERVER_SOURCE / SERVER_RUNTIME / CLIENT / SQL modificado; sin commit ni push; sin documentos nuevos (conteo intacto en 104). No se implementó SchemeValidator ni features de Community Board.
+
+**Hallazgos reconciliados** (investigación 2.7 completada antes de editar; anclas revalidadas puntualmente en RUNTIME `HomeBoard.java`):
+- Persistencia Community Board = tabla **`buffer_schemes`** (L167-169); la KB afirmaba `bbs_schemes` → CORREGIDO en ambos docs BUFFS.
+- Hook de grabación de schemes = **`_bbsbuffsingle`** (L285-330; llamada `addBuffToScheme()` en **L319**; registro bypass en L83). **`_bbsbuff` NO graba esquemas** (solo aplicación directa) → CORREGIDO.
+- Entrega HTML verificada: **L633-640** → `returnHtml` → `CommunityBoardHandler.separateAndSend(returnHtml, player)` (ancla send en L639).
+- **`CommunityMaxSchemes`**: propiedad de `config/Custom/CommunityBoard.ini`, default **5** (carga runtime L1090-1102, `getProperty` en L1096; INI físico verificado).
+- **SOURCE/RUNTIME PATH_DIVERGENCE**: el engine de schemes existe SOLO en RUNTIME `game/data/scripts/handlers/communityboard/HomeBoard.java`; el homólogo SOURCE `dist/game/data/scripts/handlers/bypass/communityboard/HomeBoard.java` es otra generación sin ese subsystem y con interfaz `IParseBoardHandler` distinta → mismatch marcado **PARTIAL**. Origen exacto de la customización runtime: **PARTIAL** (no se afirma como probado).
+
+**Verificación targeted pre-edición (exactamente una lectura)**:
+- `SchemeBufferTable.java` — única copia en el workspace: `UPSTREAM/L2J_Mobius/L2J_Mobius_CT_2.6_HighFive/java/org/l2jmobius/gameserver/data/SchemeBufferTable.java` (el árbol RUNTIME no contiene Java core). Resultado: LOAD/TRUNCATE/INSERT sobre **`buffer_schemes`** (L64-L66) + `_schemesTable` en memoria (L75). Valor de la celda NPC de SCHEME_SYSTEM_COMPARISON ya coincidía → se PRESERVA. **CONFLICT/SOURCE_REQUIRED**: AUDIT-006 registró persistencia runtime como `custom_buff_schemes`; resolución diferida a una auditoría con acceso al core del build 26/05/2024.
+
+**Line refs válidos preservados**: L372-404 (`_bbsscheme_create`), L444-501 (`_bbsscheme_apply`), L516-556 (`_bbsbuff`), L937-945/L953-967/L975-982/L989-1009/L1017-1022 (helpers de schemes, AUDIT-006).
+
+**Corrections applied**: `BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md` (persistencia, hook, entrega HTML, config, identificación RUNTIME, §1.1 divergencia, tabla de anchors) · `BUFFS/SCHEME_SYSTEM_COMPARISON.md` (celdas persistencia/max schemes, notas de verdad-fuente y conflicto NPC) · `GAPS.md` (arquitectura COMMUNITY BOARD añadida; **PARTIAL intacto**; TELEPORT sigue MISSING aparte) · `AI_INSTRUCTIONS/AI_MANIFEST.md` (layout note) · `VERSIONING/KB_VERSION.md` (2.4.1 + LAST_AUDIT; conteos intactos) · `VERSIONING/CHANGELOG.md` (entrada 2.4.1). Autorización: plan MICRO-SPRINT 2.7 (modo ACT).
+
+**Post-change validation**: 104 físicos ✓ (88 técnicos + 5 + 11) · 0 `.md` nuevos ✓ · enlaces internos revisados en los 7 archivos tocados ✓ · `git diff` confinado a AI_KNOWLEDGE_BASE ✓ · repositorio upstream clean ✓.
+
+---
+
+## AUDIT-006
+
+- **Date**: 2026-08-26
+- **KB Version**: 2.3 → **2.4**
+- **Upstream Commit auditado**: `e2518ab10872b28cd4c6860e102b493656ba8728` (sin cambios upstream; baseline preservado)
+- **Result**: SYNCHRONIZED
+
+**Filesystem state at audit start**:
+- KB canónica: v2.3, 83 técnicos + 5 + 11 = **99 `.md`** físicos al inicio (manifest histórico reportaba 97 antes del añadido de AI_INSTRUCTIONS VERIFICATION_RULES/CHANGE_DETECTION).
+- Micro-Sprint objetivo: **2.6 SCHEME ENGINE / VALIDATOR** (documentation-only).
+
+**Verificaciones RUNTIME realizadas**:
+- `SchemeBuffer.java` (RUNTIME, sin Git): persistencia DB (`custom_buff_schemes`), handlers `createscheme` L292-332 / `skillselect`/`skillunselect` L246-282 / `givebuffs` L143-199, storage CSV `"id,level"`, límites (`BUFFER_MAX_SCHEMES`, `DANCES_MAX_AMOUNT`, `getMaxBuffCount()`).
+- Community Board scheme flows: bypass → HTML, add/remove buff sobre string persistido, cast flow.
+- Semántica 2.5 usada como base del diseño (Skill identity/categorías/slots ya verificadas en AUDIT-005).
+
+**Nuevos documentos**:
+- `BUFFS/SCHEME_BUFFER_ANALYSIS.md`, `BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md`, `BUFFS/SCHEME_SYSTEM_COMPARISON.md` (carpeta nueva).
+- `SKILLS/SCHEME_VALIDATOR_DESIGN.md`, `SKILLS/SCHEME_VALIDATION_LIFECYCLE.md`.
+- Extendido: `SKILLS/SKILL_SEMANTIC_REFERENCE.md` (cross-links).
+
+**Límites**:
+- Diseño only — ninguna clase nueva implementada; SERVER_SOURCE/RUNTIME/CLIENT intactos.
+- Reglas del validador condicionadas a evidencia XML por-skill (`SOURCE_REQUIRED`) antes de creerse.
+
+**Post-change validation**: 104 físicos ✓ (= 99 al inicio + 5 nuevos) · links revisados ✓ · solo AI_KNOWLEDGE_BASE modificada ✓.
+
+---
+
 ## AUDIT-005
 
 - **Date**: 2026-08-26
