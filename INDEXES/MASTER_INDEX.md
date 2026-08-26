@@ -107,6 +107,14 @@
 
 ---
 
+## WORLD / SPAWNS
+
+| Tema | Documento |
+|------|-----------|
+| Localizar/contar spawns de un NPC/mob (layout SOURCE por celdas vs RUNTIME consolidado) | [WORLD/SPAWN_QUERY_GUIDE.md](../WORLD/SPAWN_QUERY_GUIDE.md) ✅ |
+
+---
+
 ## AI & COMBAT (Fase 2B)
 
 | Tema | Documento |
@@ -157,6 +165,10 @@
 | Análisis transversal Q00039 RedEyedInvaders (SOURCE↔RUNTIME↔CLIENT↔GAMEPLAY) | [QUESTS/Q00039_REDEYEDINVADERS_ANALYSIS.md](../QUESTS/Q00039_REDEYEDINVADERS_ANALYSIS.md) ✅ |
 | Análisis transversal Q00005 Miner's Favor (SOURCE↔RUNTIME, Newbie Guide conflict documented) | [QUESTS/Q00005_MINERSFAVOR_ANALYSIS.md](../QUESTS/Q00005_MINERSFAVOR_ANALYSIS.md) ✅ |
 | Metodología de investigación (framework, plantilla A-W, taxon. clues/lore) | [QUESTS/QUEST_RESEARCH_FRAMEWORK.md](../QUESTS/QUEST_RESEARCH_FRAMEWORK.md) ✅ |
+| Crédito de party en quests (getRandomPartyMember* / PARTY_CREDIT_*) | [QUESTS/QUEST_PARTY_CREDIT.md](../QUESTS/QUEST_PARTY_CREDIT.md) ✅ |
+| Plantilla reutilizable de vertical slice (24 secciones + checklist) | [QUESTS/QUEST_VERTICAL_SLICE_TEMPLATE.md](../QUESTS/QUEST_VERTICAL_SLICE_TEMPLATE.md) ✅ |
+| Vertical slice Q00003 Will the Seal be Broken? (combate, race-lock Dark Elf, PARTY_CREDIT_SHARED) | [QUESTS/Q00003_PVE_VERTICAL_SLICE.md](../QUESTS/Q00003_PVE_VERTICAL_SLICE.md) ✅ |
+| Vertical slice Q00005 Miner's Favor (delivery sin combate) | [QUESTS/Q00005_PVE_VERTICAL_SLICE.md](../QUESTS/Q00005_PVE_VERTICAL_SLICE.md) ✅ |
 
 ### Sistemas de juego planificados (fases futuras)
 
@@ -169,7 +181,7 @@ Los siguientes documentos NO existen todavía; toda consulta sobre ellos debe re
 | How do instances work? | SYSTEMS/INSTANCE_SYSTEM.md ⧗ |
 | How do zones work? | SYSTEMS/ZONE_SYSTEM.md ⧗ |
 | How do events work? | SYSTEMS/EVENT_SYSTEM.md ⧗ |
-| How do spawns work? | SYSTEMS/SPAWN_SYSTEM.md ⧗ |
+| How do spawns work? | SYSTEMS/SPAWN_SYSTEM.md ⧗ · consulta práctica ya cubierta por [WORLD/SPAWN_QUERY_GUIDE.md](../WORLD/SPAWN_QUERY_GUIDE.md) ✅ |
 
 ---
 

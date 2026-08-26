@@ -32,6 +32,18 @@ public static boolean takeItems(Player player, int amount, int... itemIds)      
 ```
 - En `exitQuest` los quest items registrados se limpian: `takeItems(player, -1, _questItemIds)`.
 
+### Consultar inventario de quest items
+```java
+public static boolean hasQuestItems(Player player, int itemId)                            // L4483 — existe ese ID
+public static boolean hasQuestItems(Player player, int... itemIds)                        // L4494 — AND: TODOS deben existir
+public static long getQuestItemsCount(Player player, int itemId)                          // L4379 — cantidad actual
+public int[] getRegisteredItemIds()                                                       // L2338 — IDs pasados a registerQuestItems(...)
+```
+- `hasQuestItems(player, a, b, c)` es un **AND**: true solo si posee **todos** (patrón de colección completa; usado por Q00003 para cond2).
+- `getRegisteredItemIds()` permite reutilizar la lista registrada sin repetir literales (usado por Q00003 en su helper `giveItem`).
+- Familia usada por scripts RUNTIME (API nueva, verificada por uso en datapack; firma exacta REQUIRES CODE VERIFICATION en core runtime): `hasItem(player, ItemHolder)` · `hasAllItems(player, onlyThisItems?, ItemHolder...)` · `takeItem(player, ItemHolder)` · `takeAllItems(player, ItemHolder...)`. Semántica: trabajan sobre `ItemHolder` (ID+count) y respetan cantidad mínima.
+- Distinción clave: **quest-item** (registrado, no comerciável, se limpia al salir) vs **reward item** (normal, permanece). No mezclar ID de item con cantidad.
+
 ### Adena
 ```java
 public static void giveAdena(Player player, long count, boolean applyRates)               // L4634
@@ -78,9 +90,11 @@ No existe un helper único "giveReward" que englobe todo: cada script compone su
 | Helper | Path |
 |--------|------|
 | giveItems/rewardItems/giveAdena/takeItems/giveItemRandomly | `mechanics/script/Quest.java` L4634–5114 |
+| hasQuestItems / getQuestItemsCount / getRegisteredItemIds | ídem L4379–4505 · L2338 |
 | addExpAndSp | ídem L5147 |
 | playSound | ídem L5126–5140 |
 | getNoQuestMsg/getAlreadyCompletedMsg | ídem L1442–1452 |
+| getRandomPartyMember*/party credit | [QUEST_PARTY_CREDIT.md](QUEST_PARTY_CREDIT.md) |
 
 ---
 ## Ver también
