@@ -1,6 +1,6 @@
 # VERIFICATION_RULES — Reglas obligatorias de verificación
 
-Aplican a cualquier afirmación escrita o modificada en esta KB. Última revisión: 2026-08-26 (KB v2.2).
+Aplican a cualquier afirmación escrita o modificada en esta KB. Última revisión: 2026-08-26 (KB v2.3).
 
 ## Taxonomía de estados (obligatoria)
 

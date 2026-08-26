@@ -75,6 +75,10 @@ Campos/métodos verificados por uso directo:
 | `_operateType` | `SkillOperateType` (isActive/isMagic/isPhysical/isToggle/isChanneling/isStatic) |
 | `_targetType` | `TargetType` |
 | `_effectPoint` | negativo ⇒ debuff (`hasNegativeEffect()`: `_effectPoint < 0 && targetType != SELF`) |
+| `_isDebuff` | flag explícito XML `isDebuff="true"` |
+| `_abnormalType`, `_abnormalLevel`, `_abnormalTime` | stacking, duración |
+| `_isTriggeredSkill` | buffs de activación |
+| `_magic` | 0=physical, 1=magic, 2=static, 3=dance |
 | `_preCondition`, `_itemPreCondition` | listas `List<Condition>` |
 | `getHitTime()/getCoolTime()` | cálculo de skillTime en `beginCast` |
 | `getReuseDelay()/isStaticReuse()` | cooldowns |
@@ -85,7 +89,31 @@ Campos/métodos verificados por uso directo:
 
 > Enumeración completa de campos privados de `Skill.java` no realizada línea a línea → `REQUIRES CODE VERIFICATION` si se requiere inventario total.
 
-## 4. QUÉ PERTENECE A QUÉ
+## 4. Skill Categories & Beneficial/Harmful Semantics
+
+### 4.1 Categories (rutas de `EffectList.getEffectList`)
+
+| Category | Detection | Queue |
+|---|---|---|
+| Passive | `operateType == P` | `_passives` |
+| Debuff | `_isDebuff == true` | `_debuffs` |
+| Triggered | `_isTriggeredSkill == true` | `_triggered` |
+| Dance/Song | `_magic == 3` | `_dances` |
+| Toggle | `operateType == T` | `_toggles` |
+| Normal buff | default | `_buffs` |
+
+### 4.2 Beneficial / harmful — 4 layers
+
+No single "beneficial" flag exists. Combine:
+
+1. **Skill-level explicit**: `isDebuff()` (XML `isDebuff`), `is7Signs()`, `isRecoveryHerb()`.
+2. **Derived negative**: `hasNegativeEffect() = _effectPoint < 0 && _targetType != SELF`.
+3. **Effect-level**: `AbstractEffect.getEffectType()` returns `EffectType.BUFF/DEBUFF/STUN/SLEEP/HEAL/...`.
+4. **Control flags**: `EffectFlag.MUTED/SLEEP/STUNNED/CONFUSED/...`.
+
+For Scheme Validator decision tree see [`SKILL_SEMANTIC_REFERENCE.md`](SKILL_SEMANTIC_REFERENCE.md) §3.
+
+## 5. QUÉ PERTENECE A QUÉ
 
 | Dato | Dónde vive |
 |------|------------|
@@ -98,5 +126,5 @@ Campos/métodos verificados por uso directo:
 | XSD validación | `dist/game/data/xsd/skills.xsd` |
 
 ---
-**Status**: VERIFIED (atributos observados) · inventario total de campos → REQUIRES  
-**Verified**: 2026-08-23
+**Status**: VERIFIED (atributos, categorías y semántica beneficial/harmful) · inventario total de campos → REQUIRES  
+**Verified**: 2026-08-26

@@ -4,6 +4,30 @@ Formato: entradas concisas y cronológicas (descendentes). El detalle completo v
 
 ---
 
+## KB 2.3 — 2026-08-26
+
+**Base**: KB v2.2 preservada. Objetivo del sprint: **SKILL / BUFF SEMANTIC FOUNDATION** para habilitar el Scheme Validator (2.6).
+
+**Nuevos documentos**:
+- `SKILLS/SKILL_SEMANTIC_REFERENCE.md` — referencia central semántica (skill identity, categories, beneficial/harmful 4-capas, targets, stacking, restrictions, evidence matrix para Scheme Validator).
+- `SKILLS/ABNORMAL_TYPE_REFERENCE.md` — catálogo de 337 valores `AbnormalType` extraídos literalmente del enum SOURCE; reglas de stacking con `SOURCE_REQUIRED` para clasificación individual.
+
+**Documentos extendidos**:
+- `SKILLS/EFFECT_SYSTEM.md` — catálogos `EffectType` (42 valores) y `EffectFlag` (22 flags); buff category routing (`EffectList.getEffectList`); stacking/replacement rules (`EffectList.add`); slot overflow rules.
+- `SKILLS/SKILL_TARGETING.md` — catálogos `AffectScope` (15 valores) y `AffectObject` (10 valores).
+- `SKILLS/SKILL_DATA_MODEL.md` — categorías de skill y enrutamiento; semántica beneficial/harmful multicapa.
+
+**Documentos de soporte actualizados**: `GAPS.md`, `INDEXES/MASTER_INDEX.md`, `00_PROJECT/ROADMAP.md`.
+
+**Conteos tras Micro-Sprint 2.5**: 83 técnicos + 5 (`00_PROJECT/`) + sistema 9 = **97 .md**. KB_VERSION 2.2 → **2.3**.
+
+**Notas de límite**:
+- No se clasificó cada `AbnormalType` individualmente: la semántica real depende del skill XML correspondiente.
+- Conflictos cross-`AbnormalType` → `SOURCE_REQUIRED`; solo se documentó la regla general de reemplazo por `abnormalLevel`.
+- Ningún archivo de SERVER_SOURCE / SERVER_RUNTIME / CLIENT fue modificado.
+
+---
+
 ## KB 2.2 — 2026-08-26
 
 **Base**: KB v2.1 preservada. Objetivo del sprint: consolidar y endurecer la KB antes de usarla como especificación para construir gameplay con IA (Skill/Buff Semantic → Scheme Validator → Community Board).

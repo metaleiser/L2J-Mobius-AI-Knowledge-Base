@@ -1,6 +1,8 @@
 # GAPS MAP — Cobertura de la AI_KNOWLEDGE_BASE
 
-**Última actualización**: 2026-08-26 (KB v2.2)
+**Última actualización**: 2026-08-26 (KB v2.2 / SKILL SEMANTIC FOUNDATION 2.5)
+
+> **Nota `*`**: dominio COVERED con base semántica documentada en Micro-Sprint 2.5. Sub-temas cross-AbnormalType y augmentation siguen como SOURCE_REQUIRED.
 **Propósito**: mapa central de cobertura documental. Protege contra alucinaciones: si un dominio figura como MISSING, la KB **no lo documenta** y cualquier afirmación sobre él debe verificarse directamente contra SOURCE.
 
 > ⚠️ **"MISSING" significa "La KB todavía no documenta este dominio."**
@@ -20,7 +22,10 @@ Estados permitidos:
 |---|---|---|---|---|---|
 | QUESTING (motor) | **COVERED** | QUESTS/ (14 docs): ARCHITECTURE, LIFECYCLE, EVENTS, STATES_VARIABLES, REWARDS, PARTY_CREDIT, TIMERS, PLAYER_NPC_DIALOG, ENGINE_REFERENCE, RESEARCH_FRAMEWORK, VERTICAL_SLICE_TEMPLATE + slices Q00003/Q00005 + análisis Q00039/Q00005 | Mantener al día; promover patrones nuevos a ENGINE_REFERENCE/REWARDS | `mechanics/script/*`, datapack quests | — |
 | COMBAT | PARTIAL | COMBAT/ (7 docs): architecture, attack flow, damage, defense, criticals, death flow, tasks | Drop/reward normal del mob (cruce con DEATH_FLOW); efectos por elemento | `Attackable`, `Creature`, formulas | MEDIA |
-| SKILLS | COVERED | SKILLS/ (10 docs) | Validación semántica (ver ROADMAP 2.5) | `skills/**`, XML | ALTA (2.5) |
+| SKILLS | COVERED* | SKILLS/ (12 docs): ARCHITECTURE, DATA_MODEL, TARGETING, CONDITIONS, LOADING, LEARNING, CAST_FLOW, EFFECT_SYSTEM, MAGIC_DAMAGE, HANDLERS_SCRIPTS + SKILL_SEMANTIC_REFERENCE + ABNORMAL_TYPE_REFERENCE | Semántica cross-AbnormalType y augmentation → SOURCE_REQUIRED | `skills/**`, XML | ALTA (2.5) |
+| BUFFS / EFFECTS | COVERED* | SKILL_SEMANTIC_REFERENCE, EFFECT_SYSTEM extendido, ABNORMAL_TYPE_REFERENCE | Comportamiento por skill XML específica → SOURCE_REQUIRED | `EffectList.java`, `AbstractEffect` | ALTA (2.5) |
+| TARGETS | COVERED | SKILL_TARGETING extendido con AffectScope/AffectObject | Semántica específica de cada handler script → SOURCE_REQUIRED | `TargetHandler`, scripts targets | — |
+| SCHEME VALIDATION | PARTIAL | SKILL_SEMANTIC_REFERENCE evidence matrix | Reglas ejecutables del validator; validación por skill XML → SOURCE_REQUIRED | `mechanics/skill/**`, XML | ALTA (2.6) |
 | ITEMS / EQUIPMENT | PARTIAL | SYSTEMS/ITEM_SYSTEM.md (59 líneas), INVENTORY_SYSTEM.md | enchant/attributes/equip/sets/crystalización | `items/**`, Item/Inventory | MEDIA |
 | DROPS / LOOT | PARTIAL | DEATH_FLOW menciona `doItemDrop`; SPAWN_QUERY_GUIDE no cubre tablas | Tablas normales vs quest vs evento; rates | `DropListDAO`/XML drops, Attackable | ALTA |
 | LEVELING | MISSING | — | XP tables, rates, penalty party-level | `PcStat`, config rates | MEDIA |

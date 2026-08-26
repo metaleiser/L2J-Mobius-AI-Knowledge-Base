@@ -4,6 +4,39 @@ Registro cronológico de auditorías. Una auditoría NO incrementa KB_VERSION po
 
 ---
 
+## AUDIT-005
+
+- **Date**: 2026-08-26
+- **KB Version**: 2.2 → **2.3**
+- **Upstream Commit auditado**: `e2518ab10872b28cd4c6860e102b493656ba8728` (sin cambios upstream; baseline preservado)
+- **Result**: SYNCHRONIZED
+
+**Filesystem / Git state at audit start**:
+- HEAD `62a47c3` ("KB v2.2: consolidate quest engine and coverage foundations").
+- KB canónica: v2.2, 81 técnicos + 5 + 9 = 95 `.md`.
+
+**Verificaciones SOURCE realizadas (contra baseline `e2518ab`)**:
+- `Skill.java`: identity fields L72-80, `isDebuff`, `hasNegativeEffect` (`_effectPoint < 0 && targetType != SELF` L941), `isDance()`/`isToggle()`/`isPassive()`/`isTriggeredSkill()`, `minPledgeClass` L867, `checkCondition()` L946-994, `applyEffects()` invul/zone checks L1125/L1130/L1347.
+- `EffectList.java`: `getEffectList(Skill)` L211-241 (6 queues), `add(BuffInfo)` L1414-1567 (stacking by AbnormalType, replacement by abnormalLevel, slot overflow, herb/instant handling).
+- `AbstractEffect.java`: lifecycle `onStart/onExit/onActionTime/canStart/calcSuccess/getEffectType`.
+- `EffectType.java`: 42 enum values.
+- `EffectFlag.java`: 22 enum values + mask.
+- `TargetType.java`: 38 enum values.
+- `AffectScope.java`: 15 enum values.
+- `AffectObject.java`: 10 enum values.
+- `AbnormalType.java`: 337 enum values.
+
+**Outdated/Contradicted found & fixed**:
+- `EFFECT_SYSTEM.md`: stacking marcado como REQUIRES CODE VERIFICATION → actualizado a VERIFIED con reglas de `EffectList.add()`.
+- `SKILL_TARGETING.md`: AffectScope/Object mencionados pero no catalogados → catálogos 15/10 añadidos.
+- `SKILL_DATA_MODEL.md`: beneficial/harmful reducido a `hasNegativeEffect()` → añadidas 4 capas y categorías.
+
+**Corrections applied**: ver [CHANGELOG](CHANGELOG.md) KB 2.3 (SKILL_SEMANTIC_REFERENCE + ABNORMAL_TYPE_REFERENCE + extensiones). Autorización: plan corregido MICRO-SPRINT 2.5 (PASS WITH WARNINGS).
+
+**Post-change validation**: 97 físicos ✓ (= 95 al inicio + 2 nuevos: SKILL_SEMANTIC_REFERENCE, ABNORMAL_TYPE_REFERENCE) · links revisados ✓ · solo AI_KNOWLEDGE_BASE modificada ✓ · SERVER_SOURCE/RUNTIME/CLIENT intactos ✓.
+
+---
+
 ## AUDIT-004
 
 - **Date**: 2026-08-26

@@ -87,5 +87,111 @@ Categorías pedidas que SÍ existen como efectos/scripts o flags: daño, heal, b
 | Implementaciones | `dist/game/data/scripts/handlers/skill/effects/*.java` (165) |
 
 ---
-**Status**: VERIFIED (flujo de aplicación) · stacking/dispel internos REQUIRES  
-**Verified**: 2026-08-23
+
+**Status**: VERIFIED (flujo, EffectType, EffectFlag, routing, stacking)  
+**Verified**: 2026-08-26
+---
+
+## 8. EffectType Catalog (36 values)
+
+Source: `mechanics/effects/EffectType.java`.
+
+| # | Value | # | Value |
+|---:|---|---:|---|
+| 1 | AGGRESSION | 2 | BUFF |
+| 3 | CHARM_OF_LUCK | 4 | CHAT_BLOCK |
+| 5 | CPHEAL | 6 | DEBUFF |
+| 7 | DISPEL | 8 | DISPEL_BY_SLOT |
+| 9 | DMG_OVER_TIME | 10 | DMG_OVER_TIME_PERCENT |
+| 11 | DEATH_LINK | 12 | FAKE_DEATH |
+| 13 | FEAR | 14 | FISHING |
+| 15 | FISHING_START | 16 | HATE |
+| 17 | HEAL | 18 | HP_DRAIN |
+| 19 | MAGICAL_ATTACK | 20 | MANAHEAL_BY_LEVEL |
+| 21 | MANAHEAL_PERCENT | 22 | MUTE |
+| 23 | NEVITS_HOURGLASS | 24 | NOBLESSE_BLESSING |
+| 25 | NONE | 26 | PARALYZE |
+| 27 | PHYSICAL_ATTACK | 28 | PHYSICAL_ATTACK_HP_LINK |
+| 29 | REBALANCE_HP | 30 | REFUEL_AIRSHIP |
+| 31 | RELAXING | 32 | RESURRECTION |
+| 33 | RESURRECTION_SPECIAL | 34 | ROOT |
+| 35 | SLEEP | 36 | STEAL_ABNORMAL |
+| 37 | STUN | 38 | SUMMON |
+| 39 | SUMMON_PET | 40 | SUMMON_NPC |
+| 41 | TELEPORT | 42 | TELEPORT_TO_TARGET |
+
+**Count**: 42 values (enum starts at AGGRESSION and ends at TELEPORT_TO_TARGET). Used by individual effect scripts to report their semantic type.
+
+---
+
+## 9. EffectFlag Catalog (22 values + mask)
+
+Source: `mechanics/effects/EffectFlag.java`.
+
+| Value | Mask |
+|---|---|
+| NONE | 1 << 0 |
+| RESURRECTION_SPECIAL | 1 << 1 |
+| NOBLESS_BLESSING | 1 << 2 |
+| SILENT_MOVE | 1 << 3 |
+| PROTECTION_BLESSING | 1 << 4 |
+| RELAXING | 1 << 5 |
+| FEAR | 1 << 6 |
+| CONFUSED | 1 << 7 |
+| MUTED | 1 << 8 |
+| PSYCHICAL_MUTED | 1 << 9 |
+| PSYCHICAL_ATTACK_MUTED | 1 << 10 |
+| PASSIVE | 1 << 11 |
+| DISARMED | 1 << 12 |
+| ROOTED | 1 << 13 |
+| SLEEP | 1 << 14 |
+| STUNNED | 1 << 15 |
+| BETRAYED | 1 << 16 |
+| INVUL | 1 << 17 |
+| PARALYZED | 1 << 18 |
+| BLOCK_RESURRECTION | 1 << 19 |
+| SERVITOR_SHARE | 1 << 20 |
+| POLEARM_SINGLE_TARGET | 1 << 21 |
+
+Used by `EffectList.updateEffectFlags()` to set creature state flags.
+
+---
+
+## 10. Buff Category Routing
+
+Source: `EffectList.getEffectList(Skill)` L211-241.
+
+Each active skill effect is routed to exactly one queue based on skill category:
+
+| Skill category | Queue | Counts against slot limit? |
+|---|---|---|
+| `isPassive()` | `_passives` | No |
+| `isDebuff()` | `_debuffs` | No |
+| `isTriggeredSkill()` | `_triggered` | Own limit |
+| `isDance()` (`_magic == 3`) | `_dances` | Own limit |
+| `isToggle()` | `_toggles` | No |
+| default | `_buffs` | General limit |
+
+This routing happens before stacking checks in `EffectList.add()`.
+
+---
+
+## 11. Stacking & Replacement Rules
+
+Source: `EffectList.add(BuffInfo)` L1414-1567.
+
+| Rule | Evidence |
+|---|---|
+| Grouping key | `AbnormalType` (`_stackedEffects` map) |
+| Replacement | New `abnormalLevel >= old abnormalLevel` → old removed/hidden |
+| Ignore weaker | New `abnormalLevel < old abnormalLevel` → new ignored |
+| Same skill ID, no abnormal type | Old instance removed, new added at end |
+| Herb / abnormalInstant | Old marked `setInUse(false)`, stats removed, still ticking |
+| Slot overflow | Oldest buff in the same queue removed |
+
+**Cross-AbnormalType conflicts**: `SOURCE_REQUIRED` — no general rule in SOURCE.
+
+---
+
+**Status**: VERIFIED (flujo, EffectType, EffectFlag, routing, stacking)  
+**Verified**: 2026-08-26

@@ -39,19 +39,52 @@ Cobertura de conceptos pedidos:
 - enemigo/mascota → `ENEMY_SUMMON`, `PET`, `SERVITOR`, `SUMMON`, `OWNER_PET`;
 - muertos/cadáver → `CORPSE*`; undead → `UNDEAD`, `AREA_UNDEAD`; ground → `GROUND`.
 
-## 3. FILTROS: `AffectScope` y `AffectObject`
+## 3. `AffectScope` — 15 valores (geometría)
 
-- Existen como enums en `mechanics/skill/targets/`.
-- Refinan QUÉ entidades dentro del área (aliados/enemigos/muertos/undead…).
-- Detalle de valores individuales no enumerado en esta fase → `REQUIRES CODE VERIFICATION` si se requiere catálogo completo.
+Source: `mechanics/skill/targets/AffectScope.java`.
 
-## 4. HANDLERS SCRIPT (34)
+| # | Value | Semántica |
+|---:|---|---|
+| 1 | `NONE` | No afecta nada. |
+| 2 | `SINGLE` | Un solo objetivo. |
+| 3 | `POINT_BLANK` | Área desde el caster. |
+| 4 | `RANGE` | Área desde el target seleccionado. |
+| 5 | `RING_RANGE` | Anillo alrededor del target. |
+| 6 | `FAN` | Área en abanico. |
+| 7 | `SQUARE` | Cuadrado desde el target. |
+| 8 | `SQUARE_PB` | Cuadrado desde el caster. |
+| 9 | `PARTY` | Miembros de party. |
+| 10 | `PLEDGE` | Miembros de clan. |
+| 11 | `PARTY_PLEDGE` | Party + clan. |
+| 12 | `DEAD_PLEDGE` | Clan muertos. |
+| 13 | `VALAKAS_SCOPE` | Especial Valakas. |
+| 14 | `WYVERN_SCOPE` | Especial wyvern. |
+| 15 | `STATIC_OBJECT_SCOPE` | Objetos estáticos. |
+
+## 4. `AffectObject` — 10 valores (filtro de entidad)
+
+Source: `mechanics/skill/targets/AffectObject.java`.
+
+| # | Value | Semántica |
+|---:|---|---|
+| 1 | `ALL` | Cualquier entidad. |
+| 2 | `CLAN` | Clan. |
+| 3 | `FRIEND` | Amistoso. |
+| 4 | `NOT_FRIEND` | No amistoso. |
+| 5 | `NOE` | No Ofensa/Enemigo (según contexto). |
+| 6 | `OBJECT_DEAD_NPC_BODY` | Cadáveres NPC. |
+| 7 | `UNDEAD_REAL_ENEMY` | Undead enemigo. |
+| 8 | `INVISIBLE` | Entidades invisibles. |
+| 9 | `HIDDEN_PLACE` | Lugares ocultos. |
+| 10 | `WYVERN_OBJECT` | Objetos wyvern. |
+
+## 5. HANDLERS SCRIPT (34)
 
 - Ubicación real: `dist/game/data/scripts/handlers/skill/targets/*.java`.
 - Registrados contra `handler/TargetHandler.java` (mismo patrón que EffectHandler).
 - Cada script implementa la lógica de UN TargetType (ej.: cómo se expande un AURA, qué hace GROUND).
 
-## 5. MÉTODO DE ENTRADA VERIFICADO
+## 6. MÉTODO DE ENTRADA VERIFICADO
 
 `Skill.getTargetList(Creature creature, boolean onlyFirst)` (Skill.java ~L996):
 ```java
@@ -61,12 +94,12 @@ return getTargetList(creature, onlyFirst, target);   // delega al handler según
 ```
 Overloads adicionales aceptan objetivo explícito (usado por AI cuando castea sobre un target concreto).
 
-## 6. RELACIÓN CON DEAD TARGETS
+## 7. RELACIÓN CON DEAD TARGETS
 
 - Tipos CORPSE* operan sobre cadáveres (resurrect/sweep).
 - Para skills ofensivas, un target muerto se filtra más tarde en `onMagicHitTimer`/`applyEffects` (ver CAST_FLOW §6 y EFFECT_SYSTEM).
 
-## 7. TRAZABILIDAD
+## 8. TRAZABILIDAD
 
 | Elemento | Path |
 |----------|------|
@@ -76,5 +109,5 @@ Overloads adicionales aceptan objetivo explícito (usado por AI cuando castea so
 | Punto de entrada | `mechanics/skill/Skill.getTargetList(...)` (~L996) |
 
 ---
-**Status**: VERIFIED (catálogo/estructura) · valores internos de AffectScope/Object → REQUIRES  
-**Verified**: 2026-08-23
+**Status**: VERIFIED (catálogos TargetType/AffectScope/AffectObject y estructura)  
+**Verified**: 2026-08-26

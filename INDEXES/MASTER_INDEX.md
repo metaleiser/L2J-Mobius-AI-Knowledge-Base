@@ -140,6 +140,8 @@
 |------|-----------|
 | Arquitectura (3 capas: core/scripts/xml) | [SKILLS/SKILL_ARCHITECTURE.md](../SKILLS/SKILL_ARCHITECTURE.md) ✅ |
 | Modelo de datos (XML ↔ Skill) | [SKILLS/SKILL_DATA_MODEL.md](../SKILLS/SKILL_DATA_MODEL.md) ✅ |
+| Referencia semántica (Scheme Validator) | [SKILLS/SKILL_SEMANTIC_REFERENCE.md](../SKILLS/SKILL_SEMANTIC_REFERENCE.md) ✅ |
+| Catálogo AbnormalType | [SKILLS/ABNORMAL_TYPE_REFERENCE.md](../SKILLS/ABNORMAL_TYPE_REFERENCE.md) ✅ |
 | Carga y reload | [SKILLS/SKILL_LOADING.md](../SKILLS/SKILL_LOADING.md) ✅ |
 | Aprendizaje / adquisición | [SKILLS/SKILL_LEARNING.md](../SKILLS/SKILL_LEARNING.md) ✅ |
 | Flujo de casteo | [SKILLS/CAST_FLOW.md](../SKILLS/CAST_FLOW.md) ✅ |
@@ -309,7 +311,7 @@ Los siguientes documentos NO existen todavía; toda consulta sobre ellos debe re
 | DATABASE/* (6 docs de Fase 2F) | VERIFIED con UNKNOWN explícitos | 2026-08-23 |
 | SYSTEMS/ (8 docs de Fase 2A) | VERIFIED | 2026-08-23 |
 | AI/* y COMBAT/* (12 docs de Fase 2B) | VERIFIED | 2026-08-23 |
-| SKILLS/* (10 docs de Fase 2C) | VERIFIED | 2026-08-23 |
+| SKILLS/* (12 docs: 10 de Fase 2C + SKILL_SEMANTIC_REFERENCE + ABNORMAL_TYPE_REFERENCE) | VERIFIED (semántica 2.5 añadida) | 2026-08-26 |
 | QUESTS/* (10 docs: 7 de Fase 2D + Q00039/Q00005 análisis + QUEST_RESEARCH_FRAMEWORK) | VERIFIED (Q00039/Q00005 server-side; framework metodológico) | 2026-08-25 |
 | PACKETS/* (8 docs de Fase 2E) | VERIFIED | 2026-08-23 |
 | INDEXES/* | VERIFIED (corregido 2A, ampliado 2B/2C/2D/2E) | 2026-08-23 |
@@ -351,13 +353,13 @@ Los siguientes documentos NO existen todavía; toda consulta sobre ellos debe re
 
 ## KNOWLEDGE BASE STATUS
 
-**Knowledge Base Version**: **2.2** (2026-08-26)  \
-**Markdown Documents**: 81 técnicos + 5 (`00_PROJECT/`) + sistema 9 (AI_INSTRUCTIONS=5, VERSIONING=4) = 95  \
-**Last Updated**: 2026-08-26 (KB v2.2)  \
+**Knowledge Base Version**: **2.3** (2026-08-26)  \
+**Markdown Documents**: 83 técnicos + 5 (`00_PROJECT/`) + sistema 9 (AI_INSTRUCTIONS=5, VERSIONING=4) = **97**  \
+**Last Updated**: 2026-08-26 (KB v2.3 — SKILL SEMANTIC FOUNDATION)  \
 **Status**: Proyecto documentado — 4 entidades (SERVER_SOURCE / SERVER_RUNTIME / CLIENT / KNOWLEDGE_BASE)  \
-**Current phase**: KB v2.2 (consolidación quest-engine + GAPS map + hardening) completada. Próximos micro-sprints planificados: 2.5 SKILL SEMANTIC FOUNDATION → 2.6 SCHEME VALIDATOR → 2.7 COMMUNITY BOARD → 2.8 PLAYTEST LOOP (ver [00_PROJECT/ROADMAP.md](../00_PROJECT/ROADMAP.md)).  \
+**Current phase**: KB v2.3 (Skill Semantic Foundation + AbnormalType reference) completada. Próximos micro-sprints planificados: 2.6 SCHEME VALIDATOR → 2.7 COMMUNITY BOARD → 2.8 PLAYTEST LOOP (ver [00_PROJECT/ROADMAP.md](../00_PROJECT/ROADMAP.md)).  \
 **Counting rule**: TÉCNICOS = `.md` excepto `00_PROJECT`, `AI_INSTRUCTIONS`, `VERSIONING`; SISTEMA = AI_INSTRUCTIONS + VERSIONING; 00_PROJECT por separado. Ver [VERSIONING/KB_VERSION.md](../VERSIONING/KB_VERSION.md).  \
-**Audit Note 2026-08-26 (AUDIT-004)**: conteo quests corregido (532 .java / 510 carpetas); creado QUEST_ENGINE_REFERENCE + GAPS.md; cross-links quest-party vs drop normal; taxonomía ampliada; versión normalizada v2.1 → v2.2 (el commit `63c9b40` usó "v0.9" como etiqueta de trabajo). Histórico: AUDIT-003 (2026-08-25, Fase 3/Q00039/Q00005 → 88), AUDIT-002 (v2.0, entidades/build Ant), AUDIT-001 (FASE 1-2, H1–H18).
+**Audit Note 2026-08-26 (AUDIT-005)**: añadida referencia semántica de skills (SKILL_SEMANTIC_REFERENCE) y catálogo AbnormalType (ABNORMAL_TYPE_REFERENCE); extendidos EFFECT_SYSTEM, SKILL_TARGETING y SKILL_DATA_MODEL; GAPS.md actualizado; versión v2.2 → v2.3.
 
 ## GETTING STARTED FOR NEW AI TASKS
 
