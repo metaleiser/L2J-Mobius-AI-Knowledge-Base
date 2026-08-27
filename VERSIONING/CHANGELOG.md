@@ -4,7 +4,36 @@ Formato: entradas concisas y cronológicas (descendentes). El detalle completo v
 
 ---
 
-## KB 2.4.1 — 2026-08-26
+## Sprint 0.6B — 2026-08-27
+
+**Base**: KB v2.4.1 **preservada**. Objetivo: **COMPRESSION, REORGANIZATION & SOURCE_ENTRY CONVERSION**. Cambio de versión: v2.4.1 → **v2.5**.
+
+### C0–C4 completados (ver informes de checkpoint anteriores):
+- **C0**: Safety inventory — protected areas verified (QUESTS=15, BUFFS=3, CLIENT_RESEARCH=4, COMBAT=7, SKILLS=14).
+- **C1**: Archive originals — 11 verbatim pre-sprint snapshots created in `ARCHIVE/PRE_SPRINT_0_6B/`.
+- **C2**: `SOURCE_VS_RUNTIME.md` created — consolidated SOURCE↔RUNTIME divergence reference.
+- **C3**: Compressions & Reorganizations:
+  - `ARCHITECTURE_OVERVIEW.md` compressed (95 lines).
+  - `COMMONS_ARCHITECTURE.md` compressed (85 lines).
+  - `BUILD_AND_DEPLOYMENT.md` converted to SOURCE_ENTRY (73 lines).
+  - `INDEXES/MASTER_INDEX.md` compressed to routing-focused (79 lines).
+  - `FASE1_SUMMARY.md` relocated to ARCHIVE/ (active root copy removed).
+  - `SKILLS/ABNORMAL_TYPE_REFERENCE.md` → `REFERENCE/ABNORMAL_TYPE_CATALOG.md` (337-value catalog).
+  - `SKILLS/SCHEME_VALIDATION.md` created (merged from `SCHEME_VALIDATOR_DESIGN.md` + `SCHEME_VALIDATION_LIFECYCLE.md`).
+- **C4**: SOURCE_ENTRY conversions:
+  - `CONFIGURATION/CONFIGURATION_SYSTEM.md` (SOURCE_ENTRY, 59 lines).
+  - `THREADING/THREADING_ARCHITECTURE.md` (SOURCE_ENTRY, 57 lines).
+  - `SCRIPTING/SCRIPT_ENGINE.md` (SOURCE_ENTRY, 71 lines).
+- **C5** (current): Routing & version updates:
+  - `AI_BOOTSTRAP.md`, `AI_MANIFEST.md`, `GAPS.md`, `KB_VERSION.md`, `CHANGELOG.md`, `AUDIT_HISTORY.md`, `ROADMAP.md`, `SKILL_SEMANTIC_REFERENCE.md`, `MASTER_INDEX.md` updated.
+  - `SOURCE_VS_RUNTIME.md` added to routing.
+  - ARCHIVE/ established as separate historical category.
+  - Zero Permanent Deletion Policy maintained (0 permanent deletions).
+  - No server/source code modifications.
+
+**Conteos tras Sprint 0.6B**: 105 activos + 12 archive = 117 físicos .md (medidos del filesystem).
+
+---
 
 **Base**: KB v2.4 **preservada sin documentos nuevos**. Objetivo del micro-sprint 2.7: **RECONCILIACIÓN DOCUMENTAL** (knowledge-base-only) — corregir contradicciones detectadas en BUFFS tras la investigación runtime de 2.7. Baseline upstream sin cambios (`e2518ab`). Ver AUDIT-007.
 

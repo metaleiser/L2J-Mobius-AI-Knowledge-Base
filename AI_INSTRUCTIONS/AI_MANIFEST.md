@@ -1,8 +1,8 @@
 # AI_MANIFEST — Machine-readable KB routing table
 
 **Project**: L2J Mobius CT 2.6 HighFive  
-**KB Version**: 2.4  
-**Total documents**: 104  
+**KB Version**: 2.5  
+**Total documents**: 105 (active) + 12 (archived)  
 **Purpose**: Enable an AI to select exactly which KB documents to load for a task without scanning the entire KB.
 
 ---
@@ -32,6 +32,7 @@
 | `AI_INSTRUCTIONS/UPDATE_PROTOCOL.md` | RARELY | SYSTEM | VERIFIED | - |
 | `AI_INSTRUCTIONS/CHANGE_DETECTION.md` | RARELY | SYSTEM | VERIFIED | - |
 | `GAPS.md` | ALWAYS | SYSTEM | VERIFIED | 61 |
+| `SOURCE_VS_RUNTIME.md` | ALWAYS | SYSTEM | VERIFIED | — |
 | `VERSIONING/KB_VERSION.md` | ALWAYS | SYSTEM | VERIFIED | 77 |
 | `VERSIONING/AUDIT_HISTORY.md` | RARELY | SYSTEM | VERIFIED | 209 |
 | `VERSIONING/CHANGELOG.md` | RARELY | SYSTEM | VERIFIED | - |
@@ -39,8 +40,8 @@
 | `README.md` | RARELY | SYSTEM | VERIFIED | 181 |
 | `PROJECT_OVERVIEW.md` | RARELY | PROJECT | VERIFIED | 175 |
 | `PROJECT_STRUCTURE.md` | RARELY | PROJECT | VERIFIED | 267 |
-| `ARCHITECTURE_OVERVIEW.md` | RARELY | PROJECT | VERIFIED | 335 |
-| `FASE1_SUMMARY.md` | RARELY | PROJECT | VERIFIED | 277 |
+| `ARCHITECTURE_OVERVIEW.md` | RARELY | PROJECT | VERIFIED | 95 |
+| `FASE1_SUMMARY.md` | RARELY | PROJECT | DEPRECATED | 277 |
 
 ## Project context and planning
 
@@ -58,7 +59,7 @@
 |---|---|---|---|---|
 | `SKILLS/SKILL_SEMANTIC_REFERENCE.md` | ON_DEMAND | SKILLS,BUFFS | VERIFIED | 240 |
 | `SKILLS/EFFECT_SYSTEM.md` | ON_DEMAND | SKILLS,BUFFS | VERIFIED | 197 |
-| `SKILLS/ABNORMAL_TYPE_REFERENCE.md` | ON_DEMAND | SKILLS,BUFFS | VERIFIED | 178 |
+| `REFERENCE/ABNORMAL_TYPE_CATALOG.md` | ON_DEMAND | SKILLS,BUFFS | VERIFIED | 134 |
 | `SKILLS/SKILL_DATA_MODEL.md` | ON_DEMAND | SKILLS | VERIFIED | - |
 | `SKILLS/SKILL_TARGETING.md` | ON_DEMAND | SKILLS | VERIFIED | - |
 | `SKILLS/SKILL_CONDITIONS.md` | ON_DEMAND | SKILLS | VERIFIED | - |
@@ -68,8 +69,7 @@
 | `SKILLS/MAGIC_DAMAGE.md` | ON_DEMAND | SKILLS | VERIFIED | - |
 | `SKILLS/SKILL_HANDLERS_SCRIPTS.md` | ON_DEMAND | SKILLS | VERIFIED | - |
 | `SKILLS/SKILL_ARCHITECTURE.md` | ON_DEMAND | SKILLS | VERIFIED | - |
-| `SKILLS/SCHEME_VALIDATOR_DESIGN.md` | ON_DEMAND | SKILLS,BUFFS | VERIFIED | 174 |
-| `SKILLS/SCHEME_VALIDATION_LIFECYCLE.md` | ON_DEMAND | SKILLS,BUFFS | VERIFIED | 78 |
+| `SKILLS/SCHEME_VALIDATION.md` | ON_DEMAND | SKILLS,BUFFS | VERIFIED | 97 |
 | `BUFFS/SCHEME_BUFFER_ANALYSIS.md` | ON_DEMAND | BUFFS | VERIFIED | 128 |
 | `BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md` | ON_DEMAND | BUFFS | VERIFIED | 158 |
 | `BUFFS/SCHEME_SYSTEM_COMPARISON.md` | ON_DEMAND | BUFFS | VERIFIED | 84 |
@@ -172,9 +172,9 @@
 ## Count verification
 
 ```
-System + routing:    17
-Project context:      5
-Skills + buffs:      17
+System + routing:    18 (includes SOURCE_VS_RUNTIME.md)
+Project context:      5 (FASE1_SUMMARY.md marked DEPRECATED)
+Skills + buffs:      17 (SCHEME_VALIDATION.md consolidated; ABNORMAL_TYPE_CATALOG moved to REFERENCE/)
 Quests:              15
 Combat:               7
 AI + systems:        13
@@ -185,8 +185,11 @@ Indexes:              3
 Client research:      4
 World:                1
 ---
-TOTAL:              104
+ACTIVE TOTAL:       105
+ARCHIVED:            12 (historical, not active KB)
 ```
+
+> **Note**: Active count = 105 measured from filesystem. Archived count = 12 (includes ARCHIVE/README.md). Total physical .md in AI_KNOWLEDGE_BASE = 117.
 
 If the filesystem count differs, update this manifest and `VERSIONING/KB_VERSION.md` before any other task.
 

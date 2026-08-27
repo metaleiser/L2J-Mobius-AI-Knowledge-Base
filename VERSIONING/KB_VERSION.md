@@ -1,22 +1,40 @@
 # KB_VERSION
 
 ```
-KB_VERSION          = 2.4.1
-STATUS              = SYNCHRONIZED
+KB_VERSION          = 2.5
+STATUS              = REORGANIZED
 SOURCE_BASELINE     = e2518ab10872b28cd4c6860e102b493656ba8728 (upstream master)
 RUNTIME_BUILD       = 26/05/2024 (SERVER_RUNTIME desplegado, sin Git)
 UPSTREAM_REPOSITORY = MobiusDevelopment/L2J_Mobius
 BASELINE_DATE       = 2026-08-22 03:06:03 +0300
-LAST_AUDIT          = 2026-08-26 (AUDIT-007 / Micro-Sprint 2.7: KB v2.4.1 reconciliation patch — correcciones documentales BUFFS/GAPS/AI_MANIFEST, sin docs nuevos, documentation-only)
+LAST_AUDIT          = 2026-08-27 (Sprint 0.6B — CHECKPOINT 5: routing & version updates; C0–C4 complete; C5 in progress; C6/C7 pending)
 LAST_COMMIT         = 62a47c3 (KB v2.2: consolidate quest engine and coverage foundations)
 PREVIOUS_COMMIT     = 63c9b40 (KB v0.9: PvE vertical slice + party credit + spawn query consolidation)
+ACTIVE_KB           = 105
+ARCHIVED            = 12
+TOTAL_PHYSICAL      = 117
 00_PROJECT_DOCS     = 5
-TECHNICAL_DOCS      = 88
+TECHNICAL_DOCS      = 89
 SYSTEM_DOCS         = 11 (AI_INSTRUCTIONS=7, VERSIONING=4)
-TOTAL_MD            = 104
+TOTAL_MD            = 105 (active); ARCHIVED=12 (separate, historical)
 ```
 
-> **Nota sobre "KB v0.9"**: el commit `63c9b40` utilizó **"KB v0.9" como nomenclatura de trabajo del micro-sprint**. La versión canónica de la Knowledge Base es **v2.4**. No reinterpretar el mensaje de ese commit como versión de la KB.
+> **Nota sobre "KB v0.9"**: el commit `63c9b40` utilizó **"KB v0.9" como nomenclatura de trabajo del micro-sprint**. La versión canónica de la Knowledge Base es **v2.5**. No reinterpretar el mensaje de ese commit como versión de la KB.
+
+## Cambios de v2.4.1 → v2.5 (Sprint 0.6B — Reorganización mayor)
+
+- **Reorganización significativa de la KB**: compresiones, conversiones SOURCE_ENTRY, relocalizaciones, actualizaciones de ruteo.
+- `ARCHITECTURE_OVERVIEW.md`, `COMMONS_ARCHITECTURE.md` — comprimidos (material duplicado removido).
+- `BUILD_AND_DEPLOYMENT.md` — convertido a SOURCE_ENTRY (Apache Ant, no Gradle).
+- `INDEXES/MASTER_INDEX.md` — comprimido a ruteo por dominios.
+- `FASE1_SUMMARY.md` → ARCHIVE/ (relocalizado, no activo).
+- `SKILLS/ABNORMAL_TYPE_REFERENCE.md` → `REFERENCE/ABNORMAL_TYPE_CATALOG.md`.
+- `SKILLS/SCHEME_VALIDATOR_DESIGN.md` + `SCHEME_VALIDATION_LIFECYCLE.md` → `SKILLS/SCHEME_VALIDATION.md` (merged).
+- `CONFIGURATION/`, `THREADING/`, `SCRIPTING/` — convertidos a SOURCE_ENTRY.
+- `SOURCE_VS_RUNTIME.md` añadido al ruteo de dominio.
+- ARCHIVE/ establecido como categoría histórica separada.
+- Zero Permanent Deletion Policy: 0 eliminaciones permanentes.
+- Conteos: 105 activos + 12 archive = 117 físicos total.
 
 ## Cambios de v2.4 → v2.4.1 (reconciliación documental — AUDIT-007 / Micro-Sprint 2.7)
 
@@ -53,10 +71,11 @@ TOTAL_MD            = 104
 TÉCNICOS  = todos los .md EXCEPT: 00_PROJECT, AI_INSTRUCTIONS, VERSIONING
 SISTEMA    = AI_INSTRUCTIONS + VERSIONING
 00_PROJECT = 00_PROJECT (categoría por separado)
-TOTAL      = TÉCNICOS + 00_PROJECT + SISTEMA
+ACTIVE      = TÉCNICOS + 00_PROJECT + SISTEMA
+ARCHIVED    = ARCHIVE/ (histórico, no activo)
 ```
 
-Con esta regla, estado canónico **KB v2.4**: 88 (técnicos) + 5 (00_PROJECT) + 11 (sistema) = **104**. Los documentos `INDEXES/`, `README.md` (root), `BUFFS/`, `CLIENT_RESEARCH/` se cuentan como **técnicos** (no están excluidos). Conteos históricos conservados: **97** = 83 técnicos + 5 + 9 (KB v2.3, 2026-08-26; AI_INSTRUCTIONS con 5 docs); **95** = 81 técnicos + 5 + 9 (KB v2.2, 2026-08-26); **88** = 74 técnicos + 5 + 9 (KB v2.1, 2026-08-25); **81** = 67 técnicos + 5 + 9 (KB v2.0; el `67` de AUDIT-001/AUDIT-002 se conserva como histórico).
+Con esta regla, estado canónico **KB v2.5**: 89 (técnicos) + 5 (00_PROJECT) + 11 (sistema) = **105** activos + 12 archive = **117** físicos total. Los documentos `INDEXES/`, `README.md` (root), `BUFFS/`, `CLIENT_RESEARCH/`, `REFERENCE/` se cuentan como **técnicos** (no están excluidos). ARCHIVE/ se cuenta por separado como categoría histórica. Conteos históricos conservados: **104** = 88 técnicos + 5 + 11 (KB v2.4); **97** = 83 técnicos + 5 + 9 (KB v2.3, 2026-08-26; AI_INSTRUCTIONS con 5 docs); **95** = 81 técnicos + 5 + 9 (KB v2.2, 2026-08-26); **88** = 74 técnicos + 5 + 9 (KB v2.1, 2026-08-25); **81** = 67 técnicos + 5 + 9 (KB v2.0).
 
 ## Qué significa KB 2.0
 
@@ -79,6 +98,7 @@ KB v2.0 **actualiza, no reconstruye** la KB v1.0. Se preserva todo el conocimien
 | Correcciones documentales menores / erratas / conteos puntuales | 2.0.x (p. ej. 2.0.1) o registro interno en AUDIT_HISTORY |
 | Cambio significativo de conocimiento (nueva área documentada, correcciones estructurales de fondo) | 2.1 |
 | Cambio mayor de organización/metodología de la KB | 3.0 |
+| Sprint 0.6B — reorganización significativa sin nuevo conocimiento de dominio | 2.5 |
 
 Regla fundamental: **no incrementar la versión solo porque se ejecutó una auditoría.** El versionado refleja contenido, no actividad.
 

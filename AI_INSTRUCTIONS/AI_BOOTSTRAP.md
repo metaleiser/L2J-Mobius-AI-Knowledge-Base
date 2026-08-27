@@ -1,7 +1,7 @@
 # AI_BOOTSTRAP — Mandatory first-read for any AI agent
 
 **Project**: L2J Mobius CT 2.6 HighFive  
-**KB Version**: 2.4  
+**KB Version**: 2.5  
 **Audience**: AI agents operating on this workspace  
 **Status**: VERIFIED
 
@@ -59,9 +59,10 @@ Load only the documents relevant to the current task.
 
 | Task domain | Primary KB documents |
 |---|---|
+| Implementation decisions (SOURCE↔RUNTIME divergence) | `SOURCE_VS_RUNTIME.md` (ALWAYS consult for implementation tasks) |
 | Skills, buffs, effects, targeting | `SKILLS/SKILL_SEMANTIC_REFERENCE.md` |
 | Scheme buffer NPC or Community Board schemes | `BUFFS/SCHEME_BUFFER_ANALYSIS.md`, `BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md`, `BUFFS/SCHEME_SYSTEM_COMPARISON.md` |
-| Scheme validation design | `SKILLS/SCHEME_VALIDATOR_DESIGN.md`, `SKILLS/SCHEME_VALIDATION_LIFECYCLE.md` |
+| Scheme validation design | `SKILLS/SCHEME_VALIDATION.md` (consolidated) |
 | Quests | `QUESTS/QUEST_ENGINE_REFERENCE.md` |
 | Combat, damage, death | `COMBAT/COMBAT_ARCHITECTURE.md` |
 | Player, items, inventory, NPCs, world | `SYSTEMS/{PLAYER,ITEM,INVENTORY,NPC,WORLD}_SYSTEM.md` |

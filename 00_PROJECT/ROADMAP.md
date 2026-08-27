@@ -1,6 +1,6 @@
 # ROADMAP
 
-**Última actualización**: 2026-08-26 (KB v2.4)
+**Última actualización**: 2026-08-27 (KB v3.0 — Sprint 0.7 — PvE Gameplay Knowledge Expansion)
 
 Hoja de ruta del proyecto/KB. Cronológico orientativo. Los ítems marcados con fecha futura son **direcciones**, no compromisos.
 
@@ -13,6 +13,8 @@ Hoja de ruta del proyecto/KB. Cronológico orientativo. Los ítems marcados con 
 - [x] **Slices Q00005/Q00003 + consolidación quest** — vertical slices verificados (delivery y combate), `QUEST_PARTY_CREDIT.md`, `WORLD/SPAWN_QUERY_GUIDE.md`, `QUEST_VERTICAL_SLICE_TEMPLATE.md`. *(commit `63c9b40` usó "KB v0.9" como etiqueta de trabajo; versión canónica interna v2.2).*
 - [x] **KB v2.2** — consolidación y hardening: `QUEST_ENGINE_REFERENCE.md` (referencia central del motor), [GAPS.md](../GAPS.md) (mapa de cobertura), patrones reutilizables en QUEST_REWARDS, conteo quests corregido (532 .java / 510 carpetas), cross-links quest-party vs drop normal, taxonomía ampliada. 81 técnicos / 5 project / 9 sistema = **95 .md**.
 - [x] **KB v2.3** — **SKILL / BUFF SEMANTIC FOUNDATION**: `SKILL_SEMANTIC_REFERENCE.md` (referencia central semántica para Scheme Validator), `ABNORMAL_TYPE_REFERENCE.md` (catálogo de 337 AbnormalType), extensión de EFFECT_SYSTEM (EffectType/EffectFlag, stacking, buff routing), SKILL_TARGETING (AffectScope/AffectObject) y SKILL_DATA_MODEL (categorías y beneficial/harmful 4-capas). GAPS.md e índices actualizados. 83 técnicos / 5 project / 9 sistema = **97 .md**.
+- [x] **KB v2.5 — Sprint 0.6B** — COMPRESSIONS & REORGANIZATIONS + SOURCE_ENTRY conversions. **COMPLETED** (C0-C7 done). Archivos activos=105, archive=12.
+- [x] **KB v3.0 — Sprint 0.7 (COMPLETED)** — **PVE GAMEPLAY KNOWLEDGE EXPANSION**: Auditoría PvE (C0-C2), creación de 10 documentos GAMEPLAY/. Dominios P0 ahora COVERED: LEVELING, PARTY, INSTANCES, RAID/BOSS, ZONES, TELEPORT, DROPS/LOOT. ⚠️ CRITICAL DIVERGENCE documentada: TELEPORT SOURCE vs RUNTIME. RaidBoss ≠ GrandBoss documentado explícitamente. GAPS.md, MASTER_INDEX.md, ROADMAP.md actualizados. 115 activos / 12 archive = 127 físicos total.
 - [x] **KB v2.4** — **SCHEME ENGINE / VALIDATOR (diseño, documentation-only)**: creada carpeta `BUFFS/` con `SCHEME_BUFFER_ANALYSIS.md` (SchemeBuffer RUNTIME: DB, handlers, storage CSV, slots reales), `COMMUNITY_BOARD_SCHEME_ANALYSIS.md` y `SCHEME_SYSTEM_COMPARISON.md`; creados `SKILLS/SCHEME_VALIDATOR_DESIGN.md` (clasificaciones + decision tree + evidence matrix) y `SKILLS/SCHEME_VALIDATION_LIFECYCLE.md`. Cross-links en SKILL_SEMANTIC_REFERENCE; bootstrap/manifest/GAPS sincronizados. 88 técnicos / 5 project / 11 sistema = **104 .md** (AUDIT-006). Implementación del validador diferida.
 - [x] **Fase 3 (inicio)** — investigación CLIENT H5: creado `CLIENT_RESEARCH/` (estructura, cifrado, caso piloto Q00001, mapeo autoridad). Detectado cifrado de texto del cliente y diferencia NEWBIEGUIDE SOURCE↔RUNTIME (CONFLICT).
 - [x] **Fase 3D** — creado `QUESTS/QUEST_RESEARCH_FRAMEWORK.md` (marco A-W de análisis transversal de quests).
@@ -29,9 +31,8 @@ Hoja de ruta del proyecto/KB. Cronológico orientativo. Los ítems marcados con 
 | Micro-sprint | Tema | Contenido previsto | Estado |
 |---|---|---|---|
 | ~~2.5~~ | ~~SKILL / BUFF SEMANTIC FOUNDATION~~ | ~~Base semántica de skills/buffs extraída de SOURCE+XML: tipos de efecto, targets, duraciones, stacking, flags beneficial/non-beneficial.~~ | ✅ Completado (KB v2.3) |
-| **2.6** | **SCHEME ENGINE / VALIDATOR** | Motor y validador de schemes sobre la base 2.5. | ✅ **DISEÑO COMPLETADO (documentación-only, KB v2.4)** |
+| **2.6** | **SCHEME ENGINE / VALIDATOR** | Motor y validador de schemes. Convertido a `SKILLS/SCHEME_VALIDATION.md` (consolidado de diseño + ciclo de vida) durante Sprint 0.6B. | ✅ **DISEÑO COMPLETADO (documentación-only, KB v2.4 → v2.5)** |
 | 2.7 | COMMUNITY BOARD FOUNDATION | Fundamentos del Community Board (bypass, páginas, servicios). | Planificado |
-| 2.8 | GAMEPLAY / PLAYTEST LOOP | Bucle de pruebas jugables contra la KB (expected vs actual). | Planificado |
 
 ### Requisitos futuros del Scheme Validator (documentar, NO implementar aún)
 
@@ -58,7 +59,7 @@ Clasificaciones objetivo del validador: `VALID · INVALID · SELF_ONLY · PARTY_
 ### Documentación completada (post-v2.0)
 - `CLIENT_RESEARCH/`, `Q00039_REDEYEDINVADERS_ANALYSIS.md`, `QUEST_RESEARCH_FRAMEWORK.md`, `Q00005_MINERSFAVOR_ANALYSIS.md`, slices Q00003/Q00005, `QUEST_PARTY_CREDIT.md`, `WORLD/SPAWN_QUERY_GUIDE.md`, `QUEST_VERTICAL_SLICE_TEMPLATE.md`, `QUEST_ENGINE_REFERENCE.md`, `GAPS.md`.
 - **Cliente**: cifrado detectado y registrado; **no descifrado validado**.
-- **Micro-Sprint 2.6 (KB v2.4)**: `BUFFS/SCHEME_BUFFER_ANALYSIS.md`, `BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md`, `BUFFS/SCHEME_SYSTEM_COMPARISON.md`, `SKILLS/SCHEME_VALIDATOR_DESIGN.md`, `SKILLS/SCHEME_VALIDATION_LIFECYCLE.md`. Diseño del Scheme Validator documentado (verification-first); implementación diferida.
+- **Micro-Sprint 2.6 (KB v2.4/2.5)**: `BUFFS/SCHEME_BUFFER_ANALYSIS.md`, `BUFFS/COMMUNITY_BOARD_SCHEME_ANALYSIS.md`, `BUFFS/SCHEME_SYSTEM_COMPARISON.md`, `SKILLS/SCHEME_VALIDATOR_DESIGN.md`, `SKILLS/SCHEME_VALIDATION_LIFECYCLE.md`. Diseño del Scheme Validator documentado (verification-first); implementación diferida. Consolidado a `SKILLS/SCHEME_VALIDATION.md` durante Sprint 0.6B.
 
 ## Corto plazo (siguientes fases)
 

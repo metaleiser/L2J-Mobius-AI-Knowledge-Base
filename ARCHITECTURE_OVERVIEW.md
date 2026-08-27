@@ -1,408 +1,112 @@
 # ARCHITECTURE OVERVIEW
 
-**Source of Truth**: Code structure and GameServer.java initialization  
+**Source of Truth**: Code structure and \GameServer.java\ / \LoginServer.java\ initialization  
 **Verified**: 2026-08-23  
-**Status**: VERIFIED
+**Status**: VERIFIED  
+**Sprint 0.6B**: Compressed to remove material duplicated in domain-specific documents.
 
 ---
 
-## SYSTEM ARCHITECTURE
+## 1. SYSTEM ARCHITECTURE
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│                      L2 Game Clients                          │
-│                   (Network Protocol: L2)                      │
-└────────────────────────┬─────────────────────────────────────┘
-                         │ TCP Port 7777 (Encrypted)
-                         │
-        ┌────────────────▼────────────────┐
-        │                                 │
-    ┌───┴─────────────────────────────────┴───┐
-    │   Game Server                            │
-    │   org.l2jmobius.gameserver.GameServer    │
-    └───┬─────────────────────────────────────┬───┐
-        │                                     │   │
-   ┌────┴──────────────┐          ┌──────────┴──┐│
-   │ World             │          │ Managers   ││
-   │ (60,000+ entities)│          │ (52 singletons)│
-   │ Creatures/Items   │          │ Sieges, Clans │
-   └────┬──────────────┘          │ Instances, AI │
-        │                         └───────────────┘
-   ┌────┴────────────────────────────────────────┐
-   │ Core Systems                                │
-   │ ├─ Entity System (Creature hierarchy)      │
-   │ ├─ Skill System (Learning, Casting)        │
-   │ ├─ Item System (Inventory, Enchant)        │
-   │ ├─ Combat System (PvP, PvE)               │
-   │ ├─ Clan System (Wars, Halls)              │
-   │ ├─ Siege System (Castles, Forts, Halls)   │
-   │ ├─ Quest System                            │
-   │ ├─ Zone System (PvP rules, effects)       │
-   │ └─ ... (15+ more systems)
-   └─────────┬──────────────────────────────────┘
-             │
-   ┌─────────┴──────────────────────────────┐
-   │ Commons Library (Shared)                │
-   │ ├─ ThreadPool (3 pools, async tasks)   │
-   │ ├─ DatabaseFactory (HikariCP)          │
-   │ ├─ ConnectionManager (Network)         │
-   │ ├─ ConfigLoader (Runtime config)       │
-   │ └─ Encryption (Blowfish)               │
-   └─────────┬──────────────────────────────┘
-             │ TCP Port 9014
-   ┌─────────▼──────────────────────────────┐
-   │ Login Server                            │
-   │ org.l2jmobius.loginserver.LoginServer  │
-   │ ├─ LoginController (Auth)              │
-   │ ├─ GameServerTable (Available servers) │
-   │ └─ SessionKey (Auth tokens)            │
-   └─────────┬──────────────────────────────┘
-             │
-   ┌─────────▼──────────────────────────────┐
-   │ Database (MySQL/MariaDB)               │
-   │ ├─ Accounts & Characters               │
-   │ ├─ Items & Skills                      │
-   │ ├─ Clans & Relations                   │
-   │ └─ ... (10 core tables)               │
-   └────────────────────────────────────────┘
-```
+\\\
+┌──────────────────────────────────────────────────────────┐
+│                    L2 Game Clients                        │
+│                (Network Protocol: L2)                     │
+└───────────────────────┬──────────────────────────────────┘
+                        │ TCP Port 7777 (Encrypted)
+         ┌──────────────▼──────────────┐
+         │ GameServer                  │
+         │ org.l2jmobius.gameserver    │
+         │  ├─ World (60k+ entities)   │
+         │  ├─ Managers (52 singletons)│
+         │  │  Sieges, Clans, Instances│
+         │  │  AI, Zones, Events       │
+         │  └─ Core Systems (15+)      │
+         │     Entity, Skill, Item,    │
+         │     Combat, Clan, Siege,    │
+         │     Quest, Zone, ...        │
+         └──────────────┬──────────────┘
+                        │ Commons shared lib
+         ┌──────────────▼──────────────┐
+         │ Commons Library              │
+         │ config/ crypt/ database/    │
+         │ network/ threads/ time/     │
+         │ ui/ util/                   │
+         └──────────────┬──────────────┘
+                        │ TCP Port 9014
+         ┌──────────────▼──────────────┐
+         │ LoginServer                 │
+         │ org.l2jmobius.loginserver   │
+         │ LoginController (Auth)      │
+         │ GameServerTable (available) │
+         │ SessionKey (tokens)         │
+         └──────────────┬──────────────┘
+                        │
+         ┌──────────────▼──────────────┐
+         │ Database (MySQL/MariaDB)    │
+         │ Accounts, Characters,       │
+         │ Items, Skills, Clans,       │
+         │ Quests, World state         │
+         └─────────────────────────────┘
+\\\
+
+**Cross-system relationships**: LoginServer authenticates users and directs them to GameServer via GameServerTable. GameServer delegates all shared infrastructure (config loading, database pooling, threading, network I/O, encryption) to Commons. GameServer loads static data from XML files at startup and persists runtime state to the database.
 
 ---
 
-## INITIALIZATION SEQUENCE
+## 2. INITIALIZATION SEQUENCE (GameServer)
 
-When GameServer starts, initialization happens in this order:
+Essential steps — full detail in [GAMESERVER_ARCHITECTURE.md](GAMESERVER_ARCHITECTURE.md):
 
-```
-1. GUI Setup (optional)
-   └─ InterfaceConfig.load()
-
-2. Logging System
-   └─ LogManager.readConfiguration()
-
-3. Configuration Loading
-   └─ ConfigLoader.init()
-      ├─ GeneralConfig
-      ├─ ServerConfig
-      ├─ PlayerConfig
-      ├─ RatesConfig
-      ├─ PvpConfig
-      ├─ NpcConfig
-      └─ Configuration classes loaded from .ini files (16 main load calls)
-
-4. Database System
-   └─ DatabaseFactory.init()
-      ├─ HikariCP connection pool configured
-      └─ 20-100 connections ready
-
-5. Thread Pool System
-   └─ ThreadPool.init()
-      ├─ High-Priority Scheduled Pool
-      ├─ Standard Scheduled Pool
-      └─ Instant Execution Pool
-
-6. Core ID Management
-   └─ IdManager.getInstance()
-
-7. Scripting & Events
-   ├─ EventDispatcher.getInstance()
-   └─ ScriptEngine.getInstance()
-
-8. World Initialization
-   ├─ InstanceManager.getInstance()
-   ├─ World.init()
-   ├─ MapRegionData.getInstance()
-   ├─ AnnouncementsTable.getInstance()
-   └─ GlobalVariablesManager.getInstance()
-
-9. Data Loading (Phase 1)
-   ├─ CategoryData
-   ├─ CubicData
-   ├─ DynamicExpRateData
-   └─ SecondaryAuthData
-
-10. Skills Loading
-    ├─ EffectHandler.getInstance().executeScript()
-    ├─ EnchantSkillGroupsData
-    ├─ SkillTreeData
-    ├─ SkillData
-    └─ PetSkillData
-
-11. Items Loading
-    ├─ ItemData
-    ├─ EnchantItemData
-    ├─ EnchantItemOptionsData
-    ├─ ElementalAttributeData
-    ├─ OptionData
-    ├─ RecipeData
-    ├─ MultisellData
-    ├─ BuyListData
-    ├─ FishData
-    └─ ... (more item-related data)
-
-12. Character System
-    ├─ ClassListData
-    ├─ InitialEquipmentData
-    ├─ ExperienceData
-    ├─ PlayerTemplateData
-    ├─ CharInfoTable
-    ├─ AdminData
-    └─ CaptchaManager
-
-13. Clan System
-    ├─ ClanTable
-    ├─ CHSiegeManager
-    ├─ ClanHallTable
-    └─ ClanHallAuctionManager
-
-14. Geodata System
-    └─ GeoEngine.getInstance()
-
-15. NPC System
-    ├─ NpcData
-    ├─ SpawnData
-    ├─ TeleporterData
-    ├─ DoorData
-    ├─ StaticObjectData
-    └─... (NPC-related loading)
-
-16. Game Systems
-    ├─ SiegeManager & related managers
-    ├─ DimensionalRiftManager
-    ├─ ItemsOnGroundManager
-    └─ TaskManagers
-
-17. Network Listeners
-    └─ ConnectionManager.start()
-       ├─ Listens on port 7777 for clients
-       └─ Registers packet handlers
-
-18. Login Server Connection
-    └─ LoginServerThread starts
-       └─ Connects to LoginServer on port 9014
-```
+1. **GUI Setup** (optional) — \InterfaceConfig.load()\
+2. **Logging** — \LogManager.readConfiguration()\
+3. **Configuration** — \ConfigLoader.init()\ loads 16+ core \.ini\ files via \ConfigReader\
+4. **Database** — \DatabaseFactory.init()\ configures HikariCP pool (20-100 connections)
+5. **Thread Pools** — \ThreadPool.init()\ creates 3 pools (high-priority scheduled, standard scheduled, instant execution)
+6. **Data Loading** — XML tables (items, skills, NPC templates, etc.) loaded by \*Data\ singletons
+7. **Script Engine** — \ScriptEngine.getInstance().load()\ loads \Scripts.xml\ and compiles handlers
+8. **World / Managers** — World region grid initialized, manager singletons instantiated
+9. **Network** — \ConnectionManager\ opens TCP port 7777 for client connections
+10. **Ready** — Server announces availability to LoginServer
 
 ---
 
-## COMPONENT INTERACTIONS
+## 3. KEY ARCHITECTURAL PATTERNS
 
-### Client-to-Game Server Flow
-
-```
-Client connects (TCP:7777)
-       │
-       ├─ GameClient instance created
-       ├─ Session established
-       ├─ Player character loaded from DB
-       ├─ Player entity spawned in World
-       │
-       └─ Packets exchanged:
-          ├─ ClientPacket (from client) → Handler → Database/World update
-          ├─ ServerPacket (to client)   ← Manager/System update
-          └─ ... (continuous exchange)
-```
-
-### Game Server-to-Login Server Flow
-
-```
-GameServer starts
-       │
-       ├─ LoginServerThread created
-       ├─ Connects to LoginServer (TCP:9014)
-       ├─ Registers itself in GameServerTable
-       │
-       └─ During client auth:
-          ├─ Client connects to LoginServer
-          ├─ LoginServer validates credentials
-          ├─ SessionKey issued
-          ├─ Client gets GameServer info
-          └─ Client connects to GameServer with SessionKey
-```
-
-### World Management Flow
-
-```
-World (singleton)
-       │
-       ├─ Maintains ConcurrentHashMap of all creatures
-       ├─ Organizes entities by WorldRegion (grid-based)
-       │
-       ├─ WorldRegion (geographical division)
-       │   ├─ Contains nearby creatures
-       │   └─ Optimizes visibility/broadcasts
-       │
-       └─ Creature visibility:
-          ├─ Only entities in nearby regions sent to client
-          └─ Regional broadcasts (e.g., area chat) limited
-```
-
-### Database Persistence Flow
-
-```
-Entity State Changes
-       │
-       └─ Async Task via ThreadPool
-          └─ DatabaseFactory.getConnection()
-             └─ HikariCP pool
-                └─ MySQL/MariaDB
-                   └─ Updates persisted
-```
+| Pattern | Where Used | Description |
+|---------|-----------|-------------|
+| Singleton | Managers | ~52 classes with \getInstance()\; partial audit in [MANAGERS_INDEX.md](INDEXES/MANAGERS_INDEX.md) |
+| Observer | Event system | \EventDispatcher\ — \EventType\ registered, listeners attach callbacks, events trigger execution |
+| Handler | Packets/Scripts | \ClientPacket → GamePacketHandler (dispatcher) → specific handler → Manager/System\ |
+| Data Access | XML/SQL loading | \XML File → *Data singleton loader → Memory Objects → Singleton Cache → Systems\ |
+| Task Scheduling | Async operations | \Component → ThreadPool.schedule(task) → scheduled/instant pool → async execution\ |
 
 ---
 
-## MANAGER RESPONSIBILITIES
+## 4. CRITICAL CROSS-SYSTEM RELATIONSHIPS
 
-Managers under `gameserver/managers/` handle domain-specific logic; the current directory count is 58 classes, with 52 public `getInstance()` declarations and 6 classes requiring separate treatment.
-
-| Manager Category | Examples | Purpose |
-|------------------|----------|---------|
-| **World Management** | InstanceManager, World | Entity lifecycle, visibility |
-| **Combat/Duel** | DuelManager, AntiFeedManager | PvP mechanics |
-| **Clan/Siege** | ClanTable, SiegeManager, CastleManager | Clan warfare, sieges |
-| **Economic** | ItemManager, RecipeManager, MailManager | Trading, items, mail |
-| **Events** | EventDropManager, SevenSignsManager | Special events |
-| **Punish/Secure** | PunishmentManager, CaptchaManager | Moderation |
-| **Pet/Summon** | PetManager, SummonManager | Pet systems |
-| **Spawn/AI** | RaidBossSpawnManager, GrandBossManager | Spawning, boss management |
+- **Zones** define PvP rules, effects, and geographic regions — referenced by Combat, Siege, World systems.
+- **Skills** use \AbnormalType\ for stacking/replacement in \EffectList\ — see [SKILLS/SKILL_SEMANTIC_REFERENCE.md](SKILLS/SKILL_SEMANTIC_REFERENCE.md) and [REFERENCE/ABNORMAL_TYPE_CATALOG.md](REFERENCE/ABNORMAL_TYPE_CATALOG.md).
+- **Quests** are script-driven, extend base handler classes — see [QUESTS/QUEST_ENGINE_REFERENCE.md](QUESTS/QUEST_ENGINE_REFERENCE.md).
+- **Scripting** dynamically loads via \ScriptEngine\ + \ScriptExecutor\ (Java compilation at runtime) — see [SCRIPTING/SCRIPT_ENGINE.md](SCRIPTING/SCRIPT_ENGINE.md).
+- **Database** connection pool managed by Commons \DatabaseFactory\ (HikariCP) — see [DATABASE/DATABASE_ARCHITECTURE.md](DATABASE/DATABASE_ARCHITECTURE.md).
+- **Network** uses Netty NIO (channel-oriented, non-blocking) — see [NETWORK/NETWORK_ARCHITECTURE.md](NETWORK/NETWORK_ARCHITECTURE.md).
 
 ---
 
-## DATA FLOW
+## 5. AUTHORITATIVE DOCUMENTS
 
-### Configuration Data
-
-```
-dist/game/config/*.ini
-   └─ Loaded by ConfigLoader at startup
-      └─ Cached in static fields (GeneralConfig, etc.)
-         └─ Read by GameServer components
-```
-
-### XML Data Files
-
-```
-dist/game/data/items.xml
-   └─ Loaded by ItemData at startup
-      └─ Parsed into memory objects
-         └─ Cached in ItemData singleton
-            └─ Accessed by Item system, handlers
-```
-
-### Database Data
-
-```
-MySQL Database
-   ├─ Character loading (on login)
-   ├─ Item ownership (inventory)
-   ├─ Clan membership
-   ├─ Quest progress
-   └─ World state persistence
-```
-
----
-
-## KEY ARCHITECTURAL PATTERNS
-
-### 1. Singleton Pattern
-The manager directory is not uniformly singleton-based; see [MANAGERS_INDEX.md](INDEXES/MANAGERS_INDEX.md) for the audited partial inventory.
-
-```java
-public class ManagerName {
-    private static final ManagerName INSTANCE = new ManagerName();
-    public static ManagerName getInstance() { return INSTANCE; }
-}
-```
-
-### 2. Observer Pattern
-**EventDispatcher** coordinates event listeners.
-
-```
-EventType registered with EventDispatcher
-   └─ Listeners attach callbacks
-      └─ Events trigger listener execution
-```
-
-### 3. Handler Pattern
-Command routing for different input types.
-
-```
-ClientPacket → GamePacketHandler (dispatcher)
-   └─ Routes to specific packet handler
-      └─ Handler executes command
-         └─ Possibly calls Manager or System
-```
-
-### 4. Data Access Pattern
-**TableData** classes load and cache XML/SQL data.
-
-```
-XML File → Data Loader → Memory Objects → Singleton Cache
-   └─ Systems access cache, not files
-```
-
-### 5. Task Scheduling Pattern
-**ThreadPool** manages all async operations.
-
-```
-Manager/Handler → ThreadPool.schedule(task)
-   └─ Scheduled on appropriate thread pool
-      └─ Executed asynchronously
-```
-
----
-
-## THREAD POOL ARCHITECTURE
-
-**3 Thread Pools** coordinate all concurrent work:
-
-1. **High-Priority Scheduled Pool**
-   - Critical server tasks
-   - Configured pool size
-   - PRIORITY_8 threads
-
-2. **Standard Scheduled Pool**
-   - Regular timers and periodic tasks
-   - Typical: 4-8 threads
-   - Tasks: respawns, events, cooldowns
-
-3. **Instant Execution Pool**
-   - Immediate task execution
-   - Typical: 50-100 threads
-   - Grows dynamically as needed
-   - 1-minute thread idle timeout
-
----
-
-## NETWORK PROTOCOL
-
-**Layer 1: TCP Connection**
-- Port 7777 (configurable)
-- Persistent per-client connection
-
-**Layer 2: Encryption**
-- Blowfish cipher
-- NewCrypt protocol variant
-- Session-specific key
-
-**Layer 3: Packet Protocol**
-- Byte-aligned packet format
-- Opcode-based routing
-- Request/Response pattern
-
-**Layer 4: Game Protocol**
-- 280 client packet source files observed; enum totals require verification
-- 389 server packet source files observed; enum totals require verification
-- State-based messaging
-
----
-
-## NEXT STEPS FOR UNDERSTANDING
-
-1. **Game Server Details**: [GAMESERVER_ARCHITECTURE.md](GAMESERVER_ARCHITECTURE.md)
-2. **Login Server Details**: [LOGINSERVER_ARCHITECTURE.md](LOGINSERVER_ARCHITECTURE.md)
-3. **Network System**: [NETWORK/NETWORK_ARCHITECTURE.md](NETWORK/NETWORK_ARCHITECTURE.md)
-4. **Database System**: [DATABASE/DATABASE_ARCHITECTURE.md](DATABASE/DATABASE_ARCHITECTURE.md)
-5. **Threading Model**: [THREADING/THREADING_ARCHITECTURE.md](THREADING/THREADING_ARCHITECTURE.md)
+| Domain | Document |
+|--------|----------|
+| Game Server Detail | [GAMESERVER_ARCHITECTURE.md](GAMESERVER_ARCHITECTURE.md) |
+| Commons Library | [COMMONS_ARCHITECTURE.md](COMMONS_ARCHITECTURE.md) |
+| Network Protocol | [NETWORK/NETWORK_ARCHITECTURE.md](NETWORK/NETWORK_ARCHITECTURE.md) |
+| Threading Model | [THREADING/THREADING_ARCHITECTURE.md](THREADING/THREADING_ARCHITECTURE.md) |
+| Database Design | [DATABASE/DATABASE_ARCHITECTURE.md](DATABASE/DATABASE_ARCHITECTURE.md) |
+| Configuration | [CONFIGURATION/CONFIGURATION_SYSTEM.md](CONFIGURATION/CONFIGURATION_SYSTEM.md) |
+| Build & Deploy | [BUILD_AND_DEPLOYMENT.md](BUILD_AND_DEPLOYMENT.md) |
+| Source vs Runtime | [SOURCE_VS_RUNTIME.md](SOURCE_VS_RUNTIME.md) |
 
 ---
 

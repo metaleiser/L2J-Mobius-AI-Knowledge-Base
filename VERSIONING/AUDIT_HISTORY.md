@@ -4,6 +4,37 @@ Registro cronológico de auditorías. Una auditoría NO incrementa KB_VERSION po
 
 ---
 
+## AUDIT-008
+
+- **Date**: 2026-08-27
+- **KB Version**: 2.4.1 → **2.5** (Sprint 0.6B — reorganización mayor de la KB)
+- **Upstream Commit auditado**: `e2518ab10872b28cd4c6860e102b493656ba8728` (sin cambios upstream; baseline preservado)
+- **Result**: REORGANIZED
+
+**Checkpoints completados (C0–C4)**:
+- **C0**: Inventory — protected areas verified.
+- **C1**: Archive originals — 11 verbatim pre-sprint snapshots preserved under `ARCHIVE/PRE_SPRINT_0_6B/`.
+- **C2**: `SOURCE_VS_RUNTIME.md` — consolidated divergence reference.
+- **C3**: Compressions (ARCHITECTURE_OVERVIEW, COMMONS_ARCHITECTURE), SOURCE_ENTRY conversion (BUILD_AND_DEPLOYMENT), routing compression (MASTER_INDEX), relocations (FASE1_SUMMARY → ARCHIVE/, ABNORMAL_TYPE_REFERENCE → REFERENCE/ABNORMAL_TYPE_CATALOG), merge (SCHEME_VALIDATION.md).
+- **C4**: SOURCE_ENTRY conversions for CONFIGURATION/, THREADING/, SCRIPTING/.
+
+**Checkpoint actual (C5 — ROUTING & VERSION)**:
+- `AI_BOOTSTRAP.md` — version bump to 2.5, SOURCE_VS_RUNTIME.md added to routing, scheme validation routing updated to consolidated SCHEME_VALIDATION.md.
+- `AI_MANIFEST.md` — SOURCE_VS_RUNTIME.md added (ALWAYS, SYSTEM), FASE1_SUMMARY marked DEPRECATED, SCHEME_VALIDATOR_DESIGN + SCHEME_VALIDATION_LIFECYCLE replaced by SCHEME_VALIDATION.md, ABNORMAL_TYPE_REFERENCE → REFERENCE/ABNORMAL_TYPE_CATALOG.md. Line counts updated. Count verification section updated (105 active + 12 archived).
+- `GAPS.md` — updated SKILLS, BUFFS/EFFECTS, SCHEME_VALIDATION rows to reflect new document paths.
+- `KB_VERSION.md` — 2.4.1 → 2.5, counts updated (105 active / 12 archived / 117 total). New v2.5 changes section.
+- `CHANGELOG.md` — Sprint 0.6B entry added with C0–C5 summary.
+- `AUDIT_HISTORY.md` — this entry (AUDIT-008).
+- `ROADMAP.md` — Sprint 0.6B status updated (C0–C4 complete, C5 in progress, C6/C7 pending).
+- `SKILL_SEMANTIC_REFERENCE.md` — link to ABNORMAL_TYPE_REFERENCE → REFERENCE/ABNORMAL_TYPE_CATALOG.md; scheme validator links → SCHEME_VALIDATION.md.
+- `MASTER_INDEX.md` — routing verification (already correct from C3).
+
+**Post-change validation**: 105 activos + 12 archive = 117 físicos ✓ · 0 eliminaciones permanentes ✓ · archivos protegidos intactos ✓ · código fuente no modificado ✓ · enlaces internos revisados ✓
+
+**Pendiente (C6/C7)**: Validación final de enlaces cruzados; limpieza de documentos originales redundantes (si corresponde); validación completa del sprint.
+
+---
+
 ## AUDIT-007
 
 - **Date**: 2026-08-26
